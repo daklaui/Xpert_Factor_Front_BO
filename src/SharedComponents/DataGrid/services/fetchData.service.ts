@@ -1,16 +1,6 @@
-// interface FetchTableDataProps {
-//   page: number
-//   total: number
-//   sort: SortType
-//   pageSize: number
-//   rows: number
-//   searchValue: string
-//   sortColumn: string
-//   setTotal: () => void
-//   setRows: () => void
-// }
+import { FetchTableDataProps } from '../DataGrid.interface'
 
-function FetchTableData() {
+function FetchTableData({}: FetchTableDataProps) {
   return null
 }
 
