@@ -1,7 +1,7 @@
-// import TableServerSide from 'src/SharedComponents/DataGrid/DataGrid'
+import TableServerSide from 'src/SharedComponents/DataGrid/DataGrid'
 
 const IndividualList = () => {
-  // return <TableServerSide />
+  return <TableServerSide />
 }
 
 export default IndividualList
