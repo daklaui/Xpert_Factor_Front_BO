@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import SelectAdherent from "src/SharedComponents/CustomSelect/SelectAdherentComponent";
 import SelectBanque from "src/SharedComponents/CustomSelect/SelectBanqueComponent";
 import SelectDevise from "src/SharedComponents/CustomSelect/SelectDeviseComponent";
@@ -41,6 +42,12 @@ const IndividualList = () => {
     } labelText='Paiement'/>
 
   </>
+=======
+// import TableServerSide from 'src/SharedComponents/DataGrid/DataGrid'
+
+const IndividualList = () => {
+  // return <TableServerSide />
+>>>>>>> 3a8ffd3 (data_grid_first_commit)
 }
 
 export default IndividualList
