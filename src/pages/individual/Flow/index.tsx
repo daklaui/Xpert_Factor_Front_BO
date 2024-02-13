@@ -1,5 +1,7 @@
+import StepperVerticalWithNumbers from "src/SharedComponents/FormIndvidual"
+
 const IndividualFlow = () => {
-  return <></>
+  return <StepperVerticalWithNumbers/>
 }
 
 export default IndividualFlow

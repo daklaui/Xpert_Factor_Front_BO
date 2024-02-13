@@ -1,5 +1,10 @@
+import React from 'react'
+
 const IndividualList = () => {
-  return <></>
+  return (
+    <>
+    </>
+  )
 }
 
 export default IndividualList
