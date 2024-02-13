@@ -1,5 +1,11 @@
+import DataGrid from 'src/SharedComponents/DataGrid/DataGrid'
+
 const IndividualFlow = () => {
-  return <></>
+  return (
+    <>
+      <DataGrid />
+    </>
+  )
 }
 
 export default IndividualFlow
