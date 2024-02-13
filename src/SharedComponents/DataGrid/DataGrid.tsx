@@ -25,6 +25,8 @@ import { getInitials } from 'src/@core/utils/get-initials'
 import ServerSideToolbar from './ServerSideToolbar'
 import statusObj from './mock/status.mock'
 
+import { GridColumns } from "./DataGrid.interface";
+
 type SortType = 'asc' | 'desc' | undefined | null
 
 // ** renders client column
@@ -49,7 +51,7 @@ const renderClient = (params: GridRenderCellParams) => {
   }
 }
 
-const columns: GridColumns = [
+const columns: GridColumns[] = [
   {
     flex: 0.25,
     minWidth: 290,
@@ -128,7 +130,7 @@ const columns: GridColumns = [
   }
 ]
 
-const TableServerSide = () => {
+const TableServerSide = ({ onCustomSearch }: any) => {
   // ** State
   const [page, setPage] = useState<number>(0)
   const [total, setTotal] = useState<number>(0)
@@ -178,7 +180,7 @@ const TableServerSide = () => {
 
   const handleSearch = (value: string) => {
     setSearchValue(value)
-    fetchTableData(sort, value, sortColumn)
+    onCustomSearch ? onCustomSearch(value) : fetchTableData(sort, value, sortColumn)
   }
 
   return (
