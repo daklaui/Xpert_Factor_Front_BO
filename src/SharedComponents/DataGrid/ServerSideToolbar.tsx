@@ -6,6 +6,9 @@ import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
 import IconButton from '@mui/material/IconButton'
 import { GridToolbarExport } from '@mui/x-data-grid'
+import Select from '@mui/material/Select'
+import InputLabel from '@mui/material/InputLabel'
+import FormControl from '@mui/material/FormControl'
 
 // ** Icon Imports
 import Icon from 'src/@core/components/icon'
@@ -18,6 +21,31 @@ interface Props {
 
 const ServerSideToolbar = (props: Props) => {
   return (
+    <>
+
+    <FormControl>
+    <InputLabel htmlFor='outlined-age-native-simple'>Rows per page</InputLabel>
+    <Select
+      native
+      label='Rows per page'
+      defaultValue=''
+      sx={{
+        height: '5vh',
+        alignContent: 'center'
+      }}
+      inputProps={{
+        name: 'Rows per page',
+        id: 'outlined-age-native-simple'
+      }}
+    >
+      <option aria-label='None' value='' />
+      <option value={10}>Ten</option>
+      <option value={20}>Twenty</option>
+      <option value={30}>Thirty</option>
+    </Select>
+  </FormControl>
+
+
     <Box
       sx={{
         gap: 2,
@@ -57,6 +85,7 @@ const ServerSideToolbar = (props: Props) => {
         }}
       />
     </Box>
+    </>
   )
 }
 
