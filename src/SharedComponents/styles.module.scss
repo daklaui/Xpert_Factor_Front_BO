@@ -1,0 +1,26 @@
+.Select1 {
+  &__control {
+    border-radius: 10px; /* Coins arrondis */
+    border-color: #f3efef; /* Couleur de la bordure */
+    box-shadow: none; /* Supprime l'ombre par défaut */
+  }
+
+  &__indicator-separator {
+    display: none; /* Supprime le séparateur entre l'indicateur et la flèche */
+  }
+
+  &__menu {
+    border-radius: 10px; /* Coins arrondis */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombre légère */
+  }
+
+  &__option {
+    &--is-selected {
+      background-color: #c9bfbf; /* Couleur de fond pour l'option sélectionnée */
+    }
+
+    &--is-focused {
+      background-color: #8a8686; /* Couleur de fond pour l'option survolée */
+    }
+  }
+}
