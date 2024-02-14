@@ -1,17 +1,14 @@
 
 import React, { useEffect, useState } from 'react'
 import Grid from '@mui/material/Grid'
-import FormControl from '@mui/material/FormControl'
-import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker';
 import Select from 'react-select';
 import { getOptions } from './mock';
-//@ts-ignore
-import  styles from '../styles.module.scss'
-import { SelectInerface } from '../SelectInterface';
+
+import { CustomSelectProps, SelectInerface } from '../interface/customSelect.interface';
 
 
 
-const SelectDevise = ({ onSearch, labelText }: any) => {
+const SelectDevise = ({ onSearch, labelText }: CustomSelectProps) => {
   const [options, setOptions] = useState<SelectInerface[]>([]);
   const [statusValue, setStatusValue] = useState('');
   const [isClearable, setIsClearable] = useState(true);
@@ -30,28 +27,23 @@ const SelectDevise = ({ onSearch, labelText }: any) => {
   }, []);
 
   return (
-    <DatePickerWrapper>
-      <Grid spacing={6}>
-        <Grid item xs={12}>
+  
           <Grid container spacing={6}>
             <Grid item xs={12} sm={6}>
-              <FormControl fullWidth sx={{ mr: 4, mb: 2 }}>
+              
                 <Select
                   placeholder={'---Sélectionnez une devise---'}
                   defaultValue={statusValue}
                   onChange={(value: any) => {
-                    onSearch ? onSearch() : setStatusValue(value);
+                    onSearch ? onSearch(value) : setStatusValue(value);
                   }}
                   options={options}
                   isClearable={isClearable}
-                  className={styles.Select1}
                 />
-              </FormControl>
+    
             </Grid>
           </Grid>
-        </Grid>
-      </Grid>
-    </DatePickerWrapper>
+     
   );
 };
 

@@ -1,8 +1,8 @@
-import SelectAdherent from "src/SharedComponents/SelectAdherentComponent";
-import SelectBanque from "src/SharedComponents/SelectBanqueComponent";
-import SelectDevise from "src/SharedComponents/SelectDeviseComponent";
-import SelectIndividu from "src/SharedComponents/SelectIndividualComponent";
-import SelectModePaiement from "src/SharedComponents/SelectModePaimentComponent";
+import SelectAdherent from "src/SharedComponents/CustomSelect/SelectAdherentComponent";
+import SelectBanque from "src/SharedComponents/CustomSelect/SelectBanqueComponent";
+import SelectDevise from "src/SharedComponents/CustomSelect/SelectDeviseComponent";
+import SelectIndividu from "src/SharedComponents/CustomSelect/SelectIndividualComponent";
+import SelectModePaiement from "src/SharedComponents/CustomSelect/SelectModePaimentComponent";
 
 const IndividualList = () => {
   return <>
@@ -13,7 +13,7 @@ const IndividualList = () => {
       }
     } labelText='Individu' />
 
-    < SelectAdherent onSearch={
+   < SelectAdherent onSearch={
       (value: any) => {
         console.log(value);
       }
