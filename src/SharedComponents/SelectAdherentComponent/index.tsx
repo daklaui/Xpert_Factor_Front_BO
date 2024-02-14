@@ -4,15 +4,11 @@ import FormControl from '@mui/material/FormControl'
 import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker';
 import Select from 'react-select';
 import { getOptions } from './mockAdherent';
-
-interface Option {
-  value: string;
-  label: string;
-}
+import {  SelectInerface } from '../SelectInterface';
 
 const SelectAdherent = ({ onSearch, labelText }: any) => {
 
-  const [options, setOptions] = useState<Option[]>([]);
+  const [options, setOptions] = useState<SelectInerface[]>([]);
   const [statusValue, setStatusValue] = useState('');
   const [isClearable, setIsClearable] = useState(true);
 
