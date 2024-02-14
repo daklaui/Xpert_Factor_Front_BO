@@ -1,17 +1,11 @@
-
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import Grid from '@mui/material/Grid'
-import FormControl from '@mui/material/FormControl'
-import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker';
 import Select from 'react-select';
-import { getOptions } from './mockModePaiment';
-//@ts-ignore
-import  styles from '../styles.module.scss'
-import { SelectInerface } from '../SelectInterface';
+import { getOptions } from './mockIndividu';
+import { CustomSelectProps, SelectInerface } from '../interface/customSelect.interface';
 
+const SelectIndividu = ({ onSearch , labelText }: CustomSelectProps) => {
 
-
-const SelectModePaiement = ({ onSearch, labelText }: any) => {
   const [options, setOptions] = useState<SelectInerface[]>([]);
   const [statusValue, setStatusValue] = useState('');
   const [isClearable, setIsClearable] = useState(true);
@@ -29,31 +23,25 @@ const SelectModePaiement = ({ onSearch, labelText }: any) => {
     fetchData();
   }, []);
 
+
   return (
-    <DatePickerWrapper>
-      <Grid spacing={6}>
-        <Grid item xs={12}>
           <Grid container spacing={6}>
             <Grid item xs={12} sm={6}>
-              <FormControl fullWidth sx={{ mr: 4, mb: 2 }}>
-                <Select
-                  placeholder={'---Sélectionnez une mode de paiement---'}
+                <Select placeholder={'---Sélectionnez un individu---'}
                   defaultValue={statusValue}
                   onChange={(value: any) => {
-                    onSearch ? onSearch() : setStatusValue(value);
+                    onSearch ? onSearch(value): setStatusValue(value)
+                    labelText 
                   }}
                   options={options}
                   isClearable={isClearable}
-                  className={styles.Select1}
+                  isSearchable
                 />
-              </FormControl>
             </Grid>
           </Grid>
-        </Grid>
-      </Grid>
-    </DatePickerWrapper>
-  );
-};
+       
+  
+  )
+}
 
-
-export default SelectModePaiement;
+export default SelectIndividu;

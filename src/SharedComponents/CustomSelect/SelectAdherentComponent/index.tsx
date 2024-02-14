@@ -1,15 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import Grid from '@mui/material/Grid'
-import FormControl from '@mui/material/FormControl'
-import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker';
 import Select from 'react-select';
-import { getOptions } from './mockIndividu';
-//@ts-ignore
-import style from '../styles.module.scss'
-import { SelectInerface } from '../SelectInterface';
+import { getOptions } from './mockAdherent';
+import { CustomSelectProps, SelectInerface } from '../interface/customSelect.interface';
 
-
-const SelectIndividu = ({ onSearch, labelText }: any) => {
+const SelectAdherent = ({ onSearch, labelText }: CustomSelectProps) => {
 
   const [options, setOptions] = useState<SelectInerface[]>([]);
   const [statusValue, setStatusValue] = useState('');
@@ -28,32 +23,25 @@ const SelectIndividu = ({ onSearch, labelText }: any) => {
     fetchData();
   }, []);
 
-
   return (
-    <DatePickerWrapper>
-      <Grid container spacing={6}>
-        <Grid item xs={14}>
+    
           <Grid container spacing={6}>
             <Grid item xs={12} sm={6}>
-              <FormControl fullWidth sx={{ mr: 4, mb: 2 }}>
-                <Select placeholder={'---Sélectionnez un individu---'}
+
+                <Select placeholder={'---Sélectionnez un adhérent---'}
                   defaultValue={statusValue}
                   onChange={(value: any) => {
-                    onSearch ? onSearch(): setStatusValue(value)
+                    onSearch ? onSearch(value) :  setStatusValue(value)
                     labelText 
-                  }}
-                  options={options}
+                   }}
+                  options={options} 
                   isClearable={isClearable}
-                  className={style.Select1}
-                  isSearchable
-                />
-              </FormControl>
+                  />
+                  
             </Grid>
           </Grid>
-        </Grid>
-      </Grid>
-    </DatePickerWrapper>
+  
   )
 }
 
-export default SelectIndividu;
+export default SelectAdherent;
