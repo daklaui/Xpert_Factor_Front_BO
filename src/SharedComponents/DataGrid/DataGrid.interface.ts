@@ -1,5 +1,6 @@
-import { GridRenderCellParams } from '@mui/x-data-grid';
+import { GridRenderCellParams } from '@mui/x-data-grid'
 import { ThemeColor } from 'src/@core/layouts/types'
+import { DataGridRowType } from 'src/@fake-db/types'
 
 export interface StatusObj {
   [key: number]: {
@@ -9,14 +10,12 @@ export interface StatusObj {
 }
 
 export interface GridColumns {
-  flex: number;
-  minWidth: number;
-  field: string;
-  headerName: string;
-  renderCell?: (params: GridRenderCellParams) => React.ReactNode;
+  flex: number
+  minWidth: number
+  field: string
+  headerName: string
+  renderCell?: (params: GridRenderCellParams) => React.ReactNode
 }
-
-
 
 export type SortType = 'asc' | 'desc'
 
@@ -30,4 +29,11 @@ export interface FetchTableDataProps {
   sortColumn: string
   setTotal: () => void
   setRows: () => void
+}
+
+export interface DataGridCustomProps {
+  onCustomSearch: (value: string) => void
+  showCheckboxSelection: boolean
+  onRowClick: (row: DataGridRowType) => void
+  onNumberRowPageChange: (value: string) => void
 }
