@@ -5,6 +5,7 @@ const IndividualList = () => {
   const handleRowClick = (row: DataGridRowType) => {
     console.log('Selected Row:', row)
   }
+  
   return (
     <TableServerSide
       onCustomSearch={(value: any) => {
