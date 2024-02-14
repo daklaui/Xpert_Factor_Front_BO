@@ -130,12 +130,7 @@ const columns: GridColumns[] = [
   }
 ]
 
-const TableServerSide = ({
-  onCustomSearch,
-  showCheckboxSelection,
-  onRowClick,
-  onNumberRowPageChange
-}: DataGridCustomProps) => {
+const TableServerSide = ({ onCustomSearch, showCheckboxSelection}: any) => {
   // ** State
   const [page, setPage] = useState<number>(0)
   const [total, setTotal] = useState<number>(0)
