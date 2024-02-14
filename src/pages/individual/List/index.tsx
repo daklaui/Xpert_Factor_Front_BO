@@ -6,6 +6,7 @@ import SelectIndividu from "src/SharedComponents/CustomSelect/SelectIndividualCo
 import SelectModePaiement from "src/SharedComponents/CustomSelect/SelectModePaimentComponent";
 
 const IndividualList = () => {
+<<<<<<< HEAD
   return <>
 
     <SelectIndividu onSearch={
@@ -48,6 +49,21 @@ const IndividualList = () => {
 const IndividualList = () => {
   // return <TableServerSide />
 >>>>>>> 3a8ffd3 (data_grid_first_commit)
+=======
+  const handleRowClick = (row: DataGridRowType) => {
+    console.log('Selected Row:', row)
+  }
+  
+  return (
+    <TableServerSide
+      onCustomSearch={(value: any) => {
+        console.log(value)
+      }}
+      showCheckboxSelection={false}
+      onRowClick={handleRowClick}
+    />
+  )
+>>>>>>> c830199 (push rows per page)
 }
 
 export default IndividualList
