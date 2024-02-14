@@ -24,6 +24,7 @@ interface ServerSideToolbarProps {
 
 const ServerSideToolbar = (props: ServerSideToolbarProps) => {
   const { clearSearch, onChange, onNumberRowPageChange, value } = props
+  
   return (
     <>
       <FormControl>
