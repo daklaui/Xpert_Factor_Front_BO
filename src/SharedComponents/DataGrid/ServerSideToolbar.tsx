@@ -28,6 +28,31 @@ const ServerSideToolbar = (props: ServerSideToolbarProps) => {
     onNumberRowPageChange && onNumberRowPageChange(selectedValue)
   }
   return (
+    <>
+
+    <FormControl>
+    <InputLabel htmlFor='outlined-age-native-simple'>Rows per page</InputLabel>
+    <Select
+      native
+      label='Rows per page'
+      defaultValue=''
+      sx={{
+        height: '5vh',
+        alignContent: 'center'
+      }}
+      inputProps={{
+        name: 'Rows per page',
+        id: 'outlined-age-native-simple'
+      }}
+    >
+      <option aria-label='None' value='' />
+      <option value={10}>Ten</option>
+      <option value={20}>Twenty</option>
+      <option value={30}>Thirty</option>
+    </Select>
+  </FormControl>
+
+
     <Box
       sx={{
         gap: 2,
