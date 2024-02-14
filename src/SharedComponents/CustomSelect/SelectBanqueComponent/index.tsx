@@ -22,6 +22,7 @@ const SelectBanque = ({ onSearch, labelText }: CustomSelectProps) => {
   }, [])
 
   return (
+<<<<<<< HEAD
     <Select
       placeholder={'---Sélectionnez une banque---'}
       defaultValue={statusValue}
@@ -32,6 +33,22 @@ const SelectBanque = ({ onSearch, labelText }: CustomSelectProps) => {
       options={options}
       isClearable={isClearable}
     />
+=======
+   
+      
+
+                <Select placeholder={'---Sélectionnez une banque---'}
+                  defaultValue={statusValue}
+                  onChange={(value: any) => {
+                   onSearch ? onSearch(value):  setStatusValue(value)
+                   labelText 
+                  }}
+                  options={options} 
+                  isClearable={isClearable}
+                  />
+      
+
+>>>>>>> bcd29bf (remove Grid)
   )
 }
 
