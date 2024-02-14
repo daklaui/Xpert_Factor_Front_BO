@@ -40,7 +40,7 @@ import statusObj from './mock/status.mock'
 import ServerSideToolbar from './ServerSideToolbar'
 import statusObj from './mock/status.mock'
 
-import { GridColumns } from "./DataGrid.interface";
+import { GridColumns } from './DataGrid.interface'
 
 type SortType = 'asc' | 'desc' | undefined | null
 
@@ -151,7 +151,7 @@ const columns: GridColumns[] = [
   }
 ]
 
-const TableServerSide = ({ onCustomSearch }: any) => {
+const TableServerSide = ({ onCustomSearch, showCheckboxSelection, onRowClick }: any) => {
   // ** State
   const [page, setPage] = useState<number>(0)
   const [total, setTotal] = useState<number>(0)
@@ -203,6 +203,9 @@ const TableServerSide = ({ onCustomSearch }: any) => {
     setSearchValue(value)
     onCustomSearch ? onCustomSearch(value) : fetchTableData(sort, value, sortColumn)
   }
+  const handleRowClick = (row: DataGridRowType) => {
+    console.log('Selected Row:', row)
+  }
 
   return (
     <Card>
@@ -213,7 +216,7 @@ const TableServerSide = ({ onCustomSearch }: any) => {
         rows={rows}
         rowCount={total}
         columns={columns}
-        checkboxSelection
+        checkboxSelection={showCheckboxSelection}
         pageSize={pageSize}
         sortingMode='server'
         paginationMode='server'
@@ -222,6 +225,7 @@ const TableServerSide = ({ onCustomSearch }: any) => {
         onPageChange={(newPage: number) => setPage(newPage)}
         components={{ Toolbar: ServerSideToolbar }}
         onPageSizeChange={newPageSize => setPageSize(newPageSize)}
+        onRowClick={params => handleRowClick(params.row as DataGridRowType)}
         componentsProps={{
           baseButton: {
             variant: 'outlined'
