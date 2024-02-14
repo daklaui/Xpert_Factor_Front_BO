@@ -6,15 +6,13 @@ import Select from 'react-select';
 import { getOptions } from './mockBanque';
 //@ts-ignore
 import  styles from '../styles.module.scss'
+import { SelectInerface } from '../SelectInterface';
 
 
-interface Option {
-  value: string;
-  label: string;
-}
+
 const SelectBanque = ({ onSearch, labelText }: any) => {
 
-  const [options, setOptions] = useState<Option[]>([]);
+  const [options, setOptions] = useState<SelectInerface[]>([]);
   const [statusValue, setStatusValue] = useState('');
   const [isClearable, setIsClearable] = useState(true);
 
