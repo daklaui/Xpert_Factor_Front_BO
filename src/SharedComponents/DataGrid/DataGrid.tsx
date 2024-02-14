@@ -40,7 +40,7 @@ import statusObj from './mock/status.mock'
 import ServerSideToolbar from './ServerSideToolbar'
 import statusObj from './mock/status.mock'
 
-import { GridColumns } from './DataGrid.interface'
+import { DataGridCustomProps, GridColumns } from './DataGrid.interface'
 
 type SortType = 'asc' | 'desc' | undefined | null
 
@@ -151,7 +151,12 @@ const columns: GridColumns[] = [
   }
 ]
 
-const TableServerSide = ({ onCustomSearch, showCheckboxSelection, onRowClick }: any) => {
+const TableServerSide = ({
+  onCustomSearch,
+  showCheckboxSelection,
+  onRowClick,
+  onNumberRowPageChange
+}: DataGridCustomProps) => {
   // ** State
   const [page, setPage] = useState<number>(0)
   const [total, setTotal] = useState<number>(0)
@@ -223,7 +228,16 @@ const TableServerSide = ({ onCustomSearch, showCheckboxSelection, onRowClick }: 
         onSortModelChange={handleSortModel}
         rowsPerPageOptions={[7, 10, 25, 50]}
         onPageChange={(newPage: number) => setPage(newPage)}
-        components={{ Toolbar: ServerSideToolbar }}
+        components={{
+          Toolbar: props => (
+            <ServerSideToolbar
+              {...props}
+              onNumberRowPageChange={(numberOfRows: string) => {
+                onNumberRowPageChange && onNumberRowPageChange(numberOfRows)
+              }}
+            />
+          )
+        }}
         onPageSizeChange={newPageSize => setPageSize(newPageSize)}
         onRowClick={params => handleRowClick(params.row as DataGridRowType)}
         componentsProps={{
