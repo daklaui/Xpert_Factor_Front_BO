@@ -28,8 +28,7 @@ const SelectDevise = ({ onSearch, labelText }: CustomSelectProps) => {
 
   return (
   
-          <Grid container spacing={6}>
-            <Grid item xs={12} sm={6}>
+          
               
                 <Select
                   placeholder={'---Sélectionnez une devise---'}
@@ -41,8 +40,6 @@ const SelectDevise = ({ onSearch, labelText }: CustomSelectProps) => {
                   isClearable={isClearable}
                 />
     
-            </Grid>
-          </Grid>
      
   );
 };

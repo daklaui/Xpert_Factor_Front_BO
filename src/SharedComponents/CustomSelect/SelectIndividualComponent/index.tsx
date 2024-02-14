@@ -25,8 +25,7 @@ const SelectIndividu = ({ onSearch , labelText }: CustomSelectProps) => {
 
 
   return (
-          <Grid container spacing={6}>
-            <Grid item xs={12} sm={6}>
+   
                 <Select placeholder={'---Sélectionnez un individu---'}
                   defaultValue={statusValue}
                   onChange={(value: any) => {
@@ -37,8 +36,7 @@ const SelectIndividu = ({ onSearch , labelText }: CustomSelectProps) => {
                   isClearable={isClearable}
                   isSearchable
                 />
-            </Grid>
-          </Grid>
+       
        
   
   )
