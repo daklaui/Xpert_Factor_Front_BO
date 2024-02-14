@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import Grid from '@mui/material/Grid'
 import Select from 'react-select'
 import { getOptions } from './mockBanque'
 import { CustomSelectProps, SelectInerface } from '../interface/customSelect.interface'
@@ -23,21 +22,16 @@ const SelectBanque = ({ onSearch, labelText }: CustomSelectProps) => {
   }, [])
 
   return (
-   
-          <Grid container spacing={6}>
-            <Grid item xs={12} sm={6}>
-
-                <Select placeholder={'---Sélectionnez une banque---'}
-                  defaultValue={statusValue}
-                  onChange={(value: any) => {
-                   onSearch ? onSearch(value):  setStatusValue(value)
-                   labelText 
-                  }}
-                  options={options} 
-                  isClearable={isClearable}
-                  />
-      
-
+    <Select
+      placeholder={'---Sélectionnez une banque---'}
+      defaultValue={statusValue}
+      onChange={(value: any) => {
+        onSearch ? onSearch(value) : setStatusValue(value)
+        labelText
+      }}
+      options={options}
+      isClearable={isClearable}
+    />
   )
 }
 
