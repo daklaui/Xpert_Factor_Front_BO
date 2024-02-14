@@ -25,8 +25,7 @@ const SelectAdherent = ({ onSearch, labelText }: CustomSelectProps) => {
 
   return (
     
-          <Grid container spacing={6}>
-            <Grid item xs={12} sm={6}>
+        
 
                 <Select placeholder={'---Sélectionnez un adhérent---'}
                   defaultValue={statusValue}
@@ -37,9 +36,7 @@ const SelectAdherent = ({ onSearch, labelText }: CustomSelectProps) => {
                   options={options} 
                   isClearable={isClearable}
                   />
-                  
-            </Grid>
-          </Grid>
+      
   
   )
 }

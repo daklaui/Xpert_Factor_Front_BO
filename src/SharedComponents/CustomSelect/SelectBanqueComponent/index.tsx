@@ -42,9 +42,7 @@ const SelectBanque = ({ onSearch, labelText }: CustomSelectProps) => {
                   options={options} 
                   isClearable={isClearable}
                   />
-            </Grid>
-          </Grid>
-       
+      
 
   )
 }
