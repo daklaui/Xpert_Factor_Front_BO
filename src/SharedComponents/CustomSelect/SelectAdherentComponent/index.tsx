@@ -23,20 +23,16 @@ const SelectAdherent = ({ onSearch, labelText }: CustomSelectProps) => {
   }, [])
 
   return (
-    <Grid container spacing={6}>
-      <Grid item xs={12} sm={6}>
-        <Select
-          placeholder={'---Sélectionnez un adhérent---'}
-          defaultValue={statusValue}
-          onChange={(value: any) => {
-            onSearch ? onSearch(value) : setStatusValue(value)
-            labelText
-          }}
-          options={options}
-          isClearable={isClearable}
-        />
-      </Grid>
-    </Grid>
+    <Select
+      placeholder={'---Sélectionnez un adhérent---'}
+      defaultValue={statusValue}
+      onChange={(value: any) => {
+        onSearch ? onSearch(value) : setStatusValue(value)
+        labelText
+      }}
+      options={options}
+      isClearable={isClearable}
+    />
   )
 }
 

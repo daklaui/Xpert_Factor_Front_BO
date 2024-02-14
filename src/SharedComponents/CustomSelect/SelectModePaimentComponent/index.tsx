@@ -23,21 +23,15 @@ const SelectModePaiement = ({ onSearch, labelText }: CustomSelectProps) => {
   }, [])
 
   return (
-    <Grid container spacing={6}>
-      <Grid item xs={12} sm={6}>
-        <Select
-          placeholder={'---Sélectionnez une mode de paiement---'}
-          defaultValue={statusValue}
-          onChange={(value: any) => {
-            onSearch ? onSearch(value) : setStatusValue(value)
-            labelText
-          }}
-          options={options}
-          isClearable={isClearable}
-        />
-      </Grid>
-    </Grid>
+    <Select
+      placeholder={'---Sélectionnez une mode de paiement---'}
+      defaultValue={statusValue}
+      onChange={(value: any) => {
+        onSearch ? onSearch(value) : setStatusValue(value)
+        labelText
+      }}
+      options={options}
+      isClearable={isClearable}
+    />
   )
 }
-
-export default SelectModePaiement
