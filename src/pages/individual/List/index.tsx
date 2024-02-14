@@ -94,5 +94,3 @@ const IndividualList = () => {
     />
   )
 }
-
-export default IndividualList
