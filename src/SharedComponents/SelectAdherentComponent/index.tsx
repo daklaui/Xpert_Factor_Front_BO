@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Grid from '@mui/material/Grid'
 import FormControl from '@mui/material/FormControl'
-import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker';
 import Select from 'react-select';
 import { getOptions } from './mockAdherent';
 import {  SelectInerface } from '../SelectInterface';
@@ -27,7 +26,7 @@ const SelectAdherent = ({ onSearch, labelText }: any) => {
 
 
   return (
-    <DatePickerWrapper>
+    
       <Grid container spacing={6}>
         <Grid item xs={12}>
           <Grid container spacing={6}>
@@ -48,7 +47,7 @@ const SelectAdherent = ({ onSearch, labelText }: any) => {
           </Grid>
         </Grid>
       </Grid>
-    </DatePickerWrapper>
+  
 
   )
 }
