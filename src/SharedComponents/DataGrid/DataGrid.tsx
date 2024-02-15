@@ -151,18 +151,22 @@ const columns: GridColumns[] = [
   }
 ]
 
-const TableServerSide = ({ onCustomSearch, showCheckboxSelection}: any) => {
-  // ** State
+const TableServerSide = ({
+  onCustomSearch,
+  showCheckboxSelection,
+  onNumberRowPageChange,
+  pageSize
+}: DataGridCustomProps & { pageSize: string }) => {
   const [page, setPage] = useState<number>(0)
   const [total, setTotal] = useState<number>(0)
   const [sort, setSort] = useState<SortType>('asc')
-  const [pageSize, setPageSize] = useState<number>(7)
   const [rows, setRows] = useState<DataGridRowType[]>([])
   const [searchValue, setSearchValue] = useState<string>('')
   const [sortColumn, setSortColumn] = useState<string>('full_name')
+  const [, setCurrentPageSize] = useState<string>(pageSize)
 
   function loadServerRows(currentPage: number, data: DataGridRowType[]) {
-    return data.slice(currentPage * pageSize, (currentPage + 1) * pageSize)
+    return data.slice(currentPage * parseInt(pageSize, 10), (currentPage + 1) * parseInt(pageSize, 10))
   }
 
   const fetchTableData = useCallback(
@@ -180,7 +184,6 @@ const TableServerSide = ({ onCustomSearch, showCheckboxSelection}: any) => {
           setRows(loadServerRows(page, res.data.data))
         })
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [page, pageSize]
   )
 
@@ -203,8 +206,14 @@ const TableServerSide = ({ onCustomSearch, showCheckboxSelection}: any) => {
     setSearchValue(value)
     onCustomSearch ? onCustomSearch(value) : fetchTableData(sort, value, sortColumn)
   }
+
   const handleRowClick = (row: DataGridRowType) => {
     console.log('Selected Row:', row)
+  }
+
+  const handlePageSizeChange = (newPageSize: number) => {
+    setCurrentPageSize(newPageSize.toString()) // Update current page size
+    onNumberRowPageChange && onNumberRowPageChange(newPageSize.toString())
   }
 
   return (
@@ -217,7 +226,7 @@ const TableServerSide = ({ onCustomSearch, showCheckboxSelection}: any) => {
         rowCount={total}
         columns={columns}
         checkboxSelection={showCheckboxSelection}
-        pageSize={pageSize}
+        pageSize={parseInt(pageSize, 10)}
         sortingMode='server'
         paginationMode='server'
         onSortModelChange={handleSortModel}
@@ -233,7 +242,7 @@ const TableServerSide = ({ onCustomSearch, showCheckboxSelection}: any) => {
             />
           )
         }}
-        onPageSizeChange={newPageSize => setPageSize(newPageSize)}
+        onPageSizeChange={handlePageSizeChange}
         onRowClick={params => handleRowClick(params.row as DataGridRowType)}
         componentsProps={{
           baseButton: {
