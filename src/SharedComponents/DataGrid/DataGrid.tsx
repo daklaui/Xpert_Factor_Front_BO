@@ -72,87 +72,10 @@ const renderClient = (params: GridRenderCellParams) => {
   }
 }
 
-const columns: GridColumns[] = [
-  {
-    flex: 0.25,
-    minWidth: 290,
-    field: 'full_name',
-    headerName: 'Name',
-    renderCell: (params: GridRenderCellParams) => {
-      const { row } = params
-
-      return (
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          {renderClient(params)}
-          <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-            <Typography noWrap variant='body2' sx={{ color: 'text.primary', fontWeight: 600 }}>
-              {row.full_name}
-            </Typography>
-            <Typography noWrap variant='caption'>
-              {row.email}
-            </Typography>
-          </Box>
-        </Box>
-      )
-    }
-  },
-  {
-    flex: 0.175,
-    minWidth: 120,
-    headerName: 'Date',
-    field: 'start_date',
-    renderCell: (params: GridRenderCellParams) => (
-      <Typography variant='body2' sx={{ color: 'text.primary' }}>
-        {params.row.start_date}
-      </Typography>
-    )
-  },
-  {
-    flex: 0.175,
-    minWidth: 110,
-    field: 'salary',
-    headerName: 'Salary',
-    renderCell: (params: GridRenderCellParams) => (
-      <Typography variant='body2' sx={{ color: 'text.primary' }}>
-        {params.row.salary}
-      </Typography>
-    )
-  },
-  {
-    flex: 0.125,
-    field: 'age',
-    minWidth: 80,
-    headerName: 'Age',
-    renderCell: (params: GridRenderCellParams) => (
-      <Typography variant='body2' sx={{ color: 'text.primary' }}>
-        {params.row.age}
-      </Typography>
-    )
-  },
-  {
-    flex: 0.175,
-    minWidth: 140,
-    field: 'status',
-    headerName: 'Status',
-    renderCell: (params: GridRenderCellParams) => {
-      const status = statusObj[params.row.status]
-
-      return (
-        <CustomChip
-          rounded
-          size='small'
-          skin='light'
-          color={status.color}
-          label={status.title}
-          sx={{ '& .MuiChip-label': { textTransform: 'capitalize' } }}
-        />
-      )
-    }
-  }
-]
-
 const TableServerSide = ({
   onCustomSearch,
+  columns,
+  customrows,
   showCheckboxSelection,
   onNumberRowPageChange,
   pageSize
@@ -222,14 +145,14 @@ const TableServerSide = ({
       <DataGrid
         autoHeight
         pagination
-        rows={rows}
+        rows={customrows}
         rowCount={total}
         columns={columns}
         checkboxSelection={showCheckboxSelection}
         pageSize={parseInt(pageSize, 10)}
         sortingMode='server'
         paginationMode='server'
-        onSortModelChange={handleSortModel}
+        // onSortModelChange={handleSortModel}
         rowsPerPageOptions={[7, 10, 25, 50]}
         onPageChange={(newPage: number) => setPage(newPage)}
         components={{
@@ -249,9 +172,9 @@ const TableServerSide = ({
             variant: 'outlined'
           },
           toolbar: {
-            value: searchValue,
-            clearSearch: () => handleSearch(''),
-            onChange: (event: ChangeEvent<HTMLInputElement>) => handleSearch(event.target.value)
+            value: searchValue
+            // clearSearch: () => handleSearch(''),
+            // onChange: (event: ChangeEvent<HTMLInputElement>) => handleSearch(event.target.value)
           }
         }}
       />
