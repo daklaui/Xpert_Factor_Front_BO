@@ -23,7 +23,7 @@ export interface FetchTableDataProps {
   page: number
   total: number
   sort: SortType
-  pageSize: number
+  pageSize: number 
   rows: number
   searchValue: string
   sortColumn: string

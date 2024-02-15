@@ -56,6 +56,7 @@ const IndividualList = () => {
 
   const onNumberOfRowsChange = (numberOfRows: string) => {
     console.log('the current number of Rows is:', numberOfRows)
+    setPageSize(numberOfRows)
   }
 
   return (
@@ -65,6 +66,7 @@ const IndividualList = () => {
       }}
       onNumberRowPageChange={onNumberOfRowsChange}
       showCheckboxSelection={false}
+      pageSize={pageSize}
       onRowClick={handleRowClick}
     />
   )
