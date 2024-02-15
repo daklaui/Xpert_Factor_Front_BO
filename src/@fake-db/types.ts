@@ -161,6 +161,13 @@ export type DataGridRowType = {
   experience: string
 }
 
+export type DataGridRowTypeCustomized = {
+  age: string
+  salary: number
+  full_name: string
+  start_date: string
+}
+
 // Help Center
 //------------
 export type HelpCenterSubcategoryArticlesType = {

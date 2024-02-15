@@ -54,20 +54,31 @@ const IndividualList = () => {
     console.log('Selected Row:', row)
   }
 
-  const onNumberOfRowsChange = (numberOfRows: string) => {
-    console.log('the current number of Rows is:', numberOfRows)
-    setPageSize(numberOfRows)
+  const onNumberRowPageChange = (numberOfRows: string) => {
+    console.log('The current number of Rows is:', numberOfRows)
   }
 
+  const fakeData = generateFakeData(20)
+  //console.log(fakeData)
+  const filteredData = fakeData.map(row => ({
+    id: row.id,
+    full_name: row.full_name,
+    start_date: row.start_date,
+    salary: row.salary,
+    age: row.age
+  }))
+  // console.log(filteredData.map(row => ({ start_date: row.start_date })))
   return (
     <TableServerSide
+      customrows={filteredData}
       onCustomSearch={(value: any) => {
         console.log(value)
       }}
-      onNumberRowPageChange={onNumberOfRowsChange}
+      onNumberRowPageChange={onNumberRowPageChange}
       showCheckboxSelection={false}
       pageSize={pageSize}
       onRowClick={handleRowClick}
+      columns={columns}
     />
   )
 >>>>>>> c830199 (push rows per page)
