@@ -3,7 +3,7 @@ import { ChangeEvent } from 'react'
 
 // ** MUI Imports
 import Box from '@mui/material/Box'
-import TextField from '@mui/material/TextField'
+import TextField, { TextFieldProps } from '@mui/material/TextField'
 import IconButton from '@mui/material/IconButton'
 import { GridToolbarExport } from '@mui/x-data-grid'
 import Select, { SelectChangeEvent } from '@mui/material/Select'
@@ -17,18 +17,13 @@ interface ServerSideToolbarProps {
 interface ServerSideToolbarProps {
   value: string
   clearSearch: () => void
-  onChange: (e: ChangeEvent) => void
-  onNumberRowPageChange: (value: string) => void
-  onNumberRowPageChange: (value: string) => void
+  onChange: (value: string) => void
+  onNumberRowPageChange: (value: SelectChangeEvent<string>) => void
 }
 
 const ServerSideToolbar = (props: ServerSideToolbarProps) => {
   const { clearSearch, onChange, onNumberRowPageChange, value } = props
 
-  const handlePageSizeChange = (event: SelectChangeEvent<string>) => {
-    const selectedValue = event.target.value // No need to parse since it's already a string
-    onNumberRowPageChange && onNumberRowPageChange(selectedValue)
-  }
   return (
     <Box
       sx={{
@@ -57,7 +52,7 @@ const ServerSideToolbar = (props: ServerSideToolbarProps) => {
           <Select
             native
             label='Rows per page'
-            onChange={handlePageSizeChange}
+            onChange={onNumberRowPageChange}
             defaultValue=''
             sx={{
               height: '5vh',
@@ -78,7 +73,9 @@ const ServerSideToolbar = (props: ServerSideToolbarProps) => {
         <TextField
           size='small'
           value={value}
-          onChange={onChange}
+          onChange={(e: any) => {
+            onChange(e?.target?.value)
+          }}
           placeholder='Search…'
           InputProps={{
             startAdornment: (
