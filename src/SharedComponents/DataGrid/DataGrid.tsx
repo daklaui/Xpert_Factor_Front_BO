@@ -1,5 +1,5 @@
 // ** React Imports
-import { useEffect, useState, useCallback, ChangeEvent } from 'react'
+import { useEffect, useState, useCallback, ChangeEvent, useMemo } from 'react'
 
 // ** MUI Imports
 import Box from '@mui/material/Box'
@@ -28,7 +28,7 @@ import CustomAvatar from 'src/@core/components/mui/avatar'
 
 // ** Types Imports
 import { ThemeColor } from 'src/@core/layouts/types'
-import { DataGridRowType } from 'src/@fake-db/types'
+import { DataGridRowType, DataGridRowTypeCustomized } from 'src/@fake-db/types'
 
 // ** Utils Import
 import { getInitials } from 'src/@core/utils/get-initials'
@@ -81,54 +81,25 @@ const TableServerSide = ({
   pageSize
 }: DataGridCustomProps & { pageSize: string }) => {
   const [page, setPage] = useState<number>(0)
-  const [total, setTotal] = useState<number>(0)
-  const [sort, setSort] = useState<SortType>('asc')
-  const [rows, setRows] = useState<DataGridRowType[]>([])
+  const [total, setTotal] = useState<number>(customrows.length)
+  const [currentPageSize, setCurrentPageSize] = useState<string>(pageSize)
+  const [rows, setRows] = useState<DataGridRowTypeCustomized[]>([])
   const [searchValue, setSearchValue] = useState<string>('')
   const [sortColumn, setSortColumn] = useState<string>('full_name')
-  const [, setCurrentPageSize] = useState<string>(pageSize)
 
-  function loadServerRows(currentPage: number, data: DataGridRowType[]) {
-    return data.slice(currentPage * parseInt(pageSize, 10), (currentPage + 1) * parseInt(pageSize, 10))
-  }
+  const [sort, setSort] = useState<SortType>('asc')
 
-  const fetchTableData = useCallback(
-    async (sort: SortType, q: string, column: string) => {
-      await axios
-        .get('/api/table/data', {
-          params: {
-            q,
-            sort,
-            column
-          }
-        })
-        .then(res => {
-          setTotal(res.data.total)
-          setRows(loadServerRows(page, res.data.data))
-        })
-    },
-    [page, pageSize]
-  )
+  // const memoizedLoadServerRows = useMemo(
+  //   () => (currentPage: number, pageSize: number, data: DataGridRowTypeCustomized[]) => {
+  //     return data.slice(currentPage * pageSize, (currentPage + 1) * pageSize)
+  //   },
+  //   []
+  // )
 
-  useEffect(() => {
-    fetchTableData(sort, searchValue, sortColumn)
-  }, [fetchTableData, searchValue, sort, sortColumn])
-
-  const handleSortModel = (newModel: GridSortModel) => {
-    if (newModel.length) {
-      setSort(newModel[0].sort)
-      setSortColumn(newModel[0].field)
-      fetchTableData(newModel[0].sort, searchValue, newModel[0].field)
-    } else {
-      setSort('asc')
-      setSortColumn('full_name')
-    }
-  }
-
-  const handleSearch = (value: string) => {
-    setSearchValue(value)
-    onCustomSearch ? onCustomSearch(value) : fetchTableData(sort, value, sortColumn)
-  }
+  // const handleSearch = (value: string) => {
+  //   setSearchValue(value)
+  //   onCustomSearch ? onCustomSearch(value) : fetchTableData(sort, value, sortColumn)
+  // }
 
   const handleRowClick = (row: DataGridRowType) => {
     console.log('Selected Row:', row)
@@ -138,7 +109,10 @@ const TableServerSide = ({
     setCurrentPageSize(newPageSize.toString()) // Update current page size
     onNumberRowPageChange && onNumberRowPageChange(newPageSize.toString())
   }
-
+  // useEffect(() => {
+  //   const newRows = memoizedLoadServerRows(page, parseInt(pageSize, 10), customrows)
+  //   setRows(newRows)
+  // }, [page, pageSize, customrows, memoizedLoadServerRows])
   return (
     <Card>
       <CardHeader title='Server Side' />

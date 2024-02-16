@@ -25,6 +25,10 @@ interface ServerSideToolbarProps {
 const ServerSideToolbar = (props: ServerSideToolbarProps) => {
   const { clearSearch, onChange, onNumberRowPageChange, value } = props
 
+  const handlePageSizeChange = (event: SelectChangeEvent<string>) => {
+    const selectedValue = event.target.value // No need to parse since it's already a string
+    onNumberRowPageChange && onNumberRowPageChange(selectedValue)
+  }
   return (
     <Box
       sx={{
@@ -53,9 +57,7 @@ const ServerSideToolbar = (props: ServerSideToolbarProps) => {
           <Select
             native
             label='Rows per page'
-            onChange={event => {
-              onNumberRowPageChange && onNumberRowPageChange(event.target.value)
-            }}
+            onChange={handlePageSizeChange}
             defaultValue=''
             sx={{
               height: '5vh',
@@ -70,7 +72,7 @@ const ServerSideToolbar = (props: ServerSideToolbarProps) => {
             <option value={10}>Ten</option>
             <option value={20}>Twenty</option>
             <option value={30}>Thirty</option>
-            <option value={40}>forty</option>
+            <option value={40}>fourty</option>
           </Select>
         </FormControl>
         <TextField
