@@ -1,6 +1,7 @@
 import { GridRenderCellParams } from '@mui/x-data-grid'
 import { ThemeColor } from 'src/@core/layouts/types'
 import { DataGridRowType, DataGridRowTypeCustomized } from 'src/@fake-db/types'
+
 export interface StatusObj {
   [key: number]: {
     title: string
@@ -31,11 +32,18 @@ export interface FetchTableDataProps {
 }
 
 export interface DataGridCustomProps {
-  customrows: DataGridRowTypeCustomized[]
+  data: DataGridRowTypeCustomized[]
   onCustomSearch: (value: string) => void
+  onCustomSort: (value: DataGridSortObject) => void
   showCheckboxSelection: boolean
   onRowClick: (row: DataGridRowType) => void
   onNumberRowPageChange: (value: string) => void
   columns: GridColumns[]
   pageSize: string
+  totalRows?: number
+  currentPageSize?: number
+}
+export interface DataGridSortObject {
+  field: string
+  sort: SortType
 }

@@ -1,8 +1,8 @@
 import { Typography } from '@mui/material'
 import { useEffect, useMemo, useState } from 'react'
 import { DataGridRowType, DataGridRowTypeCustomized } from 'src/@fake-db/types'
-import TableServerSide from 'src/SharedComponents/DataGrid/DataGrid'
-import { GridColumns } from 'src/SharedComponents/DataGrid/DataGrid.interface'
+import CustomDataGrid from 'src/SharedComponents/DataGrid/DataGrid'
+import { DataGridSortObject, GridColumns } from 'src/SharedComponents/DataGrid/DataGrid.interface'
 import generateFakeData from 'src/SharedComponents/DataGrid/mock/data.mock'
 
 const columns: GridColumns[] = [
@@ -45,8 +45,9 @@ const IndividualList = () => {
   const [pageSize, setPageSize] = useState<string>(defaultPageSize)
   const [page, setPage] = useState<number>(0)
   const [rows, setRows] = useState<DataGridRowTypeCustomized[]>([])
+
   const fakeData = useMemo(() => generateFakeData(60), [])
-  //console.log(fakeData)
+
   const filteredData = fakeData.map(row => ({
     id: row.id,
     full_name: row.full_name,
@@ -54,6 +55,7 @@ const IndividualList = () => {
     salary: row.salary,
     age: row.age
   }))
+
   const memoizedLoadServerRows = useMemo(
     () => (currentPage: number, pageSize: number, data: DataGridRowTypeCustomized[]) => {
       return data.slice(currentPage * pageSize, (currentPage + 1) * pageSize)
@@ -75,11 +77,9 @@ const IndividualList = () => {
     console.log('The current number of Rows is:', numberOfRows)
   }
 
-  // console.log(filteredData.map(row => ({ start_date: row.start_date })))
-
   return (
-    <TableServerSide
-      customrows={filteredData}
+    <CustomDataGrid
+      data={filteredData}
       onCustomSearch={(value: any) => {
         console.log(value)
       }}
@@ -88,6 +88,9 @@ const IndividualList = () => {
       pageSize={pageSize}
       onRowClick={handleRowClick}
       columns={columns}
+      onCustomSort={function (value: DataGridSortObject): void {
+        console.log('not implemented ', value.sort)
+      }}
     />
   )
 }
