@@ -55,7 +55,7 @@ const CustomDataGrid = ({
       <DataGrid
         autoHeight
         pagination
-        rows={rows}
+        rows={data}
         rowCount={total}
         columns={columns}
         checkboxSelection={showCheckboxSelection}
