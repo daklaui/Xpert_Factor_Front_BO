@@ -67,7 +67,29 @@ const IndividualList = () => {
     salary: row.salary,
     age: row.age
   }))
+  const memoizedLoadServerRows = useMemo(
+    () => (currentPage: number, pageSize: number, data: DataGridRowTypeCustomized[]) => {
+      return data.slice(currentPage * pageSize, (currentPage + 1) * pageSize)
+    },
+    [pageSize]
+  )
+
+  useEffect(() => {
+    const newRows = memoizedLoadServerRows(page, parseInt(pageSize, 10), filteredData)
+    setRows(newRows)
+  }, [page, pageSize, filteredData, memoizedLoadServerRows])
+
+  const handleRowClick = (row: DataGridRowType) => {
+    console.log('Selected Row:', row)
+  }
+
+  const onNumberRowPageChange = (numberOfRows: string) => {
+    setPageSize(numberOfRows)
+    console.log('The current number of Rows is:', numberOfRows)
+  }
+
   // console.log(filteredData.map(row => ({ start_date: row.start_date })))
+
   return (
     <TableServerSide
       customrows={filteredData}

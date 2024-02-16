@@ -22,7 +22,7 @@ export interface FetchTableDataProps {
   page: number
   total: number
   sort: SortType
-  pageSize: number 
+  pageSize: number
   rows: number
   searchValue: string
   sortColumn: string
@@ -37,4 +37,5 @@ export interface DataGridCustomProps {
   onRowClick: (row: DataGridRowType) => void
   onNumberRowPageChange: (value: string) => void
   columns: GridColumns[]
+  pageSize: string
 }
