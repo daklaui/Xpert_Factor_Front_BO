@@ -3,6 +3,7 @@
     "baseUrl": ".",
     "rootDir": "src",
     "target": "es6",
+    "types": ["@mui/system"],
     "lib": [
       "dom",
       "dom.iterable",
@@ -26,7 +27,7 @@
       ],
       "apexcharts/*": [
         "./node_modules/apexcharts-clevision/*"
-      ],
+      ]
     }
   },
   "include": [
