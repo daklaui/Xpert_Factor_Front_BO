@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import Select from 'react-select'
-import { getOptions } from './mock'
-
 import { CustomSelectProps, SelectInerface } from '../interface/customSelect.interface'
+import { getPaymentsMethod } from '../mock'
 
-const SelectDevise = ({ onSearch, labelText }: CustomSelectProps) => {
+const SelectPaymentType = ({ onSearch }: CustomSelectProps) => {
   const [options, setOptions] = useState<SelectInerface[]>([])
   const [statusValue, setStatusValue] = useState('')
   const [isClearable, setIsClearable] = useState(true)
@@ -12,7 +11,7 @@ const SelectDevise = ({ onSearch, labelText }: CustomSelectProps) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await getOptions()
+        const response = await getPaymentsMethod()
         setOptions(response.options)
       } catch (error) {
         console.error('Erreur lors de la récupération des options :', error)
@@ -24,7 +23,7 @@ const SelectDevise = ({ onSearch, labelText }: CustomSelectProps) => {
 
   return (
     <Select
-      placeholder={'---Sélectionnez une devise---'}
+      placeholder={'---Sélectionnez une mode de paiement---'}
       defaultValue={statusValue}
       onChange={(value: any) => {
         onSearch ? onSearch(value) : setStatusValue(value)
@@ -35,4 +34,4 @@ const SelectDevise = ({ onSearch, labelText }: CustomSelectProps) => {
   )
 }
 
-export default SelectDevise
+export default SelectPaymentType
