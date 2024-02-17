@@ -1,49 +1,36 @@
 import { useEffect, useState } from 'react'
 import { DataGridRowType, DataGridRowTypeContract } from 'src/@fake-db/types'
 import CustomDataGrid from 'src/shared-components/data-grid/dataGrid'
+  
 import { paginate } from 'src/@core/utils/paginate'
 import { customSort } from 'src/@core/utils/customSort'
 import { DataGridSortObject } from 'src/shared-components/data-grid/interface/dataGrid.interface'
 import { columns } from './components/columns'
 import generateFakeData from '../mock/Data.mock'
-<<<<<<< HEAD
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> dbfb9e274c0325b31c34f36fce7a87353e15c5ef
-const ContractList = ({ fakeData }: any) => {
-=======
+
 const IndividualList = ({ fakeData }: any) => {
->>>>>>> 4ee6d72 (Contract List Screen pushed for review)
-=======
-const ContractList = ({ fakeData }: any) => {
->>>>>>> 6dfe058 (Updating the contract list page)
   const defaultPageSize = 10
   const [pageSize, setPageSize] = useState<number>(defaultPageSize)
   const [page, setPage] = useState<number>(1)
   const [pages, setTotalPages] = useState<number>(0)
-<<<<<<< HEAD
-<<<<<<< HEAD
+  
+  
+  
   const [contract, setContract] = useState<DataGridRowType[]>([])
-=======
-  const [individus, setIndividus] = useState<DataGridRowType[]>([])
->>>>>>> 4ee6d72 (Contract List Screen pushed for review)
-=======
-  const [contract, setContract] = useState<DataGridRowType[]>([])
->>>>>>> 6dfe058 (Updating the contract list page)
-  const [filteredData, setFilteredData] = useState<DataGridRowType[]>([])
+    useEffect(() => {
+    const filteredData = fakeData.map((row: DataGridRowTypeContract, index: number) => ({
+      id: index + 1,
+        id: index + 1, // Generate a unique identifier
+        
+        id: index + 1,}))
+    })
+    const [individus, setIndividus] = useState<DataGridRowType[]>([])
+    const [filteredData, setFilteredData] = useState<DataGridRowType[]>([])
+
   useEffect(() => {
     const filteredData = fakeData.map((row: DataGridRowTypeContract, index: number) => ({
-<<<<<<< HEAD
-<<<<<<< HEAD
-      id: index + 1,
-=======
-      id: index + 1, // Generate a unique identifier
->>>>>>> 4ee6d72 (Contract List Screen pushed for review)
-=======
-      id: index + 1,
->>>>>>> 6dfe058 (Updating the contract list page)
+      id: index + 1, // Generate a unique identifier   
       Ref_contrat: row.Ref_contrat,
       Nom_Adherenet: row.Nom_Adherenet,
       Encours_des_factures: row.Encours_des_factures,
@@ -61,12 +48,7 @@ const ContractList = ({ fakeData }: any) => {
       Délai_moyen_de_réglement: row.Délai_moyen_de_réglement,
       Délai_max_de_réglement: row.Délai_max_de_réglement
     }))
-<<<<<<< HEAD
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> dbfb9e274c0325b31c34f36fce7a87353e15c5ef
+  
     setContract(filteredData)
   }, [fakeData])
   useEffect(() => {
@@ -76,16 +58,6 @@ const ContractList = ({ fakeData }: any) => {
       setFilteredData(currentPageItems)
     }
   }, [contract, pageSize])
-  const onSearch = (text: string) => {
-    const lowercaseQuery = text.toLowerCase()
-    const searchData = contract.filter((item: DataGridRowType) => {
-=======
-    setIndividus(filteredData)
-=======
-    setContract(filteredData)
->>>>>>> 6dfe058 (Updating the contract list page)
-  }, [fakeData])
-
   useEffect(() => {
     if (contract.length > 0) {
       const { currentPageItems, totalPages } = paginate<DataGridRowType>(contract, { currentPage: 1, pageSize })
@@ -96,66 +68,75 @@ const ContractList = ({ fakeData }: any) => {
 
   const onSearch = (text: string) => {
     const lowercaseQuery = text.toLowerCase()
-<<<<<<< HEAD
+  
     const searchData = individus.filter((item: DataGridRowType) => {
->>>>>>> 4ee6d72 (Contract List Screen pushed for review)
-=======
-    const searchData = contract.filter((item: DataGridRowType) => {
->>>>>>> 6dfe058 (Updating the contract list page)
+        
+      const searchData = contract.filter((item: DataGridRowType) => {
+        
+  
+    setIndividus(filteredData)
+  }, [fakeData])
+
+  useEffect(() => {
+    if (individus.length > 0) {
+      const { currentPageItems, totalPages } = paginate<DataGridRowType>(individus, { currentPage: 1, pageSize })
+      setTotalPages(totalPages)
+      setFilteredData(currentPageItems)
+    }
+  }, [individus, pageSize])
+
+  const onSearch = (text: string) => {
+    const lowercaseQuery = text.toLowerCase()
+    const searchData = individus.filter((item: DataGridRowType) => {
       return Object.values(item).some(
         value => typeof value === 'string' && value.toLowerCase().includes(lowercaseQuery)
       )
     })
     setFilteredData(searchData)
   }
+  
   const onPageChange = (index: number) => {
-<<<<<<< HEAD
-<<<<<<< HEAD
-    const { currentPageItems, totalPages } = paginate<DataGridRowType>(contract, { currentPage: index, pageSize })
-=======
+          
+  
+  const onPageChange = (index: number) => {
     const { currentPageItems, totalPages } = paginate<DataGridRowType>(individus, { currentPage: index, pageSize })
->>>>>>> 4ee6d72 (Contract List Screen pushed for review)
-=======
-    const { currentPageItems, totalPages } = paginate<DataGridRowType>(contract, { currentPage: index, pageSize })
->>>>>>> 6dfe058 (Updating the contract list page)
     setPage(index)
     setTotalPages(totalPages)
     setFilteredData(currentPageItems)
   }
+  
   const onNumberRowPageChange = (numberOfRows: string) => {
-<<<<<<< HEAD
-<<<<<<< HEAD
-    const { currentPageItems, totalPages } = paginate<DataGridRowType>(contract, {
-=======
     const { currentPageItems, totalPages } = paginate<DataGridRowType>(individus, {
->>>>>>> 4ee6d72 (Contract List Screen pushed for review)
-=======
-    const { currentPageItems, totalPages } = paginate<DataGridRowType>(contract, {
->>>>>>> 6dfe058 (Updating the contract list page)
+ 
       currentPage: page,
       pageSize: parseInt(numberOfRows)
     })
     setPageSize(parseInt(numberOfRows))
     setTotalPages(totalPages)
     setFilteredData(currentPageItems)
-  }
-  const onSort = (value: DataGridSortObject) => {
-<<<<<<< HEAD
-<<<<<<< HEAD
-    const sortedData = customSort(contract, { key: value.field, order: value.sort })
-=======
-    const sortedData = customSort(individus, { key: value.field, order: value.sort })
->>>>>>> 4ee6d72 (Contract List Screen pushed for review)
-=======
-    const sortedData = customSort(contract, { key: value.field, order: value.sort })
->>>>>>> 6dfe058 (Updating the contract list page)
+  }  
+  
+    const sortedData = customSort(contract, { key: value.field, order: value.sort })                
     const { currentPageItems } = paginate<DataGridRowType>(sortedData, { currentPage: page, pageSize })
     setFilteredData(currentPageItems)
   }
+  
+  const onSort = (value: DataGridSortObject) => {
+    const sortedData = customSort(individus, { key: value.field, order: value.sort })
+    const { currentPageItems } = paginate<DataGridRowType>(sortedData, { currentPage: page, pageSize })
+    setFilteredData(currentPageItems)
+  }
+
   const handleRowClick = (row: DataGridRowType) => {
     alert('Selected Row:' + row.full_name)
     console.log('Selected Row:', row)
   }
+  
+  
+      function onNumberRowPageChange(value: string): void {
+        throw new Error('Function not implemented.')
+      }
+
   return (
     <CustomDataGrid
       data={filteredData}
@@ -169,38 +150,38 @@ const ContractList = ({ fakeData }: any) => {
       onPageChange={onPageChange}
       columns={columns}
       onCustomSort={onSort}
-<<<<<<< HEAD
-<<<<<<< HEAD
+  
+  
+  
       title={'Liste des contrats'}
-=======
-      title={'Individu List'}
->>>>>>> 4ee6d72 (Contract List Screen pushed for review)
-=======
-      title={'Liste des contrats'}
->>>>>>> 6dfe058 (Updating the contract list page)
+        title={'Individu List'}
+        
+        title={'Liste des contrats'}
+        
+    />
+  )
+},
+  
+export default ContractList
+  
+     
+export async function getStaticProps() {
+  const fakeData = generateFakeData(60)
+        title={'Individu List'}
     />
   )
 }
-<<<<<<< HEAD
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-export default ContractList
-=======
 export default IndividualList
->>>>>>> 4ee6d72 (Contract List Screen pushed for review)
-=======
-export default ContractList
->>>>>>> 6dfe058 (Updating the contract list page)
 
-=======
-export default ContractList
->>>>>>> dbfb9e274c0325b31c34f36fce7a87353e15c5ef
 export async function getStaticProps() {
   const fakeData = generateFakeData(60)
+
   return {
     props: {
       fakeData
     }
   }
+  
 }
+  }
