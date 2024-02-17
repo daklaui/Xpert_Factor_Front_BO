@@ -1,4 +1,4 @@
-
+import FormIndividual from './FormIndividual'
 
 const IndividualFlow = () => {
   return <>
