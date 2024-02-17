@@ -1,5 +1,9 @@
+import GeneralInfo from "./AddNewContract/GeneralInfo"
+
 const IndividualFlow = () => {
-  return <></>
+  return <>
+  <GeneralInfo />
+  </>
 }
 
 export default IndividualFlow
