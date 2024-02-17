@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Select from 'react-select'
 import { CustomSelectProps, SelectInerface } from '../interface/customSelect.interface'
 import { getListOfBanks } from '../mock'
@@ -6,7 +6,7 @@ import { getListOfBanks } from '../mock'
 const SelectBanks = ({ onSearch, labelText }: CustomSelectProps) => {
   const [options, setOptions] = useState<SelectInerface[]>([])
   const [statusValue, setStatusValue] = useState('')
-  const [isClearable, ] = useState(true)
+  const [isClearable, setIsClearable] = useState(true)
 
   useEffect(() => {
     const fetchData = async () => {
