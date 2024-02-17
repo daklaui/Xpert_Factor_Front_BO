@@ -14,7 +14,7 @@ export const generateFakeData = (count: number): DataGridRowTypeContract[] => {
       Total_Avoirs: Math.floor(Math.random() * 100000),
       Total_Intérets: Math.floor(Math.random() * 100000),
       Limite_De_Financement: Math.floor(Math.random() * 100000),
-      Devise: 'USD', // Or any other currency
+      Devise: 'TND', // Or any other currency
       Nombre_Dacheteurs_prévues: Math.floor(Math.random() * 100),
       Nombre_De_Factures_prévues: Math.floor(Math.random() * 100),
       Nombre_Davoirs_prévues: Math.floor(Math.random() * 100),

@@ -53,6 +53,7 @@ const renderClient = (params: GridRenderCellParams) => {
 
 const TableServerSide = ({
   onCustomSearch,
+  title,
   columns,
   customrows,
   showCheckboxSelection,
@@ -94,7 +95,7 @@ const TableServerSide = ({
   // }, [page, pageSize, customrows, memoizedLoadServerRows])
   return (
     <Card>
-      <CardHeader title='Server Side' />
+      <CardHeader title={title} />
       <DataGrid
         autoHeight
         pagination
