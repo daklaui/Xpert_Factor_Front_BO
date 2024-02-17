@@ -1,8 +1,9 @@
-import FormIndividual from '../Flow/FormIndividual'
+import GeneralInfo from "./AddNewContract/GeneralInfo"
 
 const IndividualFlow = () => {
-  return <FormIndividual />
-  return <FormIndividual />
+  return <>
+  <GeneralInfo />
+  </>
 }
 
 export default IndividualFlow
