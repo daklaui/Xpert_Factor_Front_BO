@@ -1,10 +1,4 @@
-import React from 'react'
-
-const IndividualList = () => {
-  return (
-    <>
-    </>
-
+ 
 import { useEffect, useState } from 'react'
 import { DataGridRowType } from 'src/@fake-db/types'
 import CustomDataGrid from 'src/shared-components/data-grid/dataGrid'
