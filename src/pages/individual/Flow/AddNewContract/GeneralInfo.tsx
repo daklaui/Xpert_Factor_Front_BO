@@ -39,7 +39,7 @@ import StepperWrapper from 'src/@core/styles/mui/stepper'
 import SelectAdherent from 'src/SharedComponents/CustomSelect/SelectAdherentComponent'
 import Select from 'react-select'
 import SelectIndividu from 'src/SharedComponents/CustomSelect/SelectIndividualComponent'
-import CustomTextField from 'src/SharedComponents/StyledTextField/StyledTextField '
+import CustomTextField from 'src/@core/components/mui/text-field'
 
 interface State {
   password: string
@@ -179,8 +179,7 @@ const GeneralInfo = ({ popperPlacement }: { popperPlacement: ReactDatePickerProp
         return (
           <Fragment>
             <Grid item sm={3}>
-              <StyledLabel>Numero contrat papier</StyledLabel>
-              <CustomTextField label='' placeholder='placeholder' />
+              <CustomTextField label={'Numero contrat papier'} placeholder={'Numero contrat papier'} />
             </Grid>
             <Grid item sm={3}>
               <StyledLabel>Type contrat </StyledLabel>
@@ -191,12 +190,7 @@ const GeneralInfo = ({ popperPlacement }: { popperPlacement: ReactDatePickerProp
               <StyledTextField fullWidth placeholder='Tapez le chiffres d affaires ' />
             </Grid>
             <Grid item sm={3}>
-              <StyledLabel>Factures transmises avec </StyledLabel>
-              <StyledTextField
-                fullWidth
-                placeholder='Tapez le numéro du contrat'
-                onChange={e => setContract(e.target.value)}
-              />
+              <CustomTextField label={'Factures transmises avec'} placeholder={'Factures transmises avec'} />
             </Grid>
             <Grid item sm={3}>
               <StyledLabel> Status Contract </StyledLabel>
