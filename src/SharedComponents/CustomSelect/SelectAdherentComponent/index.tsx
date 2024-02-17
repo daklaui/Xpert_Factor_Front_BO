@@ -6,7 +6,7 @@ import { CustomSelectProps, SelectInerface } from '../interface/customSelect.int
 const SelectAdherent = ({ onSearch, labelText }: CustomSelectProps) => {
   const [options, setOptions] = useState<SelectInerface[]>([])
   const [statusValue, setStatusValue] = useState('')
-  const [isClearable, setIsClearable] = useState(true)
+  const [isClearable, ] = useState(true)
 
   useEffect(() => {
     const fetchData = async () => {
