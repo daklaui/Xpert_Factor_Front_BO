@@ -1,13 +1,6 @@
-import React, { useState } from 'react'
+import React from 'react'
 import TextField from '@mui/material/TextField'
 import { styled } from '@mui/material/styles'
-
-const StyledLabel = styled('label')({
-  fontWeight: 'bold',
-  fontSize: '13px',
-  paddingBottom: '12px',
-  marginBottom: '110px'
-})
 
 const StyledTextField = styled(TextField)(({}) => ({
   '& .MuiInputBase-root': {
@@ -18,14 +11,8 @@ const StyledTextField = styled(TextField)(({}) => ({
   '& input::placeholder': {}
 }))
 
-const CustomTextField = ({ label, name, placeholder, ...rest }) => {
-  return (
-    <>
-      <StyledLabel htmlFor={name}>{label}</StyledLabel>
-      <br />
-      <StyledTextField name={name} placeholder={label} {...rest} />
-    </>
-  )
+const CustomTextField = ({ label, placeholder, ...rest }) => {
+  return <StyledTextField label={label} placeholder={placeholder} {...rest} />
 }
 
 export default CustomTextField
