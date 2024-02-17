@@ -6,39 +6,31 @@ import Card from '@mui/material/Card'
 import CardHeader from '@mui/material/CardHeader'
 import { DataGrid, GridSortModel } from '@mui/x-data-grid'
 
-// ** ThirdParty Components
+import * as types from 'src/@fake-db/types'
 
-// ** Custom Components
-
-// ** Types Imports
-import { DataGridRowType, DataGridRowTypeCustomized } from 'src/@fake-db/types'
-
-// ** Utils Import
-
-import ServerSideToolbar from './ServerSideToolbar'
+import Toolbar from './Toolbar'
 
 import { SelectChangeEvent } from '@mui/material'
-import { DataGridCustomProps, DataGridSortObject } from './DataGrid.interface'
+import CustomPagination from '../pagination'
+import { DataGridCustomProps, DataGridSortObject } from './interface/dataGrid.interface'
 
 const CustomDataGrid = ({
   onCustomSearch,
   onCustomSort,
+  onPageChange,
   columns,
   data,
+  title,
   showCheckboxSelection,
+  onRowClick,
+  totalPages,
   onNumberRowPageChange
 }: DataGridCustomProps) => {
-  const [total, setTotal] = useState<number>(data.length)
-  const [rows, setRows] = useState<DataGridRowTypeCustomized[]>(data)
   const [searchValue, setSearchValue] = useState<string>('')
   const [sort, setSort] = useState<GridSortModel>()
-  const [paginationModel, setPaginationModel] = useState({
-    pageSize: 2,
-    page: 0
-  })
 
-  const handleRowClick = (row: DataGridRowType) => {
-    console.log('Selected Row:', row)
+  const handleRowClick = (row: types.DataGridRowType) => {
+    onRowClick ? onRowClick(row) : console.log('Selected Row:', row)
   }
 
   const handleSortModel = (direction: GridSortModel) => {
@@ -51,19 +43,17 @@ const CustomDataGrid = ({
 
   return (
     <Card>
-      <CardHeader title='Server Side' />
+      <CardHeader title={title} />
       <DataGrid
         autoHeight
-        pagination
         rows={data}
-        rowCount={total}
         columns={columns}
         checkboxSelection={showCheckboxSelection}
-        paginationModel={paginationModel}
         sortModel={sort}
         onSortModelChange={handleSortModel}
         slots={{
-          toolbar: ServerSideToolbar
+          toolbar: Toolbar,
+          footer: CustomPagination
         }}
         slotProps={{
           toolbar: {
@@ -79,15 +69,19 @@ const CustomDataGrid = ({
               setSearchValue('')
             },
             onNumberRowPageChange: (numberOfRows: SelectChangeEvent<string>) => {
-              setPaginationModel(prevState => ({
-                ...prevState,
-                pageSize: parseInt(numberOfRows.target.value)
-              }))
+              onNumberRowPageChange && onNumberRowPageChange(numberOfRows.target.value)
+            }
+          },
+          footer: {
+            //@ts-ignore
+            totalPages: totalPages,
+            onPageChange: (value: any) => {
+              onPageChange && onPageChange(value)
             }
           }
         }}
         hideFooterPagination
-        onRowClick={params => handleRowClick(params.row as DataGridRowType)}
+        onRowClick={params => handleRowClick(params.row as types.DataGridRowType)}
       />
     </Card>
   )
