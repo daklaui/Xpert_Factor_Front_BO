@@ -10,9 +10,9 @@ import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered'
 import ContactPhoneIcon from '@mui/icons-material/ContactPhone'
 import InfoIndividu from './InfoIndividu'
 import AutreInfo from './AutreInfo'
-import AutreContact from './AutreContact'
-import LoginWeb from './LoginWeb'
-import ListeRib from './ListeRib'
+import AutreContact from 'src/pages/individual/Flow/DetailsIndividu/AutreInfo'
+import LoginWeb from 'src/pages/individual/[id]/Tabs/ListeRib'
+import ListeRib from 'src/pages/individual/[id]/Tabs/ListeRib'
 import { Button, CardHeader, Typography, Grid } from '@mui/material'
 
 const DetailsIndividu = () => {
@@ -29,15 +29,15 @@ const DetailsIndividu = () => {
         <Typography variant='h2' component='div' sx={{ mb: 2 }}>
           Individu
         </Typography>
-      </Grid>
-      <Card>
-        <CardHeader title={<span style={{ fontSize: '20px' }}>Details d'individu</span>} />
-        <Grid container item justifyContent='flex-end' spacing={2}>
+        <Grid item>
           <Button variant='contained'>Modifier Individu</Button>
           <Button variant='contained' sx={{ marginLeft: '8px' }}>
             Liste des Individus
           </Button>
         </Grid>
+      </Grid>
+      <Card>
+        <CardHeader title={<span style={{ fontSize: '20px' }}>Détails d'individu</span>} />
         <TabContext value={value}>
           <TabList
             variant='scrollable'
