@@ -3,8 +3,9 @@ import { Card, CardContent, CardHeader, Divider, Grid, Typography } from '@mui/m
 import { Box } from '@mui/system'
 
 const cardStyle = {
-  marginBottom: '10px',
-  backgroundColor: '#f0f0f0' // couleur de fond
+  marginBottom: '20px',
+  backgroundColor: '#f8f8f8',
+  width: '100%' // Set width to 100% for both cards
 }
 const data = {
   id: 1,
@@ -21,12 +22,12 @@ const AutreInfo = () => {
         <TabPanel sx={{ p: 0 }} value='autre-informations'></TabPanel>
         <Grid container spacing={2}>
           <Grid item xs={6}>
-            <Card style={cardStyle}>
+            <Card sx={cardStyle}>
               <CardContent>
                 <CardHeader
                   title={
                     <Typography variant='h5' component='div'>
-                      Adresse
+                      <strong>Adresse</strong>
                     </Typography>
                   }
                 />
@@ -47,12 +48,12 @@ const AutreInfo = () => {
             </Card>
           </Grid>
           <Grid item xs={6}>
-            <Card style={cardStyle}>
+            <Card sx={cardStyle}>
               <CardContent>
                 <CardHeader
                   title={
                     <Typography variant='h5' component='div'>
-                      Contact
+                      <strong>Contact</strong>
                     </Typography>
                   }
                 />
