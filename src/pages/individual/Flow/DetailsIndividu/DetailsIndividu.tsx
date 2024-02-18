@@ -29,15 +29,15 @@ const DetailsIndividu = () => {
         <Typography variant='h2' component='div' sx={{ mb: 2 }}>
           Individu
         </Typography>
-      </Grid>
-      <Card>
-        <CardHeader title={<span style={{ fontSize: '20px' }}>Details d'individu</span>} />
-        <Grid container item justifyContent='flex-end' spacing={2}>
+        <Grid item>
           <Button variant='contained'>Modifier Individu</Button>
           <Button variant='contained' sx={{ marginLeft: '8px' }}>
             Liste des Individus
           </Button>
         </Grid>
+      </Grid>
+      <Card>
+        <CardHeader title={<span style={{ fontSize: '20px' }}>Détails d'individu</span>} />
         <TabContext value={value}>
           <TabList
             variant='scrollable'
