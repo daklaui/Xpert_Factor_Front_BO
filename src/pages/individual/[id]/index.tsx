@@ -1,9 +1,9 @@
+import React from 'react'
 import { useRouter } from 'next/router'
-
+import DetailsIndividu from './DetailsIndividu'
 const ConsulationIndividual = () => {
   const router = useRouter()
-
-  return <p>Individual id: {router.query.id}</p>
+  const { id } = router.query
+  return <DetailsIndividu individuId={id} />
 }
-
 export default ConsulationIndividual
