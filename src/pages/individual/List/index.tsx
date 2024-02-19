@@ -1,12 +1,3 @@
-<<<<<<< HEAD
-import DetailsIndividu from '../Flow/DetailsIndividu/DetailsIndividu'
-
-const IndividualList = () => {
-  return (
-    <>
-      <DetailsIndividu />
-    </>
-=======
 import { useEffect, useState } from 'react'
 import { DataGridRowType } from 'src/@fake-db/types'
 import CustomDataGrid from 'src/shared-components/data-grid/dataGrid'
@@ -96,7 +87,6 @@ const IndividualList = ({ fakeData }: any) => {
       onCustomSort={onSort}
       title={'Individu List'}
     />
->>>>>>> develop
   )
 }
 
