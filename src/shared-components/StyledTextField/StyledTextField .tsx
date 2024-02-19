@@ -1,10 +1,9 @@
-<<<<<<< HEAD
-
 import React from 'react'
 import TextField from '@mui/material/TextField'
 import { styled } from '@mui/material/styles'
 import CustomTextFieldProps from 'src/shared-components/StyledTextField/Interfaces/CustomTextFiledInterface'
 import StyledLabel from 'src/pages/Contract/Flow/StyledInputs/StyledLabel'
+import { Controller } from 'react-hook-form';
 const StyledTextField : any = styled(TextField)(({ fullWidth }: CustomTextFieldProps) => ({
   '& .MuiInputBase-root': {
     padding: '7px',
@@ -14,11 +13,6 @@ const StyledTextField : any = styled(TextField)(({ fullWidth }: CustomTextFieldP
   '& input::placeholder': {}
 }))
 const CustomTextField: React.FC<CustomTextFieldProps> = ({ label, name, placeholder, fullWidth, onChange, ...rest }) => {
-=======
-import React from 'react';
-import TextField from '@mui/material/TextField';
-import { styled } from '@mui/material/styles';
-import { Controller } from 'react-hook-form';
 
 const StyledLabel = styled('label')({
   fontWeight: 'bold',
@@ -56,12 +50,10 @@ const CustomTextField = ({ label, name, control, placeholder, helperMessage, fie
     />
   );
 
->>>>>>> dbfb9e274c0325b31c34f36fce7a87353e15c5ef
   return (
     <>
       <StyledLabel htmlFor={name}>{label}</StyledLabel>
       <br />
-<<<<<<< HEAD
       <StyledTextField
         name={name}
         placeholder={placeholder || label}
@@ -71,13 +63,5 @@ const CustomTextField = ({ label, name, control, placeholder, helperMessage, fie
       />
     </>
   )
-}
+}}
 export default CustomTextField
-=======
-      {renderField}
-    </>
-  );
-};
-
-export default CustomTextField;
->>>>>>> dbfb9e274c0325b31c34f36fce7a87353e15c5ef
