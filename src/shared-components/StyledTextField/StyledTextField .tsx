@@ -15,22 +15,36 @@ const StyledTextField : any = styled(TextField)(({ fullWidth }: CustomTextFieldP
   '& .MuiInputBase-root': {
     padding: '7px',
     height: '40px',
-    width: fullWidth ? '100%' : 'auto'
+    width: '100%',
   },
   '& input::placeholder': {}
-}))
-const CustomTextField: React.FC<CustomTextFieldProps> = ({ label, name, placeholder, fullWidth, onChange, ...rest }) => {
+}));
+
+const CustomTextField = ({ label, name, control, placeholder, helperMessage, field, ...rest } ) => {
+  const renderField = field ? field : (
+    <Controller
+      name={name}
+      control={control}
+      rules={{
+        required: true,
+      }}
+      render={({ field, fieldState }) => (
+        <StyledTextField
+          {...field}
+          placeholder={label}
+          error={fieldState.invalid}
+          helperText={fieldState.invalid ? helperMessage : ''}
+          {...rest}
+        />
+      )}
+    />
+  );
+
   return (
     <>
       <StyledLabel htmlFor={name}>{label}</StyledLabel>
       <br />
-      <StyledTextField
-        name={name}
-        placeholder={placeholder || label}
-        fullWidth={fullWidth}
-        onChange={onChange}
-        {...rest}
-      />
+      {renderField}
     </>
   );
 };
