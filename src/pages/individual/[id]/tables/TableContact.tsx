@@ -20,6 +20,7 @@ const tableRows = [
     fax: '+33 025 452 78',
     checked: true
   }
+  // Ajoutez d'autres lignes de tableau selon vos besoins
 ]
 
 const TableContact = () => {
