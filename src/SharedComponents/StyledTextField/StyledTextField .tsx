@@ -19,7 +19,7 @@ const StyledTextField = styled(TextField)(({}) => ({
   '& input::placeholder': {}
 }));
 
-const CustomTextField = ({ label, name, control, placeholder, helperMessage, field, ...rest }) => {
+const CustomTextField = ({ label, name, control, placeholder, helperMessage, field, ...rest } ) => {
   const renderField = field ? field : (
     <Controller
       name={name}
