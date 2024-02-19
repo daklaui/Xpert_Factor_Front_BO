@@ -57,21 +57,26 @@ const steps = [
   {
     icon: 'tabler:building-community',
     title: 'Société'
+    title: 'Société'
   },
   {
     icon: 'tabler:percentage',
+    title: 'TVA '
     title: 'TVA '
   },
   {
     icon: 'tabler:building-bank',
     title: 'Banque '
+    title: 'Banque '
   },
   {
     icon: 'tabler:user',
     title: "Plus d'information"
+    title: "Plus d'information"
   },
   {
     icon: 'tabler:user-plus',
+    title: 'Ajouter contact'
     title: 'Ajouter contact'
   }
 ]
@@ -112,6 +117,8 @@ const FormIndividual = () => {
   const [code_TVA, setCdTVA] = useState<string>('')
   const [language, setLanguage] = useState<string[]>([])
   const [nationalite, setNationalite] = useState<string>('')
+  const [language, setLanguage] = useState<string[]>([])
+  const [nationalite, setNationalite] = useState<string>('')
   const [reg_com, setRegistre_com] = useState<string>('')
   const [lieu, setLieu] = useState<string>('')
   const [grp_soc, setGroupeSocietes] = useState<string>('')
@@ -135,19 +142,30 @@ const FormIndividual = () => {
   const [dateDebutExonerationTVA, setDateDebutExonerationTVA] = useState<DateType>(new Date())
   const [dateFinExonerationTVA, setDateFinExonerationTVA] = useState<DateType>(new Date())
   const [exonerationDisabled, setExonerationDisabled] = useState(false)
+  const [selectDisabled, setSelectDisabled] = useState(false)
+  const [exonerationTVA, setExonerationTVA] = useState<string>('')
+  const [dateDebutExonerationTVA, setDateDebutExonerationTVA] = useState<DateType>(new Date())
+  const [dateFinExonerationTVA, setDateFinExonerationTVA] = useState<DateType>(new Date())
+  const [exonerationDisabled, setExonerationDisabled] = useState(false)
 
   const [state, setState] = useState<State>({
     password: '',
     password2: '',
     showPassword: false,
     showPassword2: false
-  })
+  }) // remove the confirm password
 
   // Handle Stepper
   const handleBack = () => {
     setActiveStep(prevActiveStep => prevActiveStep - 1)
   }
   const handleNext = () => {
+    setActiveStep(prevActiveStep => prevActiveStep + 1)
+
+    if (activeStep === steps.length - 1) {
+      toast.success('Formulaire soumis')
+    }
+  }
     setActiveStep(prevActiveStep => prevActiveStep + 1)
 
     if (activeStep === steps.length - 1) {
@@ -170,6 +188,7 @@ const FormIndividual = () => {
     setEmail_Plus('')
     setSituation('')
     setNationalite('')
+    setLanguage([])
     setLanguage([])
     setAdresse('')
     setVille('')
@@ -203,9 +222,15 @@ const FormIndividual = () => {
   // Handle Language
   const handleSelectChange = (event: SelectChangeEvent<string[]>) => {
     setLanguage(event.target.value as string[])
+    setLanguage(event.target.value as string[])
   }
 
   const handleExonerationTVAChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value
+    setExonerationTVA(value)
+    setExonerationDisabled(value === 'Non')
+  }
+
     const value = event.target.value
     setExonerationTVA(value)
     setExonerationDisabled(value === 'Non')
@@ -216,16 +241,23 @@ const FormIndividual = () => {
       if (activeStep === 0) {
         setGroupeSocietes(value)
         setSelectDisabled(value === 'Non')
+        setGroupeSocietes(value)
+        setSelectDisabled(value === 'Non')
       }
     }
+
 
     switch (step) {
       case 0:
         return (
+          // chane all the select list with react-select
           <Fragment>
             <Grid item xs={12} sm={6}>
               <p>Forme juridique</p>
+            <Grid item xs={12} sm={6}>
+              <p>Forme juridique</p>
               <FormControl fullWidth>
+                <Select value={juridique} onChange={e => setJuridique(e.target.value)}>
                 <Select value={juridique} onChange={e => setJuridique(e.target.value)}>
                   <MenuItem value='Société à responsabilité limitée'>Société à responsabilité limitée</MenuItem>
                   <MenuItem value='Société anonyme'>Société anonyme</MenuItem>
@@ -239,15 +271,19 @@ const FormIndividual = () => {
               </FormControl>
             </Grid>
             <Grid item xs={12} sm={6}>
+              {/* chane all the TextField with anis input */}
               <p>Dénomination </p>
               <TextField fullWidth value={dénomination} onChange={e => setDenomination(e.target.value)} />
             </Grid>
             <Grid item xs={12} sm={6}>
               <p>Nom de commerce </p>
               <TextField fullWidth value={nom_com} onChange={e => setNom_com(e.target.value)} />
+              <TextField fullWidth value={nom_com} onChange={e => setNom_com(e.target.value)} />
             </Grid>
             <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={6}>
               <p>Register de commerce</p>
+              <TextField fullWidth value={reg_com} onChange={e => setRegistre_com(e.target.value)} />
               <TextField fullWidth value={reg_com} onChange={e => setRegistre_com(e.target.value)} />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -265,9 +301,26 @@ const FormIndividual = () => {
               </FormControl>
             </Grid>
             <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={6}>
+              <p>Activité</p>
+              <FormControl fullWidth>
+                <Select value={activite} onChange={e => setActivite(e.target.value)}>
+                  <MenuItem value='ACTIVITE INCONNUE'>ACTIVITE INCONNUE</MenuItem>
+                  <MenuItem value='Culture de céréales'>Culture de céréales</MenuItem>
+                  <MenuItem value='Culture de fourrages'>Culture de fourrages</MenuItem>
+                  <MenuItem value='Culture de légumineuses et cultures industrielles'>
+                    Culture de légumineuses et cultures industrielles
+                  </MenuItem>
+                  <MenuItem value="Culture d'agrumes et vergers ">Culture d'agrumes et vergers</MenuItem>
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item xs={12} sm={6}>
               <p>Lieu</p>
               <TextField fullWidth value={lieu} onChange={e => setLieu(e.target.value)} />
+              <TextField fullWidth value={lieu} onChange={e => setLieu(e.target.value)} />
             </Grid>
+            <Grid container alignItems='center' item xs={12} sm={6}>
             <Grid container alignItems='center' item xs={12} sm={6}>
               <p>Groupe de sociétés</p>
               <RadioGroup row name='groupe-de-societes' onChange={handleRadioChange} value={grp_soc}>
@@ -279,10 +332,15 @@ const FormIndividual = () => {
               <p>Groupe de sociétés</p>
               <FormControl fullWidth>
                 <Select value={grp_soc} onChange={e => setGroupeSocietes(e.target.value)} disabled={selectDisabled}>
+              <FormControl fullWidth>
+                <Select value={grp_soc} onChange={e => setGroupeSocietes(e.target.value)} disabled={selectDisabled}>
                   <MenuItem value='Poulina'>Poulina</MenuItem>
                   <MenuItem value='Test'>Test</MenuItem>
                   <MenuItem value='Ajouter groupe'>Ajouter groupe</MenuItem>
                 </Select>
+              </FormControl>
+            </Grid>
+            <Grid item xs={12} sm={6}>
               </FormControl>
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -292,11 +350,58 @@ const FormIndividual = () => {
                   <DatePicker selected={date} onChange={(date: Date) => setDate(date)} customInput={<CustomInput />} />
                 </div>
               </Box>
+              <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
+                <div>
+                  <DatePicker selected={date} onChange={(date: Date) => setDate(date)} customInput={<CustomInput />} />
+                </div>
+              </Box>
             </Grid>
           </Fragment>
         )
+        )
       case 1:
         return (
+          <Fragment key={step}>
+            <Grid item xs={12} sm={6}>
+              <p>Code TVA </p>
+              <TextField value={code_TVA} onChange={e => setCdTVA(e.target.value)} />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <p>Exonération TVA </p>
+              <RadioGroup row onChange={e => handleExonerationTVAChange(e)}>
+                <FormControlLabel value='Oui' control={<Radio />} label='Oui' />
+                <FormControlLabel value='Non' control={<Radio />} label='Non' />
+              </RadioGroup>
+            </Grid>
+            <Grid item xs={12} sm={6} disabled={exonerationDisabled}>
+              <p>Date Début Exonération TVA</p>
+              <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
+                <div>
+                  <DatePicker
+                    selected={dateDebutExonerationTVA}
+                    onChange={(date: Date) => setDateDebutExonerationTVA(date)}
+                    customInput={<CustomInput />}
+                    disabled={exonerationDisabled}
+                  />
+                </div>
+              </Box>
+            </Grid>
+            <Grid item xs={12} sm={6} disabled={exonerationDisabled}>
+              <p>Date Fin Exonération TVA</p>
+              <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
+                <div>
+                  <DatePicker
+                    selected={dateFinExonerationTVA}
+                    onChange={(date: Date) => setDateFinExonerationTVA(date)}
+                    customInput={<CustomInput />}
+                    disabled={exonerationDisabled}
+                  />
+                </div>
+              </Box>
+            </Grid>
+          </Fragment>
+        )
+
           <Fragment key={step}>
             <Grid item xs={12} sm={6}>
               <p>Code TVA </p>
@@ -342,15 +447,19 @@ const FormIndividual = () => {
         return (
           <Fragment key={step}>
             <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={6}>
               <p>RIB</p>
+              <TextField fullWidth value={RIB} onChange={e => setRIB(e.target.value)} />
               <TextField fullWidth value={RIB} onChange={e => setRIB(e.target.value)} />
             </Grid>
             <Grid item xs={12} sm={6}>
               <p>Banque</p>
               <TextField fullWidth value={banque} onChange={e => setBanque(e.target.value)} />
+              <TextField fullWidth value={banque} onChange={e => setBanque(e.target.value)} />
             </Grid>
             <Grid item xs={12} sm={6}>
               <p>Agence</p>
+              <TextField fullWidth value={agence} onChange={e => setAgence(e.target.value)} />
               <TextField fullWidth value={agence} onChange={e => setAgence(e.target.value)} />
             </Grid>
           </Fragment>
@@ -364,7 +473,10 @@ const FormIndividual = () => {
             </Grid>
             <Grid item xs={12} sm={6}>
               <p>Ville</p>
+            <Grid item xs={12} sm={6}>
+              <p>Ville</p>
               <FormControl fullWidth>
+                <Select value={Ville} onChange={e => setVille(e.target.value)}>
                 <Select value={Ville} onChange={e => setVille(e.target.value)}>
                   <MenuItem value='PONT DE BIZERTE | 2061'>PONT DE BIZERTE | 2061</MenuItem>
                   <MenuItem value='CHORFECH | 2057'>CHORFECH | 2057</MenuItem>
@@ -376,17 +488,23 @@ const FormIndividual = () => {
               </FormControl>
             </Grid>
             <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={6}>
               <p>Télèphone</p>
               <TextField fullWidth value={Télephone} onChange={e => setTélephone(e.target.value)} />
+              <TextField fullWidth value={Télephone} onChange={e => setTélephone(e.target.value)} />
             </Grid>
+            <Grid item xs={12} sm={6}>
             <Grid item xs={12} sm={6}>
               <p>Fax</p>
               <TextField fullWidth value={Fax} onChange={e => setFax(e.target.value)} />
             </Grid>
             <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={6}>
               <p>Email</p>
               <TextField fullWidth value={Email} onChange={e => setEmail(e.target.value)} />
+              <TextField fullWidth value={Email} onChange={e => setEmail(e.target.value)} />
             </Grid>
+            <Grid item xs={12} sm={6}>
             <Grid item xs={12} sm={6}>
               <p>Login</p>
               <TextField fullWidth value={Login} onChange={e => setLogin(e.target.value)} />
@@ -419,6 +537,21 @@ const FormIndividual = () => {
                   <MenuItem value='German'>German</MenuItem>
                   <MenuItem value='Arabic'>Arabic</MenuItem>
                 </Select>
+                <Select
+                  multiple
+                  value={language}
+                  onChange={handleSelectChange}
+                  id='stepper-custom-horizontal-personal-multiple-select'
+                  labelId='stepper-custom-horizontal-personal-multiple-select-label'
+                >
+                  <MenuItem value='English'>English</MenuItem>
+                  <MenuItem value='French'>French</MenuItem>
+                  <MenuItem value='Spanish'>Spanish</MenuItem>
+                  <MenuItem value='Portuguese'>Portuguese</MenuItem>
+                  <MenuItem value='Italian'>Italian</MenuItem>
+                  <MenuItem value='German'>German</MenuItem>
+                  <MenuItem value='Arabic'>Arabic</MenuItem>
+                </Select>
               </FormControl>
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -431,19 +564,24 @@ const FormIndividual = () => {
                   endAdornment={
                     <InputAdornment position='end'>
                       <IconButton edge='end' onClick={handleClickShowPassword} onMouseDown={e => e.preventDefault()}>
+                      <IconButton edge='end' onClick={handleClickShowPassword} onMouseDown={e => e.preventDefault()}>
                         <Icon icon={state.showPassword ? 'tabler:eye' : 'tabler:eye-off'} />
                       </IconButton>
                     </InputAdornment>
                   }
                 />
+                  }
+                />
               </FormControl>
             </Grid>
+            <Grid item xs={12} sm={6}>
             <Grid item xs={12} sm={6}>
               <p>Confirm Password</p>
               <FormControl fullWidth>
                 <OutlinedInput
                   value={state.password2}
                   onChange={handleConfirmChange('password2')}
+                  type={state.showPassword2 ? 'text' : 'password'}
                   type={state.showPassword2 ? 'text' : 'password'}
                   endAdornment={
                     <InputAdornment position='end'>
@@ -465,9 +603,15 @@ const FormIndividual = () => {
         return (
           <Fragment key={step}>
             <Grid item xs={12} sm={6}>
+      case 4:
+        return (
+          <Fragment key={step}>
+            <Grid item xs={12} sm={6}>
               <p>Nom et prénom</p>
               <TextField fullWidth value={username} onChange={e => setUsername(e.target.value)} />
+              <TextField fullWidth value={username} onChange={e => setUsername(e.target.value)} />
             </Grid>
+            <Grid item xs={12} sm={6}>
             <Grid item xs={12} sm={6}>
               <p>Position</p>
               <FormControl fullWidth>
@@ -482,7 +626,20 @@ const FormIndividual = () => {
               </FormControl>
             </Grid>
             <Grid item xs={12} sm={6}>
+              <FormControl fullWidth>
+                <Select value={Ville} onChange={e => setVille(e.target.value)}>
+                  <MenuItem value='PONT DE BIZERTE | 2061'>PONT DE BIZERTE | 2061</MenuItem>
+                  <MenuItem value='CHORFECH | 2057'>CHORFECH | 2057</MenuItem>
+                  <MenuItem value='SIDI THABET | 2020'>SIDI THABET | 2020</MenuItem>
+                  <MenuItem value='TUNIS CARTHAGE | 2035'>TUNIS CARTHAGE | 2035</MenuItem>
+                  <MenuItem value='RAOUED | 2056'>RAOUED | 2056</MenuItem>
+                  <MenuItem value='EL MENZAH 6 | 2091'>EL MENZAH 6 | 2091</MenuItem>
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item xs={12} sm={6}>
               <p>Télèphone</p>
+              <TextField fullWidth value={Télephone_Plus} onChange={e => setTélephone_Plus(e.target.value)} />
               <TextField fullWidth value={Télephone_Plus} onChange={e => setTélephone_Plus(e.target.value)} />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -490,10 +647,21 @@ const FormIndividual = () => {
               <TextField fullWidth value={Fax} onChange={e => setFax(e.target.value)} />
             </Grid>
             <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={6}>
+              <p>Fax</p>
+              <TextField fullWidth value={Fax} onChange={e => setFax(e.target.value)} />
+            </Grid>
+            <Grid item xs={12} sm={6}>
               <p>Email</p>
+              <TextField fullWidth value={Email_Plus} onChange={e => setEmail_Plus(e.target.value)} />
               <TextField fullWidth value={Email_Plus} onChange={e => setEmail_Plus(e.target.value)} />
             </Grid>
             <Grid item xs={12} sm={6}>
+              <p>Situation</p>
+              <Checkbox value={situation} onChange={e => setSituation(e.target.value)} />
+            </Grid>
+          </Fragment>
+        )
               <p>Situation</p>
               <Checkbox value={situation} onChange={e => setSituation(e.target.value)} />
             </Grid>
