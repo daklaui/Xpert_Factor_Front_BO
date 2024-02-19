@@ -11,6 +11,9 @@ import Divider from '@mui/material/Divider'
 import Stepper from '@mui/material/Stepper'
 import { styled } from '@mui/material/styles'
 import StepLabel from '@mui/material/StepLabel'
+      
+import TextField from '@mui/material/TextField'
+       
 import Typography from '@mui/material/Typography'
 import CardContent from '@mui/material/CardContent'
 import MuiStep, { StepProps } from '@mui/material/Step'
@@ -35,11 +38,13 @@ import { hexToRGBA } from 'src/@core/utils/hex-to-rgba'
 
 // ** Styled Component
 import StepperWrapper from 'src/@core/styles/mui/stepper'
-import SelectAdherent from 'src/SharedComponents/CustomSelect/SelectAdherentComponent'
+import SelectAdherent from 'src/shared-components/custom-select/SelectAdherentList'
 import Select from 'react-select'
-import SelectIndividu from 'src/SharedComponents/CustomSelect/SelectIndividualComponent'
+import SelectIndividu from 'src/shared-components/custom-select/SelectIndividuals'
 import CustomTextField from 'src/SharedComponents/StyledTextField/StyledTextField '
-import CustomDataGrid from 'src/SharedComponents/DataGrid/DataGrid'
+   import CustomDataGrid from 'src/shared-components/data-grid/dataGrid'
+   
+       
 
 interface State {
   password: string
@@ -96,6 +101,11 @@ const GeneralInfo = ({ popperPlacement }: { popperPlacement: ReactDatePickerProp
   // ** States
   const [date, setDate] = useState<DateType>(new Date())
   const [, setContract] = useState<string>('')
+  const [google, setGoogle] = useState<string>('')
+  const [twitter, setTwitter] = useState<string>('')
+  const [facebook, setFacebook] = useState<string>('')
+  const [linkedIn, setLinkedIn] = useState<string>('')
+       
   const [activeStep, setActiveStep] = useState<number>(0)
   const [isClearable] = useState(true)
   const [state, setState] = useState<State>({
@@ -116,7 +126,14 @@ const GeneralInfo = ({ popperPlacement }: { popperPlacement: ReactDatePickerProp
     }
   }
   const handleReset = () => {
+       setContract('')
+   
+    setGoogle('')
+
+    setTwitter('')
     setContract('')
+    setLinkedIn('')
+       
     setState({ ...state, password: '', password2: '' })
   }
 
@@ -335,7 +352,7 @@ const GeneralInfo = ({ popperPlacement }: { popperPlacement: ReactDatePickerProp
       case 1:
         return (
           <Fragment key={step}>
-            <Grid item xs={12} sm={4}>
+               <Grid item xs={12} sm={4}>
               <CustomTextField
                 fullWidth
                 placeholder={'Délai moyen de réglement (jour) '}
@@ -457,12 +474,20 @@ const GeneralInfo = ({ popperPlacement }: { popperPlacement: ReactDatePickerProp
                 correctValue=''
               />
             </Grid>
+   
+            <Grid item xs={12} sm={6}>
+              <Select className='basic-single' classNamePrefix='select' isClearable={isClearable} name='color' />
+            </Grid>
+            <Grid item xs={12} sm={6}></Grid>
+            <Grid item xs={12} sm={6}></Grid>
+            <Grid item xs={12} sm={6}></Grid>
+       
           </Fragment>
         )
       case 2:
         return (
           <Fragment key={step}>
-            <Grid item sm={3}></Grid>
+               <Grid item sm={3}></Grid>
             <Grid item xs={12} sm={6}>
               <StyledLabel>aa</StyledLabel>
               <SelectIndividu labelText='Nom adherent' onSearch={handleSearch} />
@@ -530,6 +555,44 @@ const GeneralInfo = ({ popperPlacement }: { popperPlacement: ReactDatePickerProp
             <Grid item sm={12}>
             </Grid>
             
+   
+            <Grid item xs={12} sm={6}>
+              <TextField
+                fullWidth
+                label='Twitter'
+                value={twitter}
+                onChange={e => setTwitter(e.target.value)}
+                placeholder='https://twitter.com/carterLeonard'
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                fullWidth
+                label='Facebook'
+                value={facebook}
+                onChange={e => setFacebook(e.target.value)}
+                placeholder='https://facebook.com/carterLeonard'
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                fullWidth
+                label='Google+'
+                value={google}
+                onChange={e => setGoogle(e.target.value)}
+                placeholder='https://plus.google.com/carterLeonard'
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                fullWidth
+                label='LinkedIn'
+                value={linkedIn}
+                onChange={e => setLinkedIn(e.target.value)}
+                placeholder='https://linkedin.com/carterLeonard'
+              />
+            </Grid>
+       
           </Fragment>
         )
       default:
