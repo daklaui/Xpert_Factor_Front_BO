@@ -7,7 +7,7 @@ import { getDeviseList } from '../mock'
 const SelectListOfDevises = ({ onSearch }: CustomSelectProps) => {
   const [options, setOptions] = useState<SelectInerface[]>([])
   const [statusValue, setStatusValue] = useState('')
-  const [isClearable, setIsClearable] = useState(true)
+  const [isClearable, ] = useState(true)
 
   useEffect(() => {
     const fetchData = async () => {
