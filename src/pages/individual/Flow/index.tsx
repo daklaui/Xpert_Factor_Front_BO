@@ -1,8 +1,8 @@
-import FormIndividual from './FormIndividual'
+
 
 const IndividualFlow = () => {
-  return <FormIndividual />
-
+  return <>
+  </>
 }
 
 export default IndividualFlow
