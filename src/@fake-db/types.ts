@@ -161,6 +161,31 @@ export type DataGridRowType = {
   experience: string
 }
 
+export type DataGridRowTypeCustomized = {
+  age: string
+  salary: number
+  full_name: string
+  start_date: string
+}
+export type DataGridRowTypeContract = {
+  Ref_contrat: number
+  Nom_Adherenet: String
+  Encours_des_factures: number
+  Total_Factures: number
+  Total_Financements: number
+  Total_Encaissement: number
+  Total_Avoirs: number
+  Total_Intérets: number
+  Limite_De_Financement: number
+  Devise: string
+  Nombre_Dacheteurs_prévues: number
+  Nombre_De_Factures_prévues: number
+  Nombre_Davoirs_prévues: number
+  Nombre_De_remise_prévues: number
+  Délai_moyen_de_réglement: number
+  Délai_max_de_réglement: number
+}
+
 // Help Center
 //------------
 export type HelpCenterSubcategoryArticlesType = {
