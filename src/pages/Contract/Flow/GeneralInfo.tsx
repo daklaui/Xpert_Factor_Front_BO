@@ -11,36 +11,42 @@ import Divider from '@mui/material/Divider'
 import Stepper from '@mui/material/Stepper'
 import { styled } from '@mui/material/styles'
 import StepLabel from '@mui/material/StepLabel'
+import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 import CardContent from '@mui/material/CardContent'
 import MuiStep, { StepProps } from '@mui/material/Step'
 
 // ** Third Party Imports
 import toast from 'react-hot-toast'
-import { ReactDatePickerProps } from 'react-datepicker'
+import DatePicker, { ReactDatePickerProps } from 'react-datepicker'
 
 // ** Icon Imports
 import Icon from 'src/@core/components/icon'
 
 //** Types
-
+import { DateType } from 'src/types/forms/reactDatepickerTypes'
 
 // ** Custom Components Imports
 import StepperCustomDot from './StepperCustomDot'
 import CustomAvatar from 'src/@core/components/mui/avatar'
+import CustomInput from './PickersCustomInput'
 
 // ** Util Import
 import { hexToRGBA } from 'src/@core/utils/hex-to-rgba'
 
 // ** Styled Component
 import StepperWrapper from 'src/@core/styles/mui/stepper'
+import SelectAdherent from 'src/SharedComponents/CustomSelect/SelectAdherentComponent'
+import Select from 'react-select'
+import SelectIndividu from 'src/SharedComponents/CustomSelect/SelectIndividualComponent'
+import CustomTextField from 'src/SharedComponents/StyledTextField/StyledTextField '
 
-
-import GeneralsInfo from './GeneralsInfo'
-import OtherCommets from './OtherCommets'
-import ComFactoring from './ComFactoring'
-
-
+interface State {
+  password: string
+  password2: string
+  showPassword: boolean
+  showPassword2: boolean
+}
 
 const steps = [
   {
@@ -59,7 +65,6 @@ const steps = [
     subtitle: 'Add Social Links'
   }
 ]
-
 
 const Step = styled(MuiStep)<StepProps>(({ theme }) => ({
   paddingLeft: theme.spacing(4),
@@ -88,7 +93,21 @@ const Step = styled(MuiStep)<StepProps>(({ theme }) => ({
 }))
 
 const GeneralInfo = ({ popperPlacement }: { popperPlacement: ReactDatePickerProps['popperPlacement'] }) => {
+  // ** States
+  const [date, setDate] = useState<DateType>(new Date())
+  const [google, setGoogle] = useState<string>('')
+  const [twitter, setTwitter] = useState<string>('')
+  const [, setContract] = useState<string>('')
+  const [facebook, setFacebook] = useState<string>('')
+  const [linkedIn, setLinkedIn] = useState<string>('')
   const [activeStep, setActiveStep] = useState<number>(0)
+  const [isClearable] = useState(true)
+  const [state, setState] = useState<State>({
+    password: '',
+    password2: '',
+    showPassword: false,
+    showPassword2: false
+  })
 
   // Handle Stepper
   const handleBack = () => {
@@ -100,15 +119,279 @@ const GeneralInfo = ({ popperPlacement }: { popperPlacement: ReactDatePickerProp
       toast.success('Form Submitted')
     }
   }
+  const handleReset = () => {
+    setGoogle('')
+
+    setTwitter('')
+    setContract('')
+    setLinkedIn('')
+    setState({ ...state, password: '', password2: '' })
+  }
+
+  const handleSearch = (value: any) => {
+    // Handle the selected value as needed
+    console.log('Selected value:', value)
+  }
+
+  const StyledLabel = styled('label')({
+    fontWeight: 'bold',
+    fontSize: '13px',
+    paddingBottom: '12px'
+  })
+
+  const StyledDatePicker = styled(DatePicker)({
+    '& .MuiInputBase-root': {
+      backgroundColor: '#f5f5f5',
+      borderRadius: '4px',
+      width: '295px',
+      height: '40px',
+      '& input': {
+        padding: '8px',
+        fontSize: '14px',
+        width: '220px',
+        marginTop: '8px'
+      }
+    },
+    '& .MuiPickersDay-daySelected': {
+      backgroundColor: '#5d5a68',
+      color: '#fff'
+    }
+  })
 
   const getStepContent = (step: number) => {
     switch (step) {
       case 0:
-        return <GeneralsInfo popperPlacement={popperPlacement} />
+        return (
+          <Fragment>
+            <Grid item sm={3}>
+              <CustomTextField fullWidth placeholder={'anis'} label='anis' name='anis' correctValue='anis' />
+            </Grid>
+            <Grid item sm={3}>
+              <StyledLabel>Type contrat </StyledLabel>
+              <Select className='basic-single' classNamePrefix='select' isClearable={isClearable} name='color' />
+            </Grid>
+            <Grid item sm={3}>
+              <CustomTextField
+                fullWidth
+                placeholder={'Tapez le chiffres d affaires '}
+                label='Chiffres d affaires'
+                name='ChiffreDaffaire'
+                correctValue=''
+              />
+            </Grid>
+            <Grid item sm={3}>
+              <CustomTextField
+                fullWidth
+                placeholder={'Factures transmises avec '}
+                label='Factures transmises avec'
+                name='Factures transmises avec'
+                correctValue=''
+              />
+            </Grid>
+            <Grid item sm={3}>
+              <StyledLabel> Status Contract </StyledLabel>
+              <Select className='basic-single' classNamePrefix='select' isClearable={isClearable} name='color' />
+            </Grid>
+            <Grid item sm={3}>
+              <StyledLabel>Devise</StyledLabel>
+              <SelectAdherent onSearch={handleSearch} labelText='Select Adherent' />
+            </Grid>
+            <Grid item sm={3}>
+              <CustomTextField
+                fullWidth
+                placeholder={'Tapez le Dont Export '}
+                label='Dont Export'
+                name='Dont Export'
+                correctValue=''
+              />
+            </Grid>
+
+            <Grid item sm={3}>
+              <CustomTextField
+                fullWidth
+                placeholder={'Tapez le Nbr d acheteur prévus '}
+                label='Nbr d acheteur prévus'
+                name="Nbr d 'acheteur prévus"
+                correctValue=''
+              />
+            </Grid>
+
+            <Grid item sm={3}>
+              <StyledLabel> Nom Adhérent </StyledLabel>
+              <SelectIndividu onSearch={handleSearch} labelText='Select Adherent' />
+            </Grid>
+
+            <Grid item sm={3}>
+              <StyledLabel> Date de résiliation </StyledLabel>
+              <StyledDatePicker
+                selected={date}
+                id='basic-input'
+                popperPlacement={popperPlacement}
+                onChange={(date: Date) => setDate(date)}
+                customInput={<CustomInput label='' />}
+              />
+            </Grid>
+            <Grid item sm={3}>
+              <CustomTextField
+                fullWidth
+                placeholder={'Tapez le Dont dom '}
+                label='Dont dom'
+                name='Dont dom'
+                correctValue=''
+              />
+            </Grid>
+            <Grid item sm={3}>
+              <CustomTextField
+                fullWidth
+                placeholder={'Dont dom '}
+                label='Chiffres d affaires'
+                name='Dont dom'
+                correctValue=''
+              />
+            </Grid>
+            <Grid item sm={3}>
+              <StyledLabel> Date Signature </StyledLabel>
+              <StyledDatePicker
+                selected={date}
+                id='basic-input'
+                popperPlacement={popperPlacement}
+                onChange={(date: Date) => setDate(date)}
+                customInput={<CustomInput label='' />}
+              />
+            </Grid>
+
+            <Grid item sm={3}>
+              <StyledLabel>Date de prochaine révision</StyledLabel>
+              <StyledDatePicker
+                selected={date}
+                id='basic-input'
+                popperPlacement={popperPlacement}
+                onChange={(date: Date) => setDate(date)}
+                customInput={<CustomInput label='' />}
+              />
+            </Grid>
+            <Grid item sm={3}>
+              <CustomTextField
+                fullWidth
+                placeholder={'Limite de financement '}
+                label='Limite de financement'
+                name='Limite de financement'
+                correctValue=''
+              />
+            </Grid>
+            <Grid item sm={3}>
+              <CustomTextField
+                fullWidth
+                placeholder={"Nbr d'avoirs Prévus"}
+                label="Nbr d'avoirs Prévus"
+                name="Nbr d'avoirs Prévus"
+                correctValue=''
+              />
+            </Grid>
+
+            <Grid item sm={3}>
+              <StyledDatePicker
+                selected={date}
+                id='basic-input'
+                popperPlacement={popperPlacement}
+                onChange={(date: Date) => setDate(date)}
+                customInput={<CustomInput label='' />}
+              />
+            </Grid>
+            <Grid item sm={3}></Grid>
+            <Grid item sm={3}>
+              <CustomTextField
+                fullWidth
+                placeholder={'Délai moyen de réglement (jour) '}
+                label='Délai moyen de réglement (jour)'
+                name='Délai moyen de réglement (jour)'
+                correctValue=''
+              />
+            </Grid>
+            <Grid item sm={3}>
+              <CustomTextField
+                fullWidth
+                placeholder={' Délai Max de règlement '}
+                label=' Délai Max de règlement'
+                name=' Délai Max de règlement'
+                correctValue=''
+              />
+            </Grid>
+            <Grid item sm={3}></Grid>
+            <Grid item sm={3}></Grid>
+            <Grid item sm={3}>
+              <CustomTextField
+                fullWidth
+                placeholder={' Délai Max de règlement '}
+                label=' Délai Max de règlement'
+                name=' Délai Max de règlement'
+                correctValue=''
+              />
+            </Grid>
+            <Grid item sm={3}>
+              <StyledLabel> Nbr de remise Prévues </StyledLabel>
+              <CustomTextField
+                fullWidth
+                placeholder={'Nbr de remise Prévues '}
+                label='Nbr de remise Prévues'
+                name='Nbr de remise Prévues'
+                correctValue=''
+              />
+            </Grid>
+          </Fragment>
+        )
       case 1:
-        return <OtherCommets />
+        return (
+          <Fragment key={step}>
+            <Grid item xs={12} sm={6}>
+              <Select className='basic-single' classNamePrefix='select' isClearable={isClearable} name='color' />
+            </Grid>
+            <Grid item xs={12} sm={6}></Grid>
+            <Grid item xs={12} sm={6}></Grid>
+            <Grid item xs={12} sm={6}></Grid>
+          </Fragment>
+        )
       case 2:
-        return <ComFactoring popperPlacement={popperPlacement} />
+        return (
+          <Fragment key={step}>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                fullWidth
+                label='Twitter'
+                value={twitter}
+                onChange={e => setTwitter(e.target.value)}
+                placeholder='https://twitter.com/carterLeonard'
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                fullWidth
+                label='Facebook'
+                value={facebook}
+                onChange={e => setFacebook(e.target.value)}
+                placeholder='https://facebook.com/carterLeonard'
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                fullWidth
+                label='Google+'
+                value={google}
+                onChange={e => setGoogle(e.target.value)}
+                placeholder='https://plus.google.com/carterLeonard'
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                fullWidth
+                label='LinkedIn'
+                value={linkedIn}
+                onChange={e => setLinkedIn(e.target.value)}
+                placeholder='https://linkedin.com/carterLeonard'
+              />
+            </Grid>
+          </Fragment>
+        )
       default:
         return 'Unknown Step'
     }
@@ -120,7 +403,7 @@ const GeneralInfo = ({ popperPlacement }: { popperPlacement: ReactDatePickerProp
         <>
           <Typography>All steps are completed!</Typography>
           <Box sx={{ mt: 4, display: 'flex', justifyContent: 'flex-end' }}>
-            <Button size='large' variant='contained'>
+            <Button size='large' variant='contained' onClick={handleReset}>
               Reset
             </Button>
           </Box>
