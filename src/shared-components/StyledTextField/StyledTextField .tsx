@@ -15,18 +15,20 @@ const StyledTextField : any = styled(TextField)(({ fullWidth }: CustomTextFieldP
   '& .MuiInputBase-root': {
     padding: '7px',
     height: '40px',
-    width: '100%',
+    width: '100%'
   },
   '& input::placeholder': {}
-}));
+}))
 
-const CustomTextField = ({ label, name, control, placeholder, helperMessage, field, ...rest } ) => {
-  const renderField = field ? field : (
+const CustomTextField = ({ label, name, control, placeholder, helperMessage, field, ...rest }) => {
+  const renderField = field ? (
+    field
+  ) : (
     <Controller
       name={name}
       control={control}
       rules={{
-        required: true,
+        required: true
       }}
       render={({ field, fieldState }) => (
         <StyledTextField
@@ -38,7 +40,7 @@ const CustomTextField = ({ label, name, control, placeholder, helperMessage, fie
         />
       )}
     />
-  );
+  )
 
   return (
     <>
