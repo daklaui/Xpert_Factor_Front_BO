@@ -15,7 +15,7 @@ export interface CustomSelectProps {
   onSearch: (value: any) => void
   labelText?: string
 }
-interface CompanyData {
+export interface CompanyData {
   RIB: string
   Agency: string
   Bank: string
