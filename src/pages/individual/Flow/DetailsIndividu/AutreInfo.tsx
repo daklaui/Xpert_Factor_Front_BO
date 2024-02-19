@@ -5,7 +5,6 @@ import { Box } from '@mui/system'
 const cardStyle = {
   marginBottom: '20px',
   backgroundColor: '#f8f8f8',
-  width: '100%' // Set width to 100% for both cards
 }
 const data = {
   id: 1,
