@@ -2,7 +2,6 @@ import React from 'react'
 import { useForm, Controller } from 'react-hook-form'
 import CustomTextField from '../../../SharedComponents/StyledTextField/StyledTextField '
 
-   
 function Index() {
   const { control, handleSubmit } = useForm()
 
@@ -18,12 +17,17 @@ function Index() {
         rules={{ required: true, minLength: 7 }}
         render={({ field, fieldState }) => (
           <CustomTextField
-            correctValue={undefined} placeholder='fullname'
+            field={undefined} correctValue={undefined} placeholder='fullname'
+
+
+
             label='Full Name'
             control={control}
             {...field}
             error={fieldState.invalid}
+
             helperMessage='aaa'          />
+          
         )}
       />
 
@@ -34,4 +38,3 @@ function Index() {
 }
 
 export default Index
-

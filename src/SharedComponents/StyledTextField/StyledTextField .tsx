@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import TextField from '@mui/material/TextField';
 import { styled } from '@mui/material/styles';
+import { Controller } from 'react-hook-form';
 
 const StyledLabel = styled('label')({
   fontWeight: 'bold',
@@ -9,41 +10,40 @@ const StyledLabel = styled('label')({
   marginBottom: '110px',
 });
 
-const StyledTextField = styled(TextField)({
+const StyledTextField = styled(TextField)(({}) => ({
   '& .MuiInputBase-root': {
-    width: '100%', // Assurez-vous que le width est bien défini à 100%
+    padding: '7px',
     height: '40px',
-    '& .MuiInputBase-input::placeholder': {
-      color: '#5d5a68',
-    },
-
-    '& input': {
-      padding: '7px',
-      height: '100%',
-    },
+    width: '100%',
   },
-});
+  '& input::placeholder': {}
+}));
 
-
-const CustomTextField = ({ label, name, correctValue, placeholder, ...rest }) => {
-  const [isErrorVisible, setIsErrorVisible] = useState(false);
-
-  const handleInputChange = (event : any) => {
-    const inputValue = event.target.value;
-    setIsErrorVisible(inputValue !== correctValue);
-  };
+const CustomTextField = ({ label, name, control, placeholder, helperMessage, field, ...rest }) => {
+  const renderField = field ? field : (
+    <Controller
+      name={name}
+      control={control}
+      rules={{
+        required: true,
+      }}
+      render={({ field, fieldState }) => (
+        <StyledTextField
+          {...field}
+          placeholder={label}
+          error={fieldState.invalid}
+          helperText={fieldState.invalid ? helperMessage : ''}
+          {...rest}
+        />
+      )}
+    />
+  );
 
   return (
     <>
-      <StyledLabel htmlFor='name'>{label} </StyledLabel>
-      <StyledTextField
-        name={name}
-        onChange={handleInputChange}
-        placeholder={placeholder}
-        error={isErrorVisible}
-        helperText={isErrorVisible ? 'Incorrect value' : ''}
-        {...rest}
-      />
+      <StyledLabel htmlFor={name}>{label}</StyledLabel>
+      <br />
+      {renderField}
     </>
   );
 };
