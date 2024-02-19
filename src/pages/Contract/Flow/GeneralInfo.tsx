@@ -56,8 +56,8 @@ const steps = [
   },
   {
     icon: 'tabler:user',
-    title: 'Personal Info',
-    subtitle: 'Setup Information'
+    title: 'AUTRES COMM ET FRAIS',
+    subtitle: 'Information supplémentaires'
   },
   {
     icon: 'tabler:link',
@@ -133,21 +133,6 @@ const GeneralInfo = ({ popperPlacement }: { popperPlacement: ReactDatePickerProp
     console.log('Selected value:', value)
   }
 
-  const StyledTextField = styled(TextField)({
-    '& .MuiInputBase-root': {
-      padding: '7px',
-      height: '40px',
-      '& .MuiInputBase-input::placeholder': {
-        color: '#5d5a68' // Couleur du placeholder
-      },
-
-      '& input': {
-        padding: '7px',
-        height: '100%'
-      }
-    }
-  })
-
   const StyledLabel = styled('label')({
     fontWeight: 'bold',
     fontSize: '13px',
@@ -179,23 +164,28 @@ const GeneralInfo = ({ popperPlacement }: { popperPlacement: ReactDatePickerProp
         return (
           <Fragment>
             <Grid item sm={3}>
-              <StyledLabel>Numero contrat papier</StyledLabel>
-              <CustomTextField label='' placeholder='placeholder' />
+              <CustomTextField fullWidth placeholder={'anis'} label='anis' name='anis' correctValue='anis' />
             </Grid>
             <Grid item sm={3}>
               <StyledLabel>Type contrat </StyledLabel>
               <Select className='basic-single' classNamePrefix='select' isClearable={isClearable} name='color' />
             </Grid>
             <Grid item sm={3}>
-              <StyledLabel>Chiffres d'affaires </StyledLabel>
-              <StyledTextField fullWidth placeholder='Tapez le chiffres d affaires ' />
+              <CustomTextField
+                fullWidth
+                placeholder={'Tapez le chiffres d affaires '}
+                label='Chiffres d affaires'
+                name='ChiffreDaffaire'
+                correctValue=''
+              />
             </Grid>
             <Grid item sm={3}>
-              <StyledLabel>Factures transmises avec </StyledLabel>
-              <StyledTextField
+              <CustomTextField
                 fullWidth
-                placeholder='Tapez le numéro du contrat'
-                onChange={e => setContract(e.target.value)}
+                placeholder={'Factures transmises avec '}
+                label='Factures transmises avec'
+                name='Factures transmises avec'
+                correctValue=''
               />
             </Grid>
             <Grid item sm={3}>
@@ -207,13 +197,23 @@ const GeneralInfo = ({ popperPlacement }: { popperPlacement: ReactDatePickerProp
               <SelectAdherent onSearch={handleSearch} labelText='Select Adherent' />
             </Grid>
             <Grid item sm={3}>
-              <StyledLabel> Dont Export </StyledLabel>
-              <StyledTextField fullWidth placeholder='Dont Export' />
+              <CustomTextField
+                fullWidth
+                placeholder={'Tapez le Dont Export '}
+                label='Dont Export'
+                name='Dont Export'
+                correctValue=''
+              />
             </Grid>
 
             <Grid item sm={3}>
-              <StyledLabel>Nbr d'acheteur prévus</StyledLabel>
-              <StyledTextField fullWidth placeholder='Nbr d acheteur prévus ' />
+              <CustomTextField
+                fullWidth
+                placeholder={'Tapez le Nbr d acheteur prévus '}
+                label='Nbr d acheteur prévus'
+                name="Nbr d 'acheteur prévus"
+                correctValue=''
+              />
             </Grid>
 
             <Grid item sm={3}>
@@ -232,12 +232,22 @@ const GeneralInfo = ({ popperPlacement }: { popperPlacement: ReactDatePickerProp
               />
             </Grid>
             <Grid item sm={3}>
-              <StyledLabel>Dont dom </StyledLabel>
-              <StyledTextField fullWidth placeholder='Dont dom ' />
+              <CustomTextField
+                fullWidth
+                placeholder={'Tapez le Dont dom '}
+                label='Dont dom'
+                name='Dont dom'
+                correctValue=''
+              />
             </Grid>
             <Grid item sm={3}>
-              <StyledLabel>Nbr factures Prévues </StyledLabel>
-              <StyledTextField fullWidth placeholder='Nbr factures Prévues' />
+              <CustomTextField
+                fullWidth
+                placeholder={'Dont dom '}
+                label='Chiffres d affaires'
+                name='Dont dom'
+                correctValue=''
+              />
             </Grid>
             <Grid item sm={3}>
               <StyledLabel> Date Signature </StyledLabel>
@@ -261,16 +271,25 @@ const GeneralInfo = ({ popperPlacement }: { popperPlacement: ReactDatePickerProp
               />
             </Grid>
             <Grid item sm={3}>
-              <StyledLabel>Limite de financement</StyledLabel>
-              <StyledTextField fullWidth placeholder='Limite de financement ' />
+              <CustomTextField
+                fullWidth
+                placeholder={'Limite de financement '}
+                label='Limite de financement'
+                name='Limite de financement'
+                correctValue=''
+              />
             </Grid>
             <Grid item sm={3}>
-              <StyledLabel> Nbr d'avoirs Prévus </StyledLabel>
-              <StyledTextField fullWidth placeholder='Nbr d avoirs Prévus ' />
+              <CustomTextField
+                fullWidth
+                placeholder={"Nbr d'avoirs Prévus"}
+                label="Nbr d'avoirs Prévus"
+                name="Nbr d'avoirs Prévus"
+                correctValue=''
+              />
             </Grid>
 
             <Grid item sm={3}>
-              <StyledLabel> Date Démarrage </StyledLabel>
               <StyledDatePicker
                 selected={date}
                 id='basic-input'
@@ -281,22 +300,43 @@ const GeneralInfo = ({ popperPlacement }: { popperPlacement: ReactDatePickerProp
             </Grid>
             <Grid item sm={3}></Grid>
             <Grid item sm={3}>
-              <StyledLabel>Délai moyen de réglement (jour)</StyledLabel>
-              <StyledTextField fullWidth placeholder='Limite de financement ' />
+              <CustomTextField
+                fullWidth
+                placeholder={'Délai moyen de réglement (jour) '}
+                label='Délai moyen de réglement (jour)'
+                name='Délai moyen de réglement (jour)'
+                correctValue=''
+              />
             </Grid>
             <Grid item sm={3}>
-              <StyledLabel> Délai Max de règlement </StyledLabel>
-              <StyledTextField fullWidth placeholder='Nbr d avoirs Prévus ' />
+              <CustomTextField
+                fullWidth
+                placeholder={' Délai Max de règlement '}
+                label=' Délai Max de règlement'
+                name=' Délai Max de règlement'
+                correctValue=''
+              />
             </Grid>
             <Grid item sm={3}></Grid>
             <Grid item sm={3}></Grid>
             <Grid item sm={3}>
-              <StyledLabel>Comm.Min Factoring</StyledLabel>
-              <StyledTextField fullWidth placeholder='Limite de financement ' />
+              <CustomTextField
+                fullWidth
+                placeholder={' Délai Max de règlement '}
+                label=' Délai Max de règlement'
+                name=' Délai Max de règlement'
+                correctValue=''
+              />
             </Grid>
             <Grid item sm={3}>
               <StyledLabel> Nbr de remise Prévues </StyledLabel>
-              <StyledTextField fullWidth placeholder='Nbr d avoirs Prévus ' />
+              <CustomTextField
+                fullWidth
+                placeholder={'Nbr de remise Prévues '}
+                label='Nbr de remise Prévues'
+                name='Nbr de remise Prévues'
+                correctValue=''
+              />
             </Grid>
           </Fragment>
         )
