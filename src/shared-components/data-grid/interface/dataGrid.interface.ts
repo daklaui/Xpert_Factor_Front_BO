@@ -33,15 +33,17 @@ export interface FetchTableDataProps {
 
 export interface DataGridCustomProps {
   data: DataGridRowTypeCustomized[]
-  onCustomSearch: (value: string) => void
-  onCustomSort: (value: DataGridSortObject) => void
+  onCustomSearch?: (value: string) => void
+  onCustomSort?: (value: DataGridSortObject) => void
   showCheckboxSelection: boolean
-  onRowClick: (row: DataGridRowType) => void
-  onNumberRowPageChange: (value: string) => void
+  onRowClick?: (row: DataGridRowType) => void
+  onNumberRowPageChange?: (value: string) => void
+  onPageChange?: (value: number) => void
   columns: GridColumns[]
-  pageSize: string
-  totalRows?: number
-  currentPageSize?: number
+  pageSize?: number
+  totalPages?: number
+  currentPage?: number
+  title: string
 }
 export interface DataGridSortObject {
   field: string

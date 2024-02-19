@@ -1,4 +1,4 @@
-import { StatusObj } from '../DataGrid.interface'
+import { StatusObj } from '../interface/dataGrid.interface'
 
 const statusObj: StatusObj = {
   1: { title: 'current', color: 'primary' },

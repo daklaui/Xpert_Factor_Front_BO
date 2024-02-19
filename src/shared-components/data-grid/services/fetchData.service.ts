@@ -1,4 +1,4 @@
-import { FetchTableDataProps } from '../DataGrid.interface'
+import { FetchTableDataProps } from '../interface/dataGrid.interface'
 
 function FetchTableData({}: FetchTableDataProps) {
   return null

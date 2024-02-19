@@ -1,98 +1,103 @@
-import { Typography } from '@mui/material'
-import { useEffect, useMemo, useState } from 'react'
-import { DataGridRowType, DataGridRowTypeCustomized } from 'src/@fake-db/types'
-import CustomDataGrid from 'src/SharedComponents/DataGrid/DataGrid'
-import { DataGridSortObject, GridColumns } from 'src/SharedComponents/DataGrid/DataGrid.interface'
-import generateFakeData from 'src/SharedComponents/DataGrid/mock/data.mock'
+import { useEffect, useState } from 'react'
+import { DataGridRowType } from 'src/@fake-db/types'
+import CustomDataGrid from 'src/shared-components/data-grid/dataGrid'
+import { columns } from './components/columns'
+import { paginate } from 'src/@core/utils/paginate'
+import { customSort } from 'src/@core/utils/customSort'
+import generateFakeData from 'src/shared-components/data-grid/mock/data.mock'
+import { DataGridSortObject } from 'src/shared-components/data-grid/interface/dataGrid.interface'
 
-const columns: GridColumns[] = [
-  {
-    flex: 0.25,
-    minWidth: 290,
-    field: 'full_name',
-    headerName: 'Name',
-    renderCell: params => <Typography variant='body2'>{params.row.full_name}</Typography>
-  },
-  {
-    flex: 0.175,
-    minWidth: 120,
-    field: 'start_date',
-    headerName: 'Start Date',
-    renderCell: params => <Typography variant='body2'>{params.row.start_date}</Typography>
-  },
-  {
-    flex: 0.175,
-    minWidth: 110,
-    field: 'salary',
-    headerName: 'Salary',
-    renderCell: params => (
-      <Typography variant='body2'>
-        {params.row.salary.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
-      </Typography>
-    )
-  },
-  {
-    flex: 0.125,
-    minWidth: 110,
-    field: 'age',
-    headerName: 'Age',
-    renderCell: params => <Typography variant='body2'>{params.row.age}</Typography>
-  }
-]
-
-const IndividualList = () => {
-  const defaultPageSize = '10'
-  const [pageSize, setPageSize] = useState<string>(defaultPageSize)
-  const [page, setPage] = useState<number>(0)
-  const [rows, setRows] = useState<DataGridRowTypeCustomized[]>([])
-
-  const fakeData = useMemo(() => generateFakeData(60), [])
-
-  const filteredData = fakeData.map(row => ({
-    id: row.id,
-    full_name: row.full_name,
-    start_date: row.start_date,
-    salary: row.salary,
-    age: row.age
-  }))
-
-  const memoizedLoadServerRows = useMemo(
-    () => (currentPage: number, pageSize: number, data: DataGridRowTypeCustomized[]) => {
-      return data.slice(currentPage * pageSize, (currentPage + 1) * pageSize)
-    },
-    [pageSize]
-  )
+const IndividualList = ({ fakeData }: any) => {
+  const defaultPageSize = 10
+  const [pageSize, setPageSize] = useState<number>(defaultPageSize)
+  const [page, setPage] = useState<number>(1)
+  const [pages, setTotalPages] = useState<number>(0)
+  const [individus, setIndividus] = useState<DataGridRowType[]>([])
+  const [filteredData, setFilteredData] = useState<DataGridRowType[]>([])
 
   useEffect(() => {
-    const newRows = memoizedLoadServerRows(page, parseInt(pageSize, 10), filteredData)
-    setRows(newRows)
-  }, [page, pageSize, filteredData, memoizedLoadServerRows])
+    const filteredData = fakeData.map((row: DataGridRowType) => ({
+      id: row.id,
+      full_name: row.full_name,
+      start_date: row.start_date,
+      salary: row.salary,
+      age: row.age
+    }))
+    setIndividus(filteredData)
+  }, [fakeData])
 
-  const handleRowClick = (row: DataGridRowType) => {
-    console.log('Selected Row:', row)
+  useEffect(() => {
+    if (individus.length > 0) {
+      const { currentPageItems, totalPages } = paginate<DataGridRowType>(individus, { currentPage: 1, pageSize })
+      setTotalPages(totalPages)
+      setFilteredData(currentPageItems)
+    }
+  }, [individus, pageSize])
+
+  const onSearch = (text: string) => {
+    const lowercaseQuery = text.toLowerCase()
+    const searchData = individus.filter((item: DataGridRowType) => {
+      return Object.values(item).some(
+        value => typeof value === 'string' && value.toLowerCase().includes(lowercaseQuery)
+      )
+    })
+    setFilteredData(searchData)
+  }
+
+  const onPageChange = (index: number) => {
+    const { currentPageItems, totalPages } = paginate<DataGridRowType>(individus, { currentPage: index, pageSize })
+    setPage(index)
+    setTotalPages(totalPages)
+    setFilteredData(currentPageItems)
   }
 
   const onNumberRowPageChange = (numberOfRows: string) => {
-    setPageSize(numberOfRows)
-    console.log('The current number of Rows is:', numberOfRows)
+    const { currentPageItems, totalPages } = paginate<DataGridRowType>(individus, {
+      currentPage: page,
+      pageSize: parseInt(numberOfRows)
+    })
+    setPageSize(parseInt(numberOfRows))
+    setTotalPages(totalPages)
+    setFilteredData(currentPageItems)
+  }
+
+  const onSort = (value: DataGridSortObject) => {
+    const sortedData = customSort(individus, { key: value.field, order: value.sort })
+    const { currentPageItems } = paginate<DataGridRowType>(sortedData, { currentPage: page, pageSize })
+    setFilteredData(currentPageItems)
+  }
+
+  const handleRowClick = (row: DataGridRowType) => {
+    alert('Selected Row:' + row.full_name)
+    console.log('Selected Row:', row)
   }
 
   return (
     <CustomDataGrid
       data={filteredData}
-      onCustomSearch={(value: any) => {
-        console.log(value)
-      }}
+      onCustomSearch={onSearch}
       onNumberRowPageChange={onNumberRowPageChange}
       showCheckboxSelection={false}
       pageSize={pageSize}
+      totalPages={pages}
+      currentPage={page}
       onRowClick={handleRowClick}
+      onPageChange={onPageChange}
       columns={columns}
-      onCustomSort={function (value: DataGridSortObject): void {
-        console.log('not implemented ', value.sort)
-      }}
+      onCustomSort={onSort}
+      title={'Individu List'}
     />
   )
 }
 
 export default IndividualList
+
+export async function getStaticProps() {
+  const fakeData = generateFakeData(60)
+
+  return {
+    props: {
+      fakeData
+    }
+  }
+}

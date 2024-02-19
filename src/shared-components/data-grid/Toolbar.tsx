@@ -1,26 +1,25 @@
 // ** React Imports
-import { ChangeEvent } from 'react'
 
 // ** MUI Imports
 import Box from '@mui/material/Box'
-import TextField, { TextFieldProps } from '@mui/material/TextField'
-import IconButton from '@mui/material/IconButton'
-import { GridToolbarExport } from '@mui/x-data-grid'
-import Select, { SelectChangeEvent } from '@mui/material/Select'
-import InputLabel from '@mui/material/InputLabel'
 import FormControl from '@mui/material/FormControl'
+import IconButton from '@mui/material/IconButton'
+import InputLabel from '@mui/material/InputLabel'
+import Select, { SelectChangeEvent } from '@mui/material/Select'
+import TextField from '@mui/material/TextField'
+import { GridToolbarExport } from '@mui/x-data-grid'
 
 // ** Icon Imports
 import Icon from 'src/@core/components/icon'
 
-interface ServerSideToolbarProps {
+interface ToolbarProps {
   value: string
   clearSearch: () => void
   onChange: (value: string) => void
   onNumberRowPageChange: (value: SelectChangeEvent<string>) => void
 }
 
-const ServerSideToolbar = (props: ServerSideToolbarProps) => {
+const Toolbar = (props: ToolbarProps) => {
   const { clearSearch, onChange, onNumberRowPageChange, value } = props
 
   return (
@@ -103,4 +102,4 @@ const ServerSideToolbar = (props: ServerSideToolbarProps) => {
   )
 }
 
-export default ServerSideToolbar
+export default Toolbar
