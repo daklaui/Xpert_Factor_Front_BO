@@ -11,6 +11,7 @@ import Divider from '@mui/material/Divider'
 import Stepper from '@mui/material/Stepper'
 import { styled } from '@mui/material/styles'
 import StepLabel from '@mui/material/StepLabel'
+import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 import CardContent from '@mui/material/CardContent'
 import MuiStep, { StepProps } from '@mui/material/Step'
@@ -39,7 +40,6 @@ import SelectAdherent from 'src/SharedComponents/CustomSelect/SelectAdherentComp
 import Select from 'react-select'
 import SelectIndividu from 'src/SharedComponents/CustomSelect/SelectIndividualComponent'
 import CustomTextField from 'src/SharedComponents/StyledTextField/StyledTextField '
-import CustomDataGrid from 'src/SharedComponents/DataGrid/DataGrid'
 
 interface State {
   password: string
@@ -95,7 +95,11 @@ const Step = styled(MuiStep)<StepProps>(({ theme }) => ({
 const GeneralInfo = ({ popperPlacement }: { popperPlacement: ReactDatePickerProps['popperPlacement'] }) => {
   // ** States
   const [date, setDate] = useState<DateType>(new Date())
+  const [google, setGoogle] = useState<string>('')
+  const [twitter, setTwitter] = useState<string>('')
   const [, setContract] = useState<string>('')
+  const [facebook, setFacebook] = useState<string>('')
+  const [linkedIn, setLinkedIn] = useState<string>('')
   const [activeStep, setActiveStep] = useState<number>(0)
   const [isClearable] = useState(true)
   const [state, setState] = useState<State>({
@@ -116,7 +120,11 @@ const GeneralInfo = ({ popperPlacement }: { popperPlacement: ReactDatePickerProp
     }
   }
   const handleReset = () => {
+    setGoogle('')
+
+    setTwitter('')
     setContract('')
+    setLinkedIn('')
     setState({ ...state, password: '', password2: '' })
   }
 
@@ -335,201 +343,53 @@ const GeneralInfo = ({ popperPlacement }: { popperPlacement: ReactDatePickerProp
       case 1:
         return (
           <Fragment key={step}>
-            <Grid item xs={12} sm={4}>
-              <CustomTextField
-                fullWidth
-                placeholder={'Délai moyen de réglement (jour) '}
-                label='Délai moyen de réglement (jour)'
-                name='Délai moyen de réglement (jour)'
-                correctValue=''
-              />
+            <Grid item xs={12} sm={6}>
+              <Select className='basic-single' classNamePrefix='select' isClearable={isClearable} name='color' />
             </Grid>
-            <Grid item xs={12} sm={4}>
-              <CustomTextField
-                fullWidth
-                placeholder={'Délai moyen de réglement (jour) '}
-                label='Délai moyen de réglement (jour)'
-                name='Délai moyen de réglement (jour)'
-                correctValue=''
-              />
-            </Grid>
-            <Grid item xs={12} sm={4}>
-              <CustomTextField
-                fullWidth
-                placeholder={'Délai moyen de réglement (jour) '}
-                label='Délai moyen de réglement (jour)'
-                name='Délai moyen de réglement (jour)'
-                correctValue=''
-              />
-            </Grid>
-            <Grid item xs={12} sm={4}>
-              <CustomTextField
-                fullWidth
-                placeholder={'Délai moyen de réglement (jour) '}
-                label='Délai moyen de réglement (jour)'
-                name='Délai moyen de réglement (jour)'
-                correctValue=''
-              />
-            </Grid>
-            <Grid item xs={12} sm={4}>
-              <CustomTextField
-                fullWidth
-                placeholder={'Délai moyen de réglement (jour) '}
-                label='Délai moyen de réglement (jour)'
-                name='Délai moyen de réglement (jour)'
-                correctValue=''
-              />
-            </Grid>
-            <Grid item xs={12} sm={4}>
-              <CustomTextField
-                fullWidth
-                placeholder={'Délai moyen de réglement (jour) '}
-                label='Délai moyen de réglement (jour)'
-                name='Délai moyen de réglement (jour)'
-                correctValue=''
-              />
-            </Grid>
-            <Grid item xs={12} sm={4}></Grid>
-            <Grid item xs={12} sm={4}>
-              <CustomTextField
-                fullWidth
-                placeholder={'Délai moyen de réglement (jour) '}
-                label='Délai moyen de réglement (jour)'
-                name='Délai moyen de réglement (jour)'
-                correctValue=''
-              />
-            </Grid>
-            <Grid item xs={12} sm={4}>
-              {' '}
-              <CustomTextField
-                fullWidth
-                placeholder={'Délai moyen de réglement (jour) '}
-                label='Délai moyen de réglement (jour)'
-                name='Délai moyen de réglement (jour)'
-                correctValue=''
-              />
-            </Grid>
-            <Grid item xs={12} sm={4}></Grid>
-            <Grid item xs={12} sm={4}></Grid>
-            <Grid item xs={12} sm={4}>
-              {' '}
-              <CustomTextField
-                fullWidth
-                placeholder={'Délai moyen de réglement (jour) '}
-                label='Délai moyen de réglement (jour)'
-                name='Délai moyen de réglement (jour)'
-                correctValue=''
-              />
-            </Grid>
-            <Grid item xs={12} sm={4}></Grid>
-            <Grid item xs={12} sm={4}></Grid>
-            <Grid item xs={12} sm={4}>
-              {' '}
-              <CustomTextField
-                fullWidth
-                placeholder={'Délai moyen de réglement (jour) '}
-                label='Délai moyen de réglement (jour)'
-                name='Délai moyen de réglement (jour)'
-                correctValue=''
-              />
-            </Grid>
-            <Grid item xs={12} sm={4}></Grid>
-            <Grid item xs={12} sm={4}></Grid>
-            <Grid item xs={12} sm={4}>
-              {' '}
-              <CustomTextField
-                fullWidth
-                placeholder={'Délai moyen de réglement (jour) '}
-                label='Délai moyen de réglement (jour)'
-                name='Délai moyen de réglement (jour)'
-                correctValue=''
-              />
-            </Grid>
-            <Grid item xs={12} sm={4}></Grid>
-            <Grid item xs={12} sm={4}></Grid>
-            <Grid item xs={12} sm={4}>
-              {' '}
-              <CustomTextField
-                fullWidth
-                placeholder={'Délai moyen de réglement (jour) '}
-                label='Délai moyen de réglement (jour)'
-                name='Délai moyen de réglement (jour)'
-                correctValue=''
-              />
-            </Grid>
+            <Grid item xs={12} sm={6}></Grid>
+            <Grid item xs={12} sm={6}></Grid>
+            <Grid item xs={12} sm={6}></Grid>
           </Fragment>
         )
       case 2:
         return (
           <Fragment key={step}>
-            <Grid item sm={3}></Grid>
             <Grid item xs={12} sm={6}>
-              <StyledLabel>aa</StyledLabel>
-              <SelectIndividu labelText='Nom adherent' onSearch={handleSearch} />
-            </Grid>
-            <Grid item sm={4}>
-              <CustomTextField
+              <TextField
                 fullWidth
-                placeholder={'Délai moyen de réglement (jour) '}
-                label='Délai moyen de réglement (jour)'
-                name='Délai moyen de réglement (jour)'
-                correctValue=''
+                label='Twitter'
+                value={twitter}
+                onChange={e => setTwitter(e.target.value)}
+                placeholder='https://twitter.com/carterLeonard'
               />
             </Grid>
-            <Grid item sm={4}>
-              <CustomTextField
+            <Grid item xs={12} sm={6}>
+              <TextField
                 fullWidth
-                placeholder={'Délai moyen de réglement (jour) '}
-                label='Délai moyen de réglement (jour)'
-                name='Délai moyen de réglement (jour)'
-                correctValue=''
+                label='Facebook'
+                value={facebook}
+                onChange={e => setFacebook(e.target.value)}
+                placeholder='https://facebook.com/carterLeonard'
               />
             </Grid>
-            <Grid item sm={4}>
-              <StyledLabel>aa</StyledLabel>
-              <StyledDatePicker
-                selected={date}
-                id='basic-input'
-                popperPlacement={popperPlacement}
-                onChange={(date: Date) => setDate(date)}
-                customInput={<CustomInput label='' />}
-              />
-            </Grid>
-            <Grid item sm={4}>
-              <CustomTextField
+            <Grid item xs={12} sm={6}>
+              <TextField
                 fullWidth
-                placeholder={'Délai moyen de réglement (jour) '}
-                label='Délai moyen de réglement (jour)'
-                name='Délai moyen de réglement (jour)'
-                correctValue=''
+                label='Google+'
+                value={google}
+                onChange={e => setGoogle(e.target.value)}
+                placeholder='https://plus.google.com/carterLeonard'
               />
             </Grid>
-            <Grid item sm={4}>
-              <CustomTextField
+            <Grid item xs={12} sm={6}>
+              <TextField
                 fullWidth
-                placeholder={'Délai moyen de réglement (jour) '}
-                label='Délai moyen de réglement (jour)'
-                name='Délai moyen de réglement (jour)'
-                correctValue=''
+                label='LinkedIn'
+                value={linkedIn}
+                onChange={e => setLinkedIn(e.target.value)}
+                placeholder='https://linkedin.com/carterLeonard'
               />
             </Grid>
-            <Grid item sm={4}>
-              <StyledLabel>aa</StyledLabel>
-              <StyledDatePicker
-                selected={date}
-                id='basic-input'
-                popperPlacement={popperPlacement}
-                onChange={(date: Date) => setDate(date)}
-                customInput={<CustomInput label='' />}
-              />
-            </Grid>
-            <Grid item sm={4}>
-              <Button>Ajouter</Button>
-            </Grid>
-
-            <Grid item sm={12}>
-            </Grid>
-            
           </Fragment>
         )
       default:
