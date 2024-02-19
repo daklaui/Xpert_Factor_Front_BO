@@ -79,5 +79,5 @@ const CustomTextField: React.FC<CustomTextFieldProps> = ({ label, name, placehol
       />
     </>
   )
-}
+}}
 export default CustomTextField
