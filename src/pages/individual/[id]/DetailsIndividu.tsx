@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Tab from '@mui/material/Tab'
 import Card from '@mui/material/Card'
 import TabList from '@mui/lab/TabList'
@@ -14,11 +14,14 @@ import AutreContact from './AutreContact'
 import LoginWeb from './LoginWeb'
 import ListeRib from './ListeRib'
 import { Button, CardHeader, Typography, Grid } from '@mui/material'
+import { useRouter } from 'next/router'
 
-const DetailsIndividu = () => {
-  // ** States
+const DetailsIndividu = ({ individuId }) => {
   const [value, setValue] = useState('info-individu')
-
+  const router = useRouter()
+  useEffect(() => {
+    setValue('info-individu')
+  }, [individuId])
   const handleTabsChange = (event: React.ChangeEvent<any>, newValue: string) => {
     setValue(newValue)
   }
