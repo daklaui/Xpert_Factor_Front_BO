@@ -1,31 +1,33 @@
-import React from 'react';
-import TextField from '@mui/material/TextField';
-import { styled } from '@mui/material/styles';
-import { Controller } from 'react-hook-form';
+import React from 'react'
+import TextField from '@mui/material/TextField'
+import { styled } from '@mui/material/styles'
+import { Controller } from 'react-hook-form'
 
 const StyledLabel = styled('label')({
   fontWeight: 'bold',
   fontSize: '13px',
   paddingBottom: '12px',
-  marginBottom: '110px',
-});
+  marginBottom: '110px'
+})
 
 const StyledTextField = styled(TextField)(({}) => ({
   '& .MuiInputBase-root': {
     padding: '7px',
     height: '40px',
-    width: '100%',
+    width: '100%'
   },
   '& input::placeholder': {}
-}));
+}))
 
-const CustomTextField = ({ label, name, control, placeholder, helperMessage, field, ...rest } ) => {
-  const renderField = field ? field : (
+const CustomTextField = ({ label, name, control, placeholder, helperMessage, field, ...rest }) => {
+  const renderField = field ? (
+    field
+  ) : (
     <Controller
       name={name}
       control={control}
       rules={{
-        required: true,
+        required: true
       }}
       render={({ field, fieldState }) => (
         <StyledTextField
@@ -37,7 +39,7 @@ const CustomTextField = ({ label, name, control, placeholder, helperMessage, fie
         />
       )}
     />
-  );
+  )
 
   return (
     <>
@@ -45,7 +47,7 @@ const CustomTextField = ({ label, name, control, placeholder, helperMessage, fie
       <br />
       {renderField}
     </>
-  );
-};
+  )
+}
 
-export default CustomTextField;
+export default CustomTextField
