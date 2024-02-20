@@ -7,7 +7,6 @@ const TabRib = lazy(() => import('./tables/TableRIB'))
 
 const ListeRib = () => {
   return (
-    <form onSubmit={e => e.preventDefault()}>
       <CardContent>
         <TabPanel sx={{ p: 0 }} value='liste-RIB'>
           <Grid container spacing={5}>
@@ -19,7 +18,6 @@ const ListeRib = () => {
           </Grid>
         </TabPanel>
       </CardContent>
-    </form>
   )
 }
 export default ListeRib
