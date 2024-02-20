@@ -1,8 +1,8 @@
 import React from 'react'
 import { CardContent, Grid } from '@mui/material'
 import TabPanel from '@mui/lab/TabPanel'
-import InfoItem from './components/InfoItem '
-import InfoCard from './components/InfoCard'
+import InfoItem from '../components/InfoItem '
+import InfoCard from '../components/InfoCard'
 
 const InfoCardAdresse = ({ data }) => (
   <InfoCard title='Adresse'>
@@ -30,17 +30,14 @@ const AutreInfo = () => {
   }
 
   return (
-      <CardContent>
-        <TabPanel sx={{ p: 0 }} value='autre-informations'></TabPanel>
-        <Grid container spacing={2}>
-          <Grid item xs={6}>
-            <InfoCardAdresse data={data} />
-          </Grid>
-          <Grid item xs={6}>
-            <InfoCardContact data={data} />
-          </Grid>
-        </Grid>
-      </CardContent>
+    <Grid container spacing={2}>
+      <Grid item xs={6}>
+        <InfoCardAdresse data={data} />
+      </Grid>
+      <Grid item xs={6}>
+        <InfoCardContact data={data} />
+      </Grid>
+    </Grid>
   )
 }
 
