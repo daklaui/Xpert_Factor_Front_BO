@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { Button, Card, CardHeader, CircularProgress, Grid, Tab, Typography } from '@mui/material'
@@ -89,14 +88,3 @@ const Index = () => {
 }
 
 export default Index
-=======
-import React from 'react'
-import { useRouter } from 'next/router'
-import DetailsIndividu from './DetailsIndividu'
-const ConsulationIndividual = () => {
-  const router = useRouter()
-  const { id } = router.query
-  return <DetailsIndividu individuId={id} />
-}
-export default ConsulationIndividual
->>>>>>> 5d2ea3a (details individu with lazy loading)
