@@ -1,8 +1,17 @@
-import { FormControl, Grid, Icon, IconButton, InputAdornment, OutlinedInput, Select, SelectChangeEvent, TextField } from "@mui/material";
-import { useState, Fragment, ChangeEvent } from "react";
-import { getLangue, getNationalite, getVille } from "../mock";
-import {State} from '../interface/FormIndivInterfaces';
-
+import {
+  FormControl,
+  Grid,
+  Icon,
+  IconButton,
+  InputAdornment,
+  OutlinedInput,
+  Select,
+  SelectChangeEvent,
+  TextField
+} from '@mui/material'
+import { useState, Fragment, ChangeEvent } from 'react'
+import { getLangue, getNationalite, getVille } from '../mock'
+import { State } from '../interface/FormIndividual.interface'
 
 const Step3MoreInfo = () => {
   const initialCompanyState = {
@@ -13,24 +22,24 @@ const Step3MoreInfo = () => {
     Email: '',
     Login: '',
     Nationalite: '',
-    Langue: '',
-  };
+    Langue: ''
+  }
 
   const [state, setState] = useState<State>({
     password: '',
-    showPassword: false,
-  });
+    showPassword: false
+  })
 
   const handlePasswordChange = (prop: keyof State) => (event: ChangeEvent<HTMLInputElement>) => {
-    const value = prop === 'password' ? event.target.value : !state.showPassword;
-    setState({ ...state, [prop]: value });
-  };
+    const value = prop === 'password' ? event.target.value : !state.showPassword
+    setState({ ...state, [prop]: value })
+  }
 
-  const [companyData, setCompanyData] = useState(initialCompanyState);
+  const [companyData, setCompanyData] = useState(initialCompanyState)
 
   function handleChange(field: string, value: string): void {
-    const updatedData = { ...companyData, [field]: value };
-    setCompanyData(updatedData);
+    const updatedData = { ...companyData, [field]: value }
+    setCompanyData(updatedData)
   }
 
   return (
@@ -38,7 +47,7 @@ const Step3MoreInfo = () => {
       <Fragment>
         <Grid item xs={12} sm={6}>
           <p>Adresse</p>
-          <TextField fullWidth value={companyData.Adresse} onChange={(e) => handleChange('Adresse', e.target.value)} />
+          <TextField fullWidth value={companyData.Adresse} onChange={e => handleChange('Adresse', e.target.value)} />
         </Grid>
         <Grid item xs={12} sm={6}>
           <p>Ville</p>
@@ -51,28 +60,33 @@ const Step3MoreInfo = () => {
 
         <Grid item xs={12} sm={6}>
           <p>Télèphone</p>
-          <TextField fullWidth value={companyData.Telephone} onChange={(e) => handleChange('Telephone', e.target.value)} />
+          <TextField
+            fullWidth
+            value={companyData.Telephone}
+            onChange={e => handleChange('Telephone', e.target.value)}
+          />
         </Grid>
         <Grid item xs={12} sm={6}>
           <p>Fax</p>
-          <TextField fullWidth value={companyData.Fax} onChange={(e) => handleChange('Fax', e.target.value)} />
+          <TextField fullWidth value={companyData.Fax} onChange={e => handleChange('Fax', e.target.value)} />
         </Grid>
         <Grid item xs={12} sm={6}>
           <p>Email</p>
-          <TextField fullWidth value={companyData.Email} onChange={(e) => handleChange('Email', e.target.value)} />
+          <TextField fullWidth value={companyData.Email} onChange={e => handleChange('Email', e.target.value)} />
         </Grid>
         <Grid item xs={12} sm={6}>
           <p>Login</p>
-          <TextField fullWidth value={companyData.Login} onChange={(e) => handleChange('Login', e.target.value)} />
+          <TextField fullWidth value={companyData.Login} onChange={e => handleChange('Login', e.target.value)} />
         </Grid>
         <Grid item xs={12} sm={6}>
           <p>Nationalité</p>
           <Select
             options={getNationalite}
             value={{ value: companyData.Nationalite, label: companyData.Nationalite }}
-            onChange={(selectedOption: { value: string; label: string }) => handleChange('Nationalite', selectedOption.value)}
-            />
-
+            onChange={(selectedOption: { value: string; label: string }) =>
+              handleChange('Nationalite', selectedOption.value)
+            }
+          />
         </Grid>
         <Grid item xs={12} sm={6}>
           <p>Langue</p>
@@ -91,7 +105,7 @@ const Step3MoreInfo = () => {
               type={state.showPassword ? 'text' : 'password'}
               endAdornment={
                 <InputAdornment position='end'>
-                  <IconButton edge='end' onClick={handlePasswordChange} onMouseDown={(e) => e.preventDefault()}>
+                  <IconButton edge='end' onClick={handlePasswordChange} onMouseDown={e => e.preventDefault()}>
                     <Icon icon={state.showPassword ? 'tabler:eye' : 'tabler:eye-off'} />
                   </IconButton>
                 </InputAdornment>
@@ -101,7 +115,7 @@ const Step3MoreInfo = () => {
         </Grid>
       </Fragment>
     </>
-  );
-};
+  )
+}
 
-export default Step3MoreInfo;
+export default Step3MoreInfo

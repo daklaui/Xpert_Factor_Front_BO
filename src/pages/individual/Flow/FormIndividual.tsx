@@ -2,7 +2,6 @@
 // ** React Imports
 import { ChangeEvent, Fragment, useState } from 'react'
 
-
 // ** MUI Imports
 import Avatar from '@mui/material/Avatar'
 import Box from '@mui/material/Box'
@@ -29,7 +28,6 @@ import Icon from 'src/@core/components/icon'
 
 // ** Custom Components Imports
 import CustomAvatar from 'src/@core/components/mui/avatar'
-import StepperCustomDot from 'C:/Users/HpPavilion/Desktop/xpert/Xpert_Factor_Front_BO/src/pages/individual/Flow/Form_Individual/StepperCustomDot';
 
 // ** Util Import
 import { hexToRGBA } from 'src/@core/utils/hex-to-rgba'
@@ -40,12 +38,11 @@ import StepperWrapper from 'src/@core/styles/mui/stepper'
 
 import DatePicker from 'react-datepicker'
 
-// ** Custom Component Imports
-import CustomInput from 'C:/Users/HpPavilion/Desktop/xpert/Xpert_Factor_Front_BO/src/pages/individual/Flow/Form_Individual/PickersCustomInput'
-
 // ** Types
 import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker'
 import { DateType } from 'src/types/forms/reactDatepickerTypes'
+import StepperCustomDot from './Form_Individual/StepperCustomDot'
+import PickersComponent from './Form_Individual/PickersCustomInput'
 
 interface State {
   password: string
@@ -58,8 +55,8 @@ const steps = [
   { icon: 'tabler:percentage', title: 'TVA ' },
   { icon: 'tabler:building-bank', title: 'Banque ' },
   { icon: 'tabler:user', title: "Plus d'information" },
-  { icon: 'tabler:user-plus', title: "Ajouter contact" },
-];
+  { icon: 'tabler:user-plus', title: 'Ajouter contact' }
+]
 const Step = styled(MuiStep)<StepProps>(({ theme }) => ({
   paddingLeft: theme.spacing(5),
   paddingRight: theme.spacing(5),
@@ -275,7 +272,11 @@ const FormIndividual = () => {
               <p>Date de création</p>
               <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
                 <div>
-                  <DatePicker selected={date} onChange={(date: Date) => setDate(date)} customInput={<CustomInput />} />
+                  <DatePicker
+                    selected={date}
+                    onChange={(date: Date) => setDate(date)}
+                    customInput={<PickersComponent />}
+                  />
                 </div>
               </Box>
             </Grid>
@@ -302,7 +303,7 @@ const FormIndividual = () => {
                   <DatePicker
                     selected={dateDebutExonerationTVA}
                     onChange={(date: Date) => setDateDebutExonerationTVA(date)}
-                    customInput={<CustomInput />}
+                    customInput={<PickersComponent />}
                     disabled={exonerationDisabled}
                   />
                 </div>
@@ -315,7 +316,7 @@ const FormIndividual = () => {
                   <DatePicker
                     selected={dateFinExonerationTVA}
                     onChange={(date: Date) => setDateFinExonerationTVA(date)}
-                    customInput={<CustomInput />}
+                    customInput={<PickersComponent />}
                     disabled={exonerationDisabled}
                   />
                 </div>
