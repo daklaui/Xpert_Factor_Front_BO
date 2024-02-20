@@ -7,7 +7,6 @@ const TabLogin = lazy(() => import('./tables/TableLogin'))
 
 const LoginWeb = () => {
   return (
-    <form onSubmit={e => e.preventDefault()}>
       <CardContent>
         <TabPanel sx={{ p: 0 }} value='login-web'>
           <Grid container spacing={5}>
@@ -19,7 +18,6 @@ const LoginWeb = () => {
           </Grid>
         </TabPanel>
       </CardContent>
-    </form>
   )
 }
 export default LoginWeb
