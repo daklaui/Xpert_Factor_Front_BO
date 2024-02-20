@@ -63,10 +63,8 @@ const MoreInfo = ({ onSearch }: CustomSelectProps) => {
   return (
     <>
       <Fragment>
-        <Grid sm={2}></Grid>
-        <Grid item xs={12} sm={3}>
+        <Grid item xs={12} sm={6}>
           <CustomTextField
-            fullWidth
             label={'Adresse '}
             name={'Adresse'}
             placeholder={'Tapez adresse'}
@@ -74,9 +72,8 @@ const MoreInfo = ({ onSearch }: CustomSelectProps) => {
             onChange={e => handleChange('Adresse', e.target.value)}
           />
         </Grid>
-        <Grid sm={2}></Grid>
-        <Grid item xs={12} sm={3}>
-          ville
+        <Grid item xs={12} sm={6}>
+          <p>Ville</p>
           <Select
             placeholder={'---Sélectionnez une ville---'}
             defaultValue={statusValueVille}
@@ -86,11 +83,9 @@ const MoreInfo = ({ onSearch }: CustomSelectProps) => {
             options={optionsVille}
           />
         </Grid>
-        <Grid sm={2}></Grid>
-        <Grid sm={2}></Grid>
-        <Grid item xs={12} sm={3}>
+
+        <Grid item xs={12} sm={6}>
           <CustomTextField
-            fullWidth
             label={'Télèphone '}
             name={'Télephone'}
             placeholder={'Tapez numéro'}
@@ -98,10 +93,8 @@ const MoreInfo = ({ onSearch }: CustomSelectProps) => {
             onChange={e => handleChange('Télephone', e.target.value)}
           />
         </Grid>
-        <Grid sm={2}></Grid>
-        <Grid item xs={12} sm={3}>
+        <Grid item xs={12} sm={6}>
           <CustomTextField
-            fullWidth
             label={'Fax '}
             name={'Fax'}
             placeholder={'Tapez fax'}
@@ -109,11 +102,8 @@ const MoreInfo = ({ onSearch }: CustomSelectProps) => {
             onChange={e => handleChange('Fax', e.target.value)}
           />
         </Grid>
-        <Grid sm={2}></Grid>
-        <Grid sm={2}></Grid>
-        <Grid item xs={12} sm={3}>
+        <Grid item xs={12} sm={6}>
           <CustomTextField
-            fullWidth
             label={'Email '}
             name={'Email'}
             placeholder={'Tapez email'}
@@ -121,10 +111,8 @@ const MoreInfo = ({ onSearch }: CustomSelectProps) => {
             onChange={e => handleChange('Email', e.target.value)}
           />
         </Grid>
-        <Grid sm={2}></Grid>
-        <Grid item xs={12} sm={3}>
+        <Grid item xs={12} sm={6}>
           <CustomTextField
-            fullWidth
             label={'Login '}
             name={'Login'}
             placeholder={'Tapez login'}
@@ -132,9 +120,7 @@ const MoreInfo = ({ onSearch }: CustomSelectProps) => {
             onChange={e => handleChange('Login', e.target.value)}
           />
         </Grid>
-        <Grid sm={2}></Grid>
-        <Grid sm={2}></Grid>
-        <Grid item xs={12} sm={3}>
+        <Grid item xs={12} sm={6}>
           <p>Nationalité</p>
           <Select
             placeholder={'---Sélectionnez une nationalité---'}
@@ -145,8 +131,7 @@ const MoreInfo = ({ onSearch }: CustomSelectProps) => {
             options={optionsNationalite}
           />
         </Grid>
-        <Grid sm={2}></Grid>
-        <Grid item xs={12} sm={3}>
+        <Grid item xs={12} sm={6}>
           <p>Langue</p>
           <Select
             placeholder={'---Sélectionnez langue---'}
@@ -157,12 +142,9 @@ const MoreInfo = ({ onSearch }: CustomSelectProps) => {
             options={optionsLangue}
           />
         </Grid>
-        <Grid sm={2}></Grid>
-        <Grid sm={2}></Grid>
-        <Grid item xs={12} sm={3}>
+        <Grid item xs={12} sm={6}>
           <FormControl fullWidth variant='outlined'>
             <CustomTextField
-              fullWidth
               label={'Password '}
               name={'Password'}
               value={state.password}
