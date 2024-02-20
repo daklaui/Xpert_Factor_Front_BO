@@ -4,7 +4,7 @@ import { forwardRef } from 'react'
 // ** MUI Imports
 import TextField from '@mui/material/TextField'
 
-import { PickerProps } from './interface/FormIndivInterfaces'
+import { PickerProps } from './interface/FormIndividual.interface'
 
 const PickersComponent = forwardRef(({ ...props }: PickerProps, ref) => {
   // ** Props
