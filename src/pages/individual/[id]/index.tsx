@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
 import { Button, Card, CardHeader, CircularProgress, Grid, Tab, Typography } from '@mui/material'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import ContactPhoneIcon from '@mui/icons-material/ContactPhone'
@@ -11,9 +12,9 @@ import TabList from '@mui/lab/TabList'
 
 const LazyInfoIndividu = lazy(() => import('./Tabs/InfoIndividu'))
 const LazyAutreInfo = lazy(() => import('./Tabs/AutreInfo'))
-const LazyAutreContact = lazy(() => import('src/pages/individual/[id]/tables/TableContact'))
-const LazyLoginWeb = lazy(() => import('src/pages/individual/[id]/tables/TableLogin'))
-const LazyListeRib = lazy(() => import('src/pages/individual/[id]/tables/TableRIB'))
+const LazyAutreContact = lazy(() => import('./Tables/TableContact'))
+const LazyLoginWeb = lazy(() => import('./Tables/TableLogin'))
+const LazyListeRib = lazy(() => import('./Tables/TableRib'))
 
 const Index = () => {
   const router = useRouter()
@@ -86,13 +87,4 @@ const Index = () => {
   )
 }
 
-import React from 'react'
-import { useRouter } from 'next/router'
-import DetailsIndividu from './DetailsIndividu'
-const ConsulationIndividual = () => {
-  const router = useRouter()
-  const { id } = router.query
-  return <DetailsIndividu individuId={id} />
-}
-export default ConsulationIndividual
-
+export default Index
