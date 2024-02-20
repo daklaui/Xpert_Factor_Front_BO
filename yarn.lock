@@ -1829,7 +1829,7 @@ decimal.js-light@^2.4.1:
 deep-is@^0.1.3:
   version "0.1.4"
 
-define-data-property@^1.0.1, define-data-property@^1.1.2:
+define-data-property@^1.0.1, define-data-property@^1.1.2, define-data-property@^1.1.4:
   version "1.1.4"
   dependencies:
     es-define-property "^1.0.0"
@@ -2708,7 +2708,7 @@ is-symbol@^1.0.2, is-symbol@^1.0.3:
   dependencies:
     has-symbols "^1.0.2"
 
-is-typed-array@^1.1.10, is-typed-array@^1.1.13, is-typed-array@^1.1.9:
+is-typed-array@^1.1.10, is-typed-array@^1.1.13:
   version "1.1.13"
   dependencies:
     which-typed-array "^1.1.14"
@@ -3796,9 +3796,10 @@ set-function-length@^1.2.1:
 set-function-name@^2.0.0, set-function-name@^2.0.1:
   version "2.0.1"
   dependencies:
-    define-data-property "^1.0.1"
+    define-data-property "^1.1.4"
+    es-errors "^1.3.0"
     functions-have-names "^1.2.3"
-    has-property-descriptors "^1.0.0"
+    has-property-descriptors "^1.0.2"
 
 setimmediate@^1.0.5:
   version "1.0.5"
@@ -4058,7 +4059,7 @@ type-fest@^2.19.0:
 typed-array-buffer@^1.0.1:
   version "1.0.1"
   dependencies:
-    call-bind "^1.0.6"
+    call-bind "^1.0.7"
     es-errors "^1.3.0"
     is-typed-array "^1.1.13"
 
@@ -4083,9 +4084,12 @@ typed-array-byte-offset@^1.0.0:
 typed-array-length@^1.0.4:
   version "1.0.4"
   dependencies:
-    call-bind "^1.0.2"
+    call-bind "^1.0.7"
     for-each "^0.3.3"
-    is-typed-array "^1.1.9"
+    gopd "^1.0.1"
+    has-proto "^1.0.3"
+    is-typed-array "^1.1.13"
+    possible-typed-array-names "^1.0.0"
 
 typescript@5.0.4:
   version "5.0.4"
