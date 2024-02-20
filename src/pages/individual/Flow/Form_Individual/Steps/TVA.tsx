@@ -1,14 +1,17 @@
 import { Box, FormControlLabel, Grid, Radio, RadioGroup, TextField } from "@mui/material";
 import { useState } from "react";
 import DatePicker from 'react-datepicker';
+import CustomTextField from "src/@core/components/mui/text-field";
+// ** Custom Component Imports
+import CustomInput from '../PickersCustomInput';
 
-const Step1TVA = () => {
+const TVA = () => {
   const [companyData, setCompanyData] = useState({
-    date: new Date(),
     Code_TVA: '',
     ExonerationTVA: '',
     selectDisabled: false,
   });
+  const [date, setDate] = useState(new Date());
 
   const handleChange = (field: string, value: string | Date): void => {
     setCompanyData((prevData) => ({
@@ -19,10 +22,15 @@ const Step1TVA = () => {
   };
 
   return (
-    <Grid container spacing={2}>
-      <Grid item xs={12} sm={6}>
-        <p>Code TVA</p>
-        <TextField fullWidth value={companyData.Code_TVA} onChange={(e) => handleChange('Code_TVA', e.target.value)} />
+    <>
+    <Grid item xs={12} sm={6}>
+        <CustomTextField
+          label={'Code TVA '}
+          name={'Code_TVA'}
+          placeholder={'Tapez code '}
+          value={companyData.Code_TVA}
+          onChange={(e) => handleChange('Code_TVA', e.target.value)}
+        />
       </Grid>
       <Grid item xs={12} sm={6}>
         <p>Exonération TVA</p>
@@ -31,18 +39,26 @@ const Step1TVA = () => {
           <FormControlLabel value='Non' control={<Radio />} label='Non' />
         </RadioGroup>
       </Grid>
-      {['Début', 'Fin'].map((suffix) => (
-        <Grid key={suffix} item xs={12} sm={6}>
-          <p>Date {suffix} Exonération TVA</p>
+      <Grid item xs={12} sm={6}>
+          <p>Date Début Exonération </p>
           <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
             <div>
-              <DatePicker selected={companyData.date} onChange={(date: Date) => handleChange('date', date)} />
+              <DatePicker selected={date} 
+              onChange={(date: Date) => setDate(date)} customInput={<CustomInput />} />
             </div>
           </Box>
         </Grid>
-      ))}
-    </Grid>
+        <Grid item xs={12} sm={6}>
+          <p>Date Fin Exonération</p>
+          <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
+            <div>
+              <DatePicker selected={date} 
+              onChange={(date: Date) => setDate(date)} customInput={<CustomInput />} />
+            </div>
+          </Box>
+        </Grid>
+    </>
   );
 }
 
-export default Step1TVA;
+export default TVA;
