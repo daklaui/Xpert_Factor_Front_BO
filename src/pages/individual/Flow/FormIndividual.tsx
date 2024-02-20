@@ -41,8 +41,11 @@ import DatePicker from 'react-datepicker'
 // ** Types
 import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker'
 import { DateType } from 'src/types/forms/reactDatepickerTypes'
+
 import StepperCustomDot from './Form_Individual/StepperCustomDot'
 import PickersComponent from './Form_Individual/PickersCustomInput'
+
+import CustomTextField from 'src/@core/components/mui/text-field'
 
 interface State {
   password: string
@@ -222,8 +225,13 @@ const FormIndividual = () => {
             </Grid>
             <Grid item xs={12} sm={6}>
               {/* chane all the TextField with anis input */}
-              <p>Dénomination </p>
-              <TextField fullWidth value={dénomination} onChange={e => setDenomination(e.target.value)} />
+              <CustomTextField
+                label={'Dénomination '}
+                name={'Denomination'}
+                placeholder={'Dénomination'}
+                value={dénomination}
+                onChange={e => setDenomination(e.target.value)}
+              />
             </Grid>
             <Grid item xs={12} sm={6}>
               <p>Nom de commerce </p>
@@ -286,8 +294,12 @@ const FormIndividual = () => {
         return (
           <Fragment key={step}>
             <Grid item xs={12} sm={6}>
-              <p>Code TVA </p>
-              <TextField value={code_TVA} onChange={e => setCdTVA(e.target.value)} />
+              <CustomTextField
+                label={'Code TVA '}
+                name={'Code_TVA'}
+                placeholder={'Code Tva'}
+                onChange={e => setCdTVA(e.target.value)}
+              />
             </Grid>
             <Grid item xs={12} sm={6}>
               <p>Exonération TVA </p>
