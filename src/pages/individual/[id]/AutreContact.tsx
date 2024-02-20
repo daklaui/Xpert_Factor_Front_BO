@@ -7,7 +7,6 @@ const Tabcontact = lazy(() => import('./tables/TableContact'))
 
 const AutreContact = () => {
   return (
-    <form onSubmit={e => e.preventDefault()}>
       <CardContent>
         <TabPanel sx={{ p: 0 }} value='autre-contacts'>
           <Grid container spacing={5}>
@@ -19,7 +18,6 @@ const AutreContact = () => {
           </Grid>
         </TabPanel>
       </CardContent>
-    </form>
   )
 }
 export default AutreContact
