@@ -2,6 +2,7 @@
 // ** React Imports
 import { ChangeEvent, Fragment, useState } from 'react'
 
+
 // ** MUI Imports
 import Avatar from '@mui/material/Avatar'
 import Box from '@mui/material/Box'
@@ -18,7 +19,7 @@ import { styled } from '@mui/material/styles'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 
-import { Checkbox, FormControl, FormHelperText, Grid, InputLabel, MenuItem } from '@mui/material'
+import { Checkbox, FormControl, Grid, MenuItem } from '@mui/material'
 
 // ** Third Party Imports
 import toast from 'react-hot-toast'
@@ -28,7 +29,7 @@ import Icon from 'src/@core/components/icon'
 
 // ** Custom Components Imports
 import CustomAvatar from 'src/@core/components/mui/avatar'
-import StepperCustomDot from './StepperCustomDot'
+import StepperCustomDot from 'C:/Users/HpPavilion/Desktop/xpert/Xpert_Factor_Front_BO/src/pages/individual/Flow/Form_Individual/StepperCustomDot';
 
 // ** Util Import
 import { hexToRGBA } from 'src/@core/utils/hex-to-rgba'
@@ -40,7 +41,7 @@ import StepperWrapper from 'src/@core/styles/mui/stepper'
 import DatePicker from 'react-datepicker'
 
 // ** Custom Component Imports
-import CustomInput from './PickersCustomInput'
+import CustomInput from 'C:/Users/HpPavilion/Desktop/xpert/Xpert_Factor_Front_BO/src/pages/individual/Flow/Form_Individual/PickersCustomInput'
 
 // ** Types
 import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker'
@@ -52,35 +53,13 @@ interface State {
   showPassword: boolean
   showPassword2: boolean
 }
-
 const steps = [
-  {
-    icon: 'tabler:building-community',
-    title: 'Société'
-    title: 'Société'
-  },
-  {
-    icon: 'tabler:percentage',
-    title: 'TVA '
-    title: 'TVA '
-  },
-  {
-    icon: 'tabler:building-bank',
-    title: 'Banque '
-    title: 'Banque '
-  },
-  {
-    icon: 'tabler:user',
-    title: "Plus d'information"
-    title: "Plus d'information"
-  },
-  {
-    icon: 'tabler:user-plus',
-    title: 'Ajouter contact'
-    title: 'Ajouter contact'
-  }
-]
-
+  { icon: 'tabler:building-community', title: 'Société' },
+  { icon: 'tabler:percentage', title: 'TVA ' },
+  { icon: 'tabler:building-bank', title: 'Banque ' },
+  { icon: 'tabler:user', title: "Plus d'information" },
+  { icon: 'tabler:user-plus', title: "Ajouter contact" },
+];
 const Step = styled(MuiStep)<StepProps>(({ theme }) => ({
   paddingLeft: theme.spacing(5),
   paddingRight: theme.spacing(5),
