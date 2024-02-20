@@ -30,7 +30,6 @@ const AutreInfo = () => {
   }
 
   return (
-    <form onSubmit={e => e.preventDefault()}>
       <CardContent>
         <TabPanel sx={{ p: 0 }} value='autre-informations'></TabPanel>
         <Grid container spacing={2}>
@@ -42,7 +41,6 @@ const AutreInfo = () => {
           </Grid>
         </Grid>
       </CardContent>
-    </form>
   )
 }
 
