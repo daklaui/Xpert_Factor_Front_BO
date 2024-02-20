@@ -21,11 +21,12 @@ const AddContact = ({ onSearch }: CustomSelectProps) => {
     fetchData()
   }, [])
   const initialCompanyState = {
-    Name: 'Anis Allagui',
-    Télephone: '123-456-7890',
-    Position: 'PONT DE BIZERTE | 2061',
-    Fax: '987-654-3210',
-    Email: 'john.doe@example.com'
+    Name: '',
+    Télephone: '',
+    Position: '',
+    Fax: '',
+    Email: '',
+    Login: ''
   }
 
   const [companyData, setCompanyData] = useState(initialCompanyState)
@@ -38,10 +39,8 @@ const AddContact = ({ onSearch }: CustomSelectProps) => {
   return (
     <>
       <Fragment>
-        <Grid sm={1.5}></Grid>
-        <Grid item sm={4}>
+        <Grid item xs={12} sm={6}>
           <CustomTextField
-            fullWidth
             label={'Nom et prénom '}
             name={'Name'}
             placeholder={'Tapez nom et prénom'}
@@ -49,11 +48,10 @@ const AddContact = ({ onSearch }: CustomSelectProps) => {
             onChange={e => handleChange('Name', e.target.value)}
           />
         </Grid>
-        <Grid sm={1}></Grid>
-        <Grid item sm={4}>
-          position
+        <Grid item xs={12} sm={6}>
+          <p>Position</p>
           <Select
-            placeholder={'---Sélectionnez une position---'}
+            placeholder={'---Sélectionnez une positin---'}
             defaultValue={statusValueVille}
             onChange={(value: any) => {
               onSearch ? onSearch(value) : setStatusValueVille(value)
@@ -61,11 +59,9 @@ const AddContact = ({ onSearch }: CustomSelectProps) => {
             options={optionsVille}
           />
         </Grid>
-        <Grid sm={1}></Grid>
-        <Grid sm={1.5}></Grid>
-        <Grid item xs={12} sm={4}>
+
+        <Grid item xs={12} sm={6}>
           <CustomTextField
-            fullWidth
             label={'Télèphone '}
             name={'Télephone'}
             placeholder={'Tapez numéro'}
@@ -73,10 +69,8 @@ const AddContact = ({ onSearch }: CustomSelectProps) => {
             onChange={e => handleChange('Télephone', e.target.value)}
           />
         </Grid>
-        <Grid sm={1}></Grid>
-        <Grid item xs={12} sm={4}>
+        <Grid item xs={12} sm={6}>
           <CustomTextField
-            fullWidth
             label={'Fax '}
             name={'Fax'}
             placeholder={'Tapez fax'}
@@ -84,11 +78,8 @@ const AddContact = ({ onSearch }: CustomSelectProps) => {
             onChange={e => handleChange('Fax', e.target.value)}
           />
         </Grid>
-        <Grid sm={1}></Grid>
-        <Grid sm={1.5}></Grid>
-        <Grid item xs={12} sm={4}>
+        <Grid item xs={12} sm={6}>
           <CustomTextField
-            fullWidth
             label={'Email '}
             name={'Email'}
             placeholder={'Tapez email'}

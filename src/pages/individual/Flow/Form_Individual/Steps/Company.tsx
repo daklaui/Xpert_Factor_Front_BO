@@ -65,8 +65,7 @@ const Company = ({ onSearch }: CustomSelectProps) => {
   return (
     <>
       <Fragment>
-        <Grid sm={1.5}></Grid>
-        <Grid item sm={4}>
+        <Grid item xs={12} sm={6}>
           <p>Forme juridique</p>
           <Select
             placeholder={'---Sélectionnez une forme---'}
@@ -78,8 +77,7 @@ const Company = ({ onSearch }: CustomSelectProps) => {
             options={optionsJuridique}
           />
         </Grid>
-        <Grid sm={1}></Grid>
-        <Grid item sm={4}>
+        <Grid item xs={12} sm={6}>
           <p>Activité</p>
           <Select
             placeholder={'---Sélectionnez un activité---'}
@@ -90,12 +88,8 @@ const Company = ({ onSearch }: CustomSelectProps) => {
             options={optionsActivite}
           />
         </Grid>
-        <Grid sm={1.5}></Grid>
-
-        <Grid sm={1.5}></Grid>
-        <Grid item xs={12} sm={4}>
+        <Grid item xs={12} sm={6}>
           <CustomTextField
-            fullWidth
             label={'Dénomination '}
             name={'Dénomination'}
             placeholder={'Tapez nom '}
@@ -103,10 +97,8 @@ const Company = ({ onSearch }: CustomSelectProps) => {
             onChange={e => handleChange('Dénomination', e.target.value)}
           />
         </Grid>
-        <Grid sm={1}></Grid>
-        <Grid item xs={12} sm={4}>
+        <Grid item xs={12} sm={6}>
           <CustomTextField
-            fullWidth
             label={'Nom de commerce '}
             name={'Nom_com'}
             placeholder={'Tapez nom commerce '}
@@ -114,12 +106,8 @@ const Company = ({ onSearch }: CustomSelectProps) => {
             onChange={e => handleChange('Nom_com', e.target.value)}
           />
         </Grid>
-        <Grid sm={1.5}></Grid>
-
-        <Grid sm={1.5}></Grid>
-        <Grid item xs={12} sm={4}>
+        <Grid item xs={12} sm={6}>
           <CustomTextField
-            fullWidth
             label={'Register de commerce '}
             name={'Reg_com'}
             placeholder={'Tapez register '}
@@ -127,10 +115,8 @@ const Company = ({ onSearch }: CustomSelectProps) => {
             onChange={e => handleChange('Reg_com', e.target.value)}
           />
         </Grid>
-        <Grid sm={1}></Grid>
-        <Grid item xs={12} sm={4}>
+        <Grid item xs={12} sm={6}>
           <CustomTextField
-            fullWidth
             label={'Lieu '}
             name={'Lieu'}
             placeholder={'Tapez lieu '}
@@ -138,21 +124,8 @@ const Company = ({ onSearch }: CustomSelectProps) => {
             onChange={e => handleChange('Lieu', e.target.value)}
           />
         </Grid>
-        <Grid sm={1.5}></Grid>
-
-        <Grid sm={1.5}></Grid>
-
-        <Grid item xs={12} sm={2}>
-          <p>Date de création</p>
-          <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
-            <div>
-              <DatePicker selected={date} onChange={(date: Date) => setDate(date)} customInput={<CustomInput />} />
-            </div>
-          </Box>
-        </Grid>
-
-        <Grid container alignItems='center' item xs={12} sm={2}>
-          <p>Groupes de Sociétes</p>
+        <Grid container alignItems='center' item xs={12} sm={6}>
+          <p>Groupe de sociétés</p>
           <RadioGroup
             row
             name='Grp_soc'
@@ -163,10 +136,7 @@ const Company = ({ onSearch }: CustomSelectProps) => {
             <FormControlLabel value='Non' control={<Radio />} label='Non' />
           </RadioGroup>
         </Grid>
-
-        <Grid sm={1}></Grid>
-
-        <Grid item xs={12} sm={4}>
+        <Grid item xs={12} sm={6}>
           <p>Groupe de sociétés</p>
           <Select
             placeholder={'---Sélectionnez un groupe---'}
@@ -178,9 +148,14 @@ const Company = ({ onSearch }: CustomSelectProps) => {
             options={optionsGroupeSociete}
           />
         </Grid>
-        <Grid sm={1.5}></Grid>
-
-        <Grid sm={1.5}></Grid>
+        <Grid item xs={12} sm={6}>
+          <p>Date de création</p>
+          <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
+            <div>
+              <DatePicker selected={date} onChange={(date: Date) => setDate(date)} customInput={<CustomInput />} />
+            </div>
+          </Box>
+        </Grid>
       </Fragment>
     </>
   )

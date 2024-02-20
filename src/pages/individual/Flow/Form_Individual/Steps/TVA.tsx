@@ -1,11 +1,9 @@
 import { Box, FormControlLabel, Grid, Radio, RadioGroup, TextField } from '@mui/material'
-import { Fragment, useState } from 'react'
+import { useState } from 'react'
 import DatePicker from 'react-datepicker'
 import CustomTextField from 'src/@core/components/mui/text-field'
-
 // ** Custom Component Imports
 import CustomInput from '../PickersCustomInput'
-import StyledLabel from 'src/pages/Contract/Flow/StyledInputs/StyledLabel'
 
 const TVA = () => {
   const [companyData, setCompanyData] = useState({
@@ -24,11 +22,9 @@ const TVA = () => {
   }
 
   return (
-    <Fragment>
-      <Grid sm={1.5}></Grid>
-      <Grid item sm={3}>
+    <>
+      <Grid item xs={12} sm={6}>
         <CustomTextField
-          fullWidth
           label={'Code TVA '}
           name={'Code_TVA'}
           placeholder={'Tapez code '}
@@ -36,9 +32,8 @@ const TVA = () => {
           onChange={e => handleChange('Code_TVA', e.target.value)}
         />
       </Grid>
-      <Grid sm={1}></Grid>
-      <Grid item sm={3}>
-        <StyledLabel>Exonération TVA</StyledLabel>
+      <Grid item xs={12} sm={6}>
+        <p>Exonération TVA</p>
         <RadioGroup
           row
           name='ExonerationTVA'
@@ -49,24 +44,23 @@ const TVA = () => {
           <FormControlLabel value='Non' control={<Radio />} label='Non' />
         </RadioGroup>
       </Grid>
-      <Grid item xs={12} sm={3}>
-      <StyledLabel>Date Début Exonération</StyledLabel>
+      <Grid item xs={12} sm={6}>
+        <p>Date Début Exonération </p>
         <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
           <div>
             <DatePicker selected={date} onChange={(date: Date) => setDate(date)} customInput={<CustomInput />} />
           </div>
         </Box>
       </Grid>
-      <Grid sm={8.5}></Grid>
-      <Grid item xs={12} sm={3}>
-        <StyledLabel>Date Fin Exonération</StyledLabel>
+      <Grid item xs={12} sm={6}>
+        <p>Date Fin Exonération</p>
         <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
           <div>
             <DatePicker selected={date} onChange={(date: Date) => setDate(date)} customInput={<CustomInput />} />
           </div>
         </Box>
       </Grid>
-    </Fragment>
+    </>
   )
 }
 

@@ -1,6 +1,30 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-// ** React Imports
-import { ChangeEvent, Fragment, useState } from 'react'
+import React, { useState, Fragment } from 'react';
+import { styled } from '@mui/material/styles';
+import Stepper from '@mui/material/Stepper';
+import MuiStep from '@mui/material/Step';
+import StepLabel from '@mui/material/StepLabel';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Divider from '@mui/material/Divider';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Avatar from '@mui/material/Avatar';
+import { hexToRGBA } from 'src/@core/utils/hex-to-rgba';
+import toast from 'react-hot-toast';
+import Icon from 'src/@core/components/icon';
+import StepperCustomDot from './Form_Individual/StepperCustomDot';
+import StepperWrapper from 'src/@core/styles/mui/stepper';
+import DatePicker from 'react-datepicker';
+import CustomInput from './Form_Individual/PickersCustomInput';
+import Company from './Form_Individual/Steps/Company';
+import TVA from './Form_Individual/Steps/TVA';
+import Bank from './Form_Individual/Steps/Bank';
+import MoreInfo from './Form_Individual/Steps/MoreInfo';
+import AddContact from './Form_Individual/Steps/AddContact';
+import { Grid } from '@mui/material';
+import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker';
 
 // ** MUI Imports
 import Avatar from '@mui/material/Avatar'
@@ -84,149 +108,33 @@ const Step = styled(MuiStep)<StepProps>(({ theme }) => ({
   '&.Mui-completed + svg': {
     color: theme.palette.primary.main
   }
-}))
+}));
 
 const FormIndividual = () => {
-  // ** States
-  const [RIB, setRIB] = useState<string>('')
-  const [date, setDate] = useState<DateType>(new Date())
-  const [juridique, setJuridique] = useState<string>('')
-  const [dénomination, setDenomination] = useState<string>('')
-  const [nom_com, setNom_com] = useState<string>('')
-  const [code_TVA, setCdTVA] = useState<string>('')
-  const [language, setLanguage] = useState<string[]>([])
-  const [nationalite, setNationalite] = useState<string>('')
-  const [language, setLanguage] = useState<string[]>([])
-  const [nationalite, setNationalite] = useState<string>('')
-  const [reg_com, setRegistre_com] = useState<string>('')
-  const [lieu, setLieu] = useState<string>('')
-  const [grp_soc, setGroupeSocietes] = useState<string>('')
-  const [banque, setBanque] = useState<string>('')
-  const [agence, setAgence] = useState<string>('')
-  const [activite, setActivite] = useState<string>('')
-  const [, setTVA] = useState<string>('')
-  const [Email, setEmail] = useState<string>('')
-  const [Email_Plus, setEmail_Plus] = useState<string>('')
-  const [username, setUsername] = useState<string>('')
-  const [Adresse, setAdresse] = useState<string>('')
-  const [Télephone, setTélephone] = useState<string>('')
-  const [Télephone_Plus, setTélephone_Plus] = useState<string>('')
-  const [Ville, setVille] = useState<string>('')
-  const [Fax, setFax] = useState<string>('')
-  const [situation, setSituation] = useState<string>('')
-  const [Login, setLogin] = useState<string>('')
-  const [activeStep, setActiveStep] = useState<number>(0)
-  const [selectDisabled, setSelectDisabled] = useState(false)
-  const [exonerationTVA, setExonerationTVA] = useState<string>('')
-  const [dateDebutExonerationTVA, setDateDebutExonerationTVA] = useState<DateType>(new Date())
-  const [dateFinExonerationTVA, setDateFinExonerationTVA] = useState<DateType>(new Date())
-  const [exonerationDisabled, setExonerationDisabled] = useState(false)
-  const [selectDisabled, setSelectDisabled] = useState(false)
-  const [exonerationTVA, setExonerationTVA] = useState<string>('')
-  const [dateDebutExonerationTVA, setDateDebutExonerationTVA] = useState<DateType>(new Date())
-  const [dateFinExonerationTVA, setDateFinExonerationTVA] = useState<DateType>(new Date())
-  const [exonerationDisabled, setExonerationDisabled] = useState(false)
+  const [activeStep, setActiveStep] = useState<number>(0);
 
-  const [state, setState] = useState<State>({
-    password: '',
-    password2: '',
-    showPassword: false,
-    showPassword2: false
-  }) // remove the confirm password
-
-  // Handle Stepper
   const handleBack = () => {
-    setActiveStep(prevActiveStep => prevActiveStep - 1)
-  }
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  };
+
   const handleNext = () => {
-    setActiveStep(prevActiveStep => prevActiveStep + 1)
+    const isStepValid = validateStep(activeStep);
 
-    if (activeStep === steps.length - 1) {
-      toast.success('Formulaire soumis')
-    }
-  }
-    setActiveStep(prevActiveStep => prevActiveStep + 1)
+    if (isStepValid) {
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
 
-    if (activeStep === steps.length - 1) {
-      toast.success('Formulaire soumis')
-    }
-  }
-
-  const handleReset = () => {
-    setRIB('')
-    setJuridique('')
-    setTVA('')
-    setCdTVA('')
-    setDenomination('')
-    setNom_com('')
-    setRegistre_com('')
-    setLieu('')
-    setGroupeSocietes('')
-    setActivite('')
-    setEmail('')
-    setEmail_Plus('')
-    setSituation('')
-    setNationalite('')
-    setLanguage([])
-    setLanguage([])
-    setAdresse('')
-    setVille('')
-    setUsername('')
-    setBanque('')
-    setAgence('')
-    setTélephone('')
-    setTélephone_Plus('')
-    setFax('')
-    setLogin('')
-    setActiveStep(0)
-    setState({ ...state, password: '', password2: '' })
-  }
-
-  // Handle Password
-  const handlePasswordChange = (prop: keyof State) => (event: ChangeEvent<HTMLInputElement>) => {
-    setState({ ...state, [prop]: event.target.value })
-  }
-  const handleClickShowPassword = () => {
-    setState({ ...state, showPassword: !state.showPassword })
-  }
-
-  // Handle Confirm Password
-  const handleConfirmChange = (prop: keyof State) => (event: ChangeEvent<HTMLInputElement>) => {
-    setState({ ...state, [prop]: event.target.value })
-  }
-  const handleClickShowConfirmPassword = () => {
-    setState({ ...state, showPassword2: !state.showPassword2 })
-  }
-
-  // Handle Language
-  const handleSelectChange = (event: SelectChangeEvent<string[]>) => {
-    setLanguage(event.target.value as string[])
-    setLanguage(event.target.value as string[])
-  }
-
-  const handleExonerationTVAChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value
-    setExonerationTVA(value)
-    setExonerationDisabled(value === 'Non')
-  }
-
-    const value = event.target.value
-    setExonerationTVA(value)
-    setExonerationDisabled(value === 'Non')
-  }
-
-  const getStepContent = (step: number) => {
-    function handleRadioChange(event: ChangeEvent<HTMLInputElement>, value: string): void {
-      if (activeStep === 0) {
-        setGroupeSocietes(value)
-        setSelectDisabled(value === 'Non')
-        setGroupeSocietes(value)
-        setSelectDisabled(value === 'Non')
+      if (activeStep === steps.length - 1) {
+        toast.success('Formulaire soumis');
       }
     }
+  };
 
+  const handleReset = () => {
+    setActiveStep(0);
+  };
 
-    switch (step) {
+  const getStepContent = (activeStep: number): JSX.Element | string => {
+    switch (activeStep) {
       case 0:
         return (
           // chane all the select list with react-select
@@ -436,233 +344,36 @@ const FormIndividual = () => {
         )
 
       case 2:
-        return (
-          <Fragment key={step}>
-            <Grid item xs={12} sm={6}>
-            <Grid item xs={12} sm={6}>
-              <p>RIB</p>
-              <TextField fullWidth value={RIB} onChange={e => setRIB(e.target.value)} />
-              <TextField fullWidth value={RIB} onChange={e => setRIB(e.target.value)} />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <p>Banque</p>
-              <TextField fullWidth value={banque} onChange={e => setBanque(e.target.value)} />
-              <TextField fullWidth value={banque} onChange={e => setBanque(e.target.value)} />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <p>Agence</p>
-              <TextField fullWidth value={agence} onChange={e => setAgence(e.target.value)} />
-              <TextField fullWidth value={agence} onChange={e => setAgence(e.target.value)} />
-            </Grid>
-          </Fragment>
-        )
+        return <Bank />;
       case 3:
         return (
-          <Fragment key={step}>
-            <Grid item xs={12} sm={6}>
-              <p>Adresse</p>
-              <TextField fullWidth value={Adresse} onChange={e => setAdresse(e.target.value)} />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <p>Ville</p>
-            <Grid item xs={12} sm={6}>
-              <p>Ville</p>
-              <FormControl fullWidth>
-                <Select value={Ville} onChange={e => setVille(e.target.value)}>
-                <Select value={Ville} onChange={e => setVille(e.target.value)}>
-                  <MenuItem value='PONT DE BIZERTE | 2061'>PONT DE BIZERTE | 2061</MenuItem>
-                  <MenuItem value='CHORFECH | 2057'>CHORFECH | 2057</MenuItem>
-                  <MenuItem value='SIDI THABET | 2020'>SIDI THABET | 2020</MenuItem>
-                  <MenuItem value='TUNIS CARTHAGE | 2035'>TUNIS CARTHAGE | 2035</MenuItem>
-                  <MenuItem value='RAOUED | 2056'>RAOUED | 2056</MenuItem>
-                  <MenuItem value='EL MENZAH 6 | 2091'>EL MENZAH 6 | 2091</MenuItem>
-                </Select>
-              </FormControl>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-            <Grid item xs={12} sm={6}>
-              <p>Télèphone</p>
-              <TextField fullWidth value={Télephone} onChange={e => setTélephone(e.target.value)} />
-              <TextField fullWidth value={Télephone} onChange={e => setTélephone(e.target.value)} />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-            <Grid item xs={12} sm={6}>
-              <p>Fax</p>
-              <TextField fullWidth value={Fax} onChange={e => setFax(e.target.value)} />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-            <Grid item xs={12} sm={6}>
-              <p>Email</p>
-              <TextField fullWidth value={Email} onChange={e => setEmail(e.target.value)} />
-              <TextField fullWidth value={Email} onChange={e => setEmail(e.target.value)} />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-            <Grid item xs={12} sm={6}>
-              <p>Login</p>
-              <TextField fullWidth value={Login} onChange={e => setLogin(e.target.value)} />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <p>Nationalité</p>
-              <FormControl fullWidth>
-                <Select value={nationalite} onChange={e => setNationalite(e.target.value)}>
-                  <MenuItem value='Tunisienne'>Tunisienne</MenuItem>
-                  <MenuItem value='Française'>Française</MenuItem>
-                  <MenuItem value='canadienne'>canadienne</MenuItem>
-                </Select>
-              </FormControl>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <p>Langue</p>
-              <FormControl fullWidth>
-                <Select
-                  multiple
-                  value={language}
-                  onChange={handleSelectChange}
-                  id='stepper-custom-horizontal-personal-multiple-select'
-                  labelId='stepper-custom-horizontal-personal-multiple-select-label'
-                >
-                  <MenuItem value='English'>English</MenuItem>
-                  <MenuItem value='French'>French</MenuItem>
-                  <MenuItem value='Spanish'>Spanish</MenuItem>
-                  <MenuItem value='Portuguese'>Portuguese</MenuItem>
-                  <MenuItem value='Italian'>Italian</MenuItem>
-                  <MenuItem value='German'>German</MenuItem>
-                  <MenuItem value='Arabic'>Arabic</MenuItem>
-                </Select>
-                <Select
-                  multiple
-                  value={language}
-                  onChange={handleSelectChange}
-                  id='stepper-custom-horizontal-personal-multiple-select'
-                  labelId='stepper-custom-horizontal-personal-multiple-select-label'
-                >
-                  <MenuItem value='English'>English</MenuItem>
-                  <MenuItem value='French'>French</MenuItem>
-                  <MenuItem value='Spanish'>Spanish</MenuItem>
-                  <MenuItem value='Portuguese'>Portuguese</MenuItem>
-                  <MenuItem value='Italian'>Italian</MenuItem>
-                  <MenuItem value='German'>German</MenuItem>
-                  <MenuItem value='Arabic'>Arabic</MenuItem>
-                </Select>
-              </FormControl>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <p>Password</p>
-              <FormControl fullWidth>
-                <OutlinedInput
-                  value={state.password}
-                  onChange={handlePasswordChange('password')}
-                  type={state.showPassword ? 'text' : 'password'}
-                  endAdornment={
-                    <InputAdornment position='end'>
-                      <IconButton edge='end' onClick={handleClickShowPassword} onMouseDown={e => e.preventDefault()}>
-                      <IconButton edge='end' onClick={handleClickShowPassword} onMouseDown={e => e.preventDefault()}>
-                        <Icon icon={state.showPassword ? 'tabler:eye' : 'tabler:eye-off'} />
-                      </IconButton>
-                    </InputAdornment>
-                  }
-                />
-                  }
-                />
-              </FormControl>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-            <Grid item xs={12} sm={6}>
-              <p>Confirm Password</p>
-              <FormControl fullWidth>
-                <OutlinedInput
-                  value={state.password2}
-                  onChange={handleConfirmChange('password2')}
-                  type={state.showPassword2 ? 'text' : 'password'}
-                  type={state.showPassword2 ? 'text' : 'password'}
-                  endAdornment={
-                    <InputAdornment position='end'>
-                      <IconButton
-                        edge='end'
-                        onMouseDown={e => e.preventDefault()}
-                        onClick={handleClickShowConfirmPassword}
-                      >
-                        <Icon icon={state.showPassword2 ? 'tabler:eye' : 'tabler:eye-off'} />
-                      </IconButton>
-                    </InputAdornment>
-                  }
-                />
-              </FormControl>
-            </Grid>
-          </Fragment>
-        )
+          <MoreInfo
+            onSearch={(value: any): void => {
+              throw new Error('Function not implemented.');
+            }}
+          />
+        );
       case 4:
         return (
           <Fragment key={step}>
             <Grid item xs={12} sm={6}>
       case 4:
         return (
-          <Fragment key={step}>
-            <Grid item xs={12} sm={6}>
-              <p>Nom et prénom</p>
-              <TextField fullWidth value={username} onChange={e => setUsername(e.target.value)} />
-              <TextField fullWidth value={username} onChange={e => setUsername(e.target.value)} />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-            <Grid item xs={12} sm={6}>
-              <p>Position</p>
-              <FormControl fullWidth>
-                <Select value={Ville} onChange={e => setVille(e.target.value)}>
-                  <MenuItem value='PONT DE BIZERTE | 2061'>PONT DE BIZERTE | 2061</MenuItem>
-                  <MenuItem value='CHORFECH | 2057'>CHORFECH | 2057</MenuItem>
-                  <MenuItem value='SIDI THABET | 2020'>SIDI THABET | 2020</MenuItem>
-                  <MenuItem value='TUNIS CARTHAGE | 2035'>TUNIS CARTHAGE | 2035</MenuItem>
-                  <MenuItem value='RAOUED | 2056'>RAOUED | 2056</MenuItem>
-                  <MenuItem value='EL MENZAH 6 | 2091'>EL MENZAH 6 | 2091</MenuItem>
-                </Select>
-              </FormControl>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <FormControl fullWidth>
-                <Select value={Ville} onChange={e => setVille(e.target.value)}>
-                  <MenuItem value='PONT DE BIZERTE | 2061'>PONT DE BIZERTE | 2061</MenuItem>
-                  <MenuItem value='CHORFECH | 2057'>CHORFECH | 2057</MenuItem>
-                  <MenuItem value='SIDI THABET | 2020'>SIDI THABET | 2020</MenuItem>
-                  <MenuItem value='TUNIS CARTHAGE | 2035'>TUNIS CARTHAGE | 2035</MenuItem>
-                  <MenuItem value='RAOUED | 2056'>RAOUED | 2056</MenuItem>
-                  <MenuItem value='EL MENZAH 6 | 2091'>EL MENZAH 6 | 2091</MenuItem>
-                </Select>
-              </FormControl>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <p>Télèphone</p>
-              <TextField fullWidth value={Télephone_Plus} onChange={e => setTélephone_Plus(e.target.value)} />
-              <TextField fullWidth value={Télephone_Plus} onChange={e => setTélephone_Plus(e.target.value)} />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <p>Fax</p>
-              <TextField fullWidth value={Fax} onChange={e => setFax(e.target.value)} />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-            <Grid item xs={12} sm={6}>
-              <p>Fax</p>
-              <TextField fullWidth value={Fax} onChange={e => setFax(e.target.value)} />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <p>Email</p>
-              <TextField fullWidth value={Email_Plus} onChange={e => setEmail_Plus(e.target.value)} />
-              <TextField fullWidth value={Email_Plus} onChange={e => setEmail_Plus(e.target.value)} />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <p>Situation</p>
-              <Checkbox value={situation} onChange={e => setSituation(e.target.value)} />
-            </Grid>
-          </Fragment>
-        )
-              <p>Situation</p>
-              <Checkbox value={situation} onChange={e => setSituation(e.target.value)} />
-            </Grid>
-          </Fragment>
-        )
+          <AddContact
+            onSearch={(value: any): void => {
+              throw new Error('Function not implemented.');
+            }}
+          />
+        );
       default:
-        return 'Étape inconnue'
+        return 'Unknown Step';
     }
+  };
+
+  function validateStep(activeStep: number): boolean {
+    return true; // Add your validation logic here if needed
   }
+
   const renderContent = () => {
     if (activeStep === steps.length) {
       return (
@@ -698,7 +409,7 @@ const FormIndividual = () => {
         </form>
       )
     }
-  }
+  };
 
   return (
     <Card>
@@ -706,7 +417,7 @@ const FormIndividual = () => {
         <StepperWrapper>
           <Stepper activeStep={activeStep} connector={<Icon icon='tabler:chevron-right' />}>
             {steps.map((step, index) => {
-              const RenderAvatar = activeStep >= index ? CustomAvatar : Avatar
+              const RenderAvatar = activeStep >= index ? Avatar : Icon;
 
               return (
                 <Step key={index}>
@@ -742,7 +453,7 @@ const FormIndividual = () => {
         </DatePickerWrapper>
       </CardContent>
     </Card>
-  )
-}
+  );
+};
 
-export default FormIndividual
+export default FormIndividual;
