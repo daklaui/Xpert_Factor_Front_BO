@@ -47,7 +47,6 @@ const data = {
 const InfoIndividu = () => {
   if (data) {
     return (
-      <form onSubmit={e => e.preventDefault()}>
         <CardContent>
           <TabPanel sx={{ p: 0 }} value='info-individu'>
             <Grid container spacing={2}>
@@ -60,7 +59,6 @@ const InfoIndividu = () => {
             </Grid>
           </TabPanel>
         </CardContent>
-      </form>
     )
   } else {
     return null
