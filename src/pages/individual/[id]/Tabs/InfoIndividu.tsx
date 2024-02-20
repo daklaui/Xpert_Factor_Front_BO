@@ -1,8 +1,6 @@
-import CardContent from '@mui/material/CardContent'
-import TabPanel from '@mui/lab/TabPanel'
 import Grid from '@mui/material/Grid'
-import InfoCard from './components/InfoCard'
-import InfoItem from './components/InfoItem '
+import InfoCard from '../components/InfoCard'
+import InfoItem from '../components/InfoItem '
 
 const InfoCardInfoGenerale = ({ data }) => (
   <InfoCard title='Informations générales'>
@@ -47,18 +45,14 @@ const data = {
 const InfoIndividu = () => {
   if (data) {
     return (
-        <CardContent>
-          <TabPanel sx={{ p: 0 }} value='info-individu'>
-            <Grid container spacing={2}>
-              <Grid item xs={6}>
-                <InfoCardInfoGenerale data={data} />
-              </Grid>
-              <Grid item xs={6}>
-                <InfoCardInfoFiscales data={data} />
-              </Grid>
-            </Grid>
-          </TabPanel>
-        </CardContent>
+      <Grid container spacing={2}>
+        <Grid item xs={6}>
+          <InfoCardInfoGenerale data={data} />
+        </Grid>
+        <Grid item xs={6}>
+          <InfoCardInfoFiscales data={data} />
+        </Grid>
+      </Grid>
     )
   } else {
     return null
