@@ -5,4 +5,5 @@ export interface SelectInerface {
 export interface CustomSelectProps {
   onSearch: (value: any) => void
   labelText?: string
+  onAdherentSelect?: (selectedAdherent: any) => void
 }
