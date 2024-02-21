@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Grid, Typography, Card, CardHeader } from '@mui/material';
 
 import InfoAcheteur from './InfoAcheteur';
 import TableAcheteur from './TableAcheteur';
 
-const AjouterAcheteur = ({ }) => {
+const AjouterAcheteur = () => {
+  const [selectedAdherent, setSelectedAdherent] = useState(null);
 
   return (
     <>
@@ -16,13 +17,12 @@ const AjouterAcheteur = ({ }) => {
       <Grid container spacing={2}>
         <Grid item xs={6}>
           <Card>
-          <InfoAcheteur/>
+            <InfoAcheteur onAdherentSelect={setSelectedAdherent} />
           </Card>
         </Grid>
         <Grid item xs={6}>
           <Card>
-          <TableAcheteur />
-            
+            <TableAcheteur adherent={selectedAdherent} />
           </Card>
         </Grid>
       </Grid>
@@ -31,3 +31,4 @@ const AjouterAcheteur = ({ }) => {
 };
 
 export default AjouterAcheteur;
+
