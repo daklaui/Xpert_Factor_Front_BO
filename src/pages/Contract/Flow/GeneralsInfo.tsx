@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { Fragment } from 'react'
 import Grid from '@mui/material/Grid'
-import CustomTextField from 'src/SharedComponents/StyledTextField/StyledTextField '
 import Select from 'react-select'
 import SelectAdherent from 'src/shared-components/custom-select/SelectAdherentList'
 import { ReactDatePickerProps } from 'react-datepicker'
@@ -11,8 +10,14 @@ import { DateType } from 'src/types/forms/reactDatepickerTypes'
 
 import StyledDatePicker from './StyledInputs/StyledDatePicker'
 import StyledLabel from './StyledInputs/StyledLabel'
+import CustomTextField from 'src/shared-components/StyledTextField/StyledTextField '
 
-function GeneralsInfo({ popperPlacement }: { popperPlacement: ReactDatePickerProps['popperPlacement'] }) {
+interface GeneralsInfoProps {
+  popperPlacement: ReactDatePickerProps['popperPlacement']
+  onFormChange: (values: any) => void // Nouvelle prop pour la fonction de mise à jour du formulaire
+}
+
+function GeneralsInfo({ popperPlacement, onFormChange }: GeneralsInfoProps) {
   const [isClearable] = useState(true)
   const [date, setDate] = useState<DateType>(new Date())
 
@@ -21,10 +26,21 @@ function GeneralsInfo({ popperPlacement }: { popperPlacement: ReactDatePickerPro
     console.log('Selected value:', value)
   }
 
+  const handleInputChange = (name: string, value: any) => {
+    // Fonction pour mettre à jour le formulaire
+    onFormChange({ [name]: value })
+  }
+
   return (
     <Fragment>
       <Grid item sm={3}>
-        <CustomTextField fullWidth placeholder={'anis'} label='anis' name='anis' correctValue='anis' />
+        <CustomTextField
+          fullWidth
+          placeholder={'Numéro contract papier'}
+          label='Numéro contract papier'
+          name='NumContract'
+          onChange={(e: any) => handleInputChange('NumContract', e.target.value)}
+        />
       </Grid>
       <Grid item sm={3}>
         <StyledLabel>Type contrat </StyledLabel>
@@ -36,7 +52,7 @@ function GeneralsInfo({ popperPlacement }: { popperPlacement: ReactDatePickerPro
           placeholder={'Tapez le chiffres d affaires '}
           label='Chiffres d affaires'
           name='ChiffreDaffaire'
-          correctValue=''
+          onChange={(e: any) => handleInputChange('ChiffreDaffaire', e.target.value)}
         />
       </Grid>
       <Grid item sm={3}>
@@ -44,8 +60,8 @@ function GeneralsInfo({ popperPlacement }: { popperPlacement: ReactDatePickerPro
           fullWidth
           placeholder={'Factures transmises avec '}
           label='Factures transmises avec'
-          name='Factures transmises avec'
-          correctValue=''
+          name='FacturesTransmises'
+          onChange={(e: any) => handleInputChange('FacturesTransmises', e.target.value)}
         />
       </Grid>
       <Grid item sm={3}>
@@ -61,8 +77,8 @@ function GeneralsInfo({ popperPlacement }: { popperPlacement: ReactDatePickerPro
           fullWidth
           placeholder={'Tapez le Dont Export '}
           label='Dont Export'
-          name='Dont Export'
-          correctValue=''
+          name='DontExport'
+          onChange={(e: any) => handleInputChange('DontExport', e.target.value)}
         />
       </Grid>
 
@@ -71,8 +87,8 @@ function GeneralsInfo({ popperPlacement }: { popperPlacement: ReactDatePickerPro
           fullWidth
           placeholder={'Tapez le Nbr d acheteur prévus '}
           label='Nbr d acheteur prévus'
-          name="Nbr d 'acheteur prévus"
-          correctValue=''
+          name='NbrAchePrévus'
+          onChange={(e: any) => handleInputChange('NbrAchePrévus', e.target.value)}
         />
       </Grid>
 
@@ -96,17 +112,17 @@ function GeneralsInfo({ popperPlacement }: { popperPlacement: ReactDatePickerPro
           fullWidth
           placeholder={'Tapez le Dont dom '}
           label='Dont dom'
-          name='Dont dom'
-          correctValue=''
+          name='DontDom'
+          onChange={(e: any) => handleInputChange('DontDom', e.target.value)}
         />
       </Grid>
       <Grid item sm={3}>
         <CustomTextField
           fullWidth
-          placeholder={'Dont dom '}
-          label='Chiffres d affaires'
-          name='Dont dom'
-          correctValue=''
+          placeholder={'Nbr factures Prévues'}
+          label='Nbr factures Prévues'
+          name='NbFacturesPrévues'
+          onChange={(e: any) => handleInputChange('NbFacturesPrévues', e.target.value)}
         />
       </Grid>
       <Grid item sm={3}>
@@ -135,8 +151,8 @@ function GeneralsInfo({ popperPlacement }: { popperPlacement: ReactDatePickerPro
           fullWidth
           placeholder={'Limite de financement '}
           label='Limite de financement'
-          name='Limite de financement'
-          correctValue=''
+          name='LimiteDeFinancement'
+          onChange={(e: any) => handleInputChange('LimiteDeFinancement', e.target.value)}
         />
       </Grid>
       <Grid item sm={3}>
@@ -144,12 +160,13 @@ function GeneralsInfo({ popperPlacement }: { popperPlacement: ReactDatePickerPro
           fullWidth
           placeholder={"Nbr d'avoirs Prévus"}
           label="Nbr d'avoirs Prévus"
-          name="Nbr d'avoirs Prévus"
-          correctValue=''
+          name='NbrAvoirsPrévus'
+          onChange={(e: any) => handleInputChange('NbrAvoirsPrévus', e.target.value)}
         />
       </Grid>
 
       <Grid item sm={3}>
+        <StyledLabel>Date Démarrage</StyledLabel>
         <StyledDatePicker
           selected={date}
           id='basic-input'
@@ -164,8 +181,8 @@ function GeneralsInfo({ popperPlacement }: { popperPlacement: ReactDatePickerPro
           fullWidth
           placeholder={'Délai moyen de réglement (jour) '}
           label='Délai moyen de réglement (jour)'
-          name='Délai moyen de réglement (jour)'
-          correctValue=''
+          name='DélaiMoyenRéglement'
+          onChange={(e: any) => handleInputChange('DélaiMoyenRéglement', e.target.value)}
         />
       </Grid>
       <Grid item sm={3}>
@@ -173,8 +190,8 @@ function GeneralsInfo({ popperPlacement }: { popperPlacement: ReactDatePickerPro
           fullWidth
           placeholder={' Délai Max de règlement '}
           label=' Délai Max de règlement'
-          name=' Délai Max de règlement'
-          correctValue=''
+          name=' DélaiMaxRèglement'
+          onChange={(e: any) => handleInputChange('DélaiMaxRèglement', e.target.value)}
         />
       </Grid>
       <Grid item sm={3}></Grid>
@@ -182,10 +199,10 @@ function GeneralsInfo({ popperPlacement }: { popperPlacement: ReactDatePickerPro
       <Grid item sm={3}>
         <CustomTextField
           fullWidth
-          placeholder={' Délai Max de règlement '}
-          label=' Délai Max de règlement'
-          name=' Délai Max de règlement'
-          correctValue=''
+          placeholder={' Comm.Min Factoring '}
+          label=' Comm.Min Factoring'
+          name='CommMinFactoring'
+          onChange={(e: any) => handleInputChange('CommMinFactoring', e.target.value)}
         />
       </Grid>
       <Grid item sm={3}>
@@ -194,8 +211,8 @@ function GeneralsInfo({ popperPlacement }: { popperPlacement: ReactDatePickerPro
           fullWidth
           placeholder={'Nbr de remise Prévues '}
           label='Nbr de remise Prévues'
-          name='Nbr de remise Prévues'
-          correctValue=''
+          name='NbrDeRemisePrévues'
+          onChange={(e: any) => handleInputChange('NbrDeRemisePrévues', e.target.value)}
         />
       </Grid>
     </Fragment>

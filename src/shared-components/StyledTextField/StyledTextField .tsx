@@ -10,7 +10,7 @@ const StyledLabel = styled('label')({
   marginBottom: '110px',
 });
 
-const StyledTextField = styled(TextField)(({}) => ({
+const StyledTextField : any = styled(TextField)(({ fullWidth }: CustomTextFieldProps) => ({
   '& .MuiInputBase-root': {
     padding: '7px',
     height: '40px',
