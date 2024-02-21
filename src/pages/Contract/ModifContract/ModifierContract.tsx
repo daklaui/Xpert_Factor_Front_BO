@@ -260,98 +260,53 @@ const ModifierContract = () => {
             </Grid>
           </Fragment>
         )
-      case 1:
-        function handleRadioChange(_event: ChangeEvent<HTMLInputElement>, value: string): void {
-          throw new Error('Function not implemented.')
-        }
-
-        return <Fragment key={step}></Fragment>
-
-      default:
-        return 'Unknown Step'
     }
   }
   const renderContent = () => {
-    if (activeStep === steps.length) {
-      return (
-        <>
-          <Typography>All steps are completed!</Typography>
-          <Box sx={{ mt: 5, display: 'flex', justifyContent: 'flex-end' }}>
-            <Button size='large' variant='contained' onClick={handleReset}>
-              Reset
-            </Button>
-          </Box>
-        </>
-      )
-    } else {
-      return (
-        <form onSubmit={e => e.preventDefault()}>
-          <Grid container spacing={5}>
-            {getStepContent(activeStep)}
-            <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'space-between' }}>
-              <Button
-                size='large'
-                variant='outlined'
-                color='secondary'
-                disabled={activeStep === 0}
-                onClick={handleBack}
-              >
-                Back
-              </Button>
-              <Button size='large' variant='contained' onClick={handleNext}>
-                {activeStep === steps.length - 1 ? 'Submit' : 'Next'}
-              </Button>
-            </Grid>
-          </Grid>
-        </form>
-      )
-    }
-  }
+    return (
+      <Card>
+        <CardContent>
+          <StepperWrapper>
+            <Stepper activeStep={activeStep} connector={<Icon icon='tabler:chevron-right' />}>
+              {steps.map((step, index) => {
+                const RenderAvatar = activeStep >= index ? CustomAvatar : Avatar
 
-  return (
-    <Card>
-      <CardContent>
-        <StepperWrapper>
-          <Stepper activeStep={activeStep} connector={<Icon icon='tabler:chevron-right' />}>
-            {steps.map((step, index) => {
-              const RenderAvatar = activeStep >= index ? CustomAvatar : Avatar
-
-              return (
-                <Step key={index}>
-                  <StepLabel StepIconComponent={StepperCustomDot}>
-                    <div className='step-label'>
-                      <RenderAvatar
-                        variant='rounded'
-                        {...(activeStep >= index && { skin: 'light' })}
-                        {...(activeStep === index && { skin: 'filled' })}
-                        {...(activeStep >= index && { color: 'primary' })}
-                        sx={{
-                          ...(activeStep === index && { boxShadow: theme => theme.shadows[3] }),
-                          ...(activeStep > index && { color: theme => hexToRGBA(theme.palette.primary.main, 0.4) })
-                        }}
-                      >
-                        <Icon icon={step.icon} />
-                      </RenderAvatar>
-                      <div>
-                        <Typography className='step-title'>{step.title}</Typography>
-                        {/* <Typography className='step-subtitle'>{step.subtitle}</Typography> */}
+                return (
+                  <Step key={index}>
+                    <StepLabel StepIconComponent={StepperCustomDot}>
+                      <div className='step-label'>
+                        <RenderAvatar
+                          variant='rounded'
+                          {...(activeStep >= index && { skin: 'light' })}
+                          {...(activeStep === index && { skin: 'filled' })}
+                          {...(activeStep >= index && { color: 'primary' })}
+                          sx={{
+                            ...(activeStep === index && { boxShadow: theme => theme.shadows[3] }),
+                            ...(activeStep > index && { color: theme => hexToRGBA(theme.palette.primary.main, 0.4) })
+                          }}
+                        >
+                          <Icon icon={step.icon} />
+                        </RenderAvatar>
+                        <div>
+                          <Typography className='step-title'>{step.title}</Typography>
+                          {/* <Typography className='step-subtitle'>{step.subtitle}</Typography> */}
+                        </div>
                       </div>
-                    </div>
-                  </StepLabel>
-                </Step>
-              )
-            })}
-          </Stepper>
-        </StepperWrapper>
-      </CardContent>
-      <Divider sx={{ m: '0 !important' }} />
-      <CardContent>
-        <DatePickerWrapper sx={{ '& .react-datepicker-wrapper': { width: 'auto' } }}>
-          {renderContent()}
-        </DatePickerWrapper>
-      </CardContent>
-    </Card>
-  )
+                    </StepLabel>
+                  </Step>
+                )
+              })}
+            </Stepper>
+          </StepperWrapper>
+        </CardContent>
+        <Divider sx={{ m: '0 !important' }} />
+        <CardContent>
+          <DatePickerWrapper sx={{ '& .react-datepicker-wrapper': { width: 'auto' } }}>
+            {renderContent()}
+          </DatePickerWrapper>
+        </CardContent>
+      </Card>
+    )
+  }
 }
-
 export default ModifierContract

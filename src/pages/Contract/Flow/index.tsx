@@ -1,7 +1,7 @@
-import ModifierContract from '../ModifContract/ModifierContract'
+import Modif from '../ModifContract/Modif'
 
 const ContractFlow = () => {
-  return <ModifierContract />
+  return <Modif />
 }
 
 export default ContractFlow
