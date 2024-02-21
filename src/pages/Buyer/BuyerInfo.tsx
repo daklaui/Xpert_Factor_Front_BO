@@ -10,9 +10,7 @@ import CustomTextField from 'src/@core/components/mui/text-field'
 import SelectIndividus from 'src/shared-components/custom-select/SelectIndividuals'
 import SelectAdherent from 'src/shared-components/custom-select/SelectAdherentList'
 
-
-
-const InfoAcheteur = ({onAdherentSelect}) => {
+const BuyerInfo = ({onAdherentSelect}) => {
   const [date, setDate] = useState<DateType>(new Date())
   const [MontantFinancement, setMontantFinancement] = useState()
   const [MontantAssurance, setMontantAssurance] = useState()
@@ -104,4 +102,4 @@ const InfoAcheteur = ({onAdherentSelect}) => {
     </Card>
   )
 }
-export default InfoAcheteur
+export default BuyerInfo

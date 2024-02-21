@@ -1,4 +1,3 @@
-// mock data for adherents
 export const getAdherentsData = () => {
   return {
     AD1: [
