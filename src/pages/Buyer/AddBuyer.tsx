@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Grid, Typography, Card, CardHeader } from '@mui/material';
 
-import InfoAcheteur from './InfoAcheteur';
-import TableAcheteur from './TableAcheteur';
+import InfoAcheteur from './BuyerInfo';
+import TableAcheteur from './TableBuyer';
 
-const AjouterAcheteur = () => {
+const AddBuyer= () => {
   const [selectedAdherent, setSelectedAdherent] = useState(null);
 
   return (
@@ -30,5 +30,5 @@ const AjouterAcheteur = () => {
   );
 };
 
-export default AjouterAcheteur;
+export default AddBuyer;
 
