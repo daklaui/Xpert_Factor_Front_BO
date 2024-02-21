@@ -3,7 +3,7 @@ import AjouterAcheteur from "./AjouterAcheteur";
 
 const ConsultationAjouterAcheteur = () => {
 
-  return <AjouterAcheteur  />;
+  return <AjouterAcheteur/>;
 };
 
 export default ConsultationAjouterAcheteur;
