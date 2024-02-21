@@ -36,7 +36,7 @@ export const getGroupeSociete = async () => {
     { value: 'Ajouter groupe', label: 'Ajouter groupe' }
   ]
 
-  return { optionsActivite: mockOptions }
+  return { optionsGroupeSociete: mockOptions }
 }
 
 export const getVille = async () => {

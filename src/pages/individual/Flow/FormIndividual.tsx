@@ -42,7 +42,7 @@ import { styled } from '@mui/material/styles'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 
-import { Checkbox, FormControl, Grid, MenuItem } from '@mui/material'
+import { Checkbox, FormControl, FormHelperText, Grid, InputLabel, MenuItem } from '@mui/material'
 
 // ** Third Party Imports
 import toast from 'react-hot-toast'
@@ -62,28 +62,43 @@ import StepperWrapper from 'src/@core/styles/mui/stepper'
 
 import DatePicker from 'react-datepicker'
 
+// ** Custom Component Imports
+import CustomInput from './Form_Individual/PickersCustomInput'
+
 // ** Types
 import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker'
 import { DateType } from 'src/types/forms/reactDatepickerTypes'
+import Login from '@mui/icons-material/Login'
+import { date } from 'yup'
+import TVA from './Form_Individual/Steps/TVA'
+import AddContact from './Form_Individual/Steps/AddContact'
+import Bank from './Form_Individual/Steps/Bank'
+import MoreInfo from './Form_Individual/Steps/MoreInfo'
+import Company from './Form_Individual/Steps/Company'
 
-import StepperCustomDot from './Form_Individual/StepperCustomDot'
-import PickersComponent from './Form_Individual/PickersCustomInput'
-
-import CustomTextField from 'src/@core/components/mui/text-field'
-
-interface State {
-  password: string
-  password2: string
-  showPassword: boolean
-  showPassword2: boolean
-}
 const steps = [
-  { icon: 'tabler:building-community', title: 'Société' },
-  { icon: 'tabler:percentage', title: 'TVA ' },
-  { icon: 'tabler:building-bank', title: 'Banque ' },
-  { icon: 'tabler:user', title: "Plus d'information" },
-  { icon: 'tabler:user-plus', title: 'Ajouter contact' }
+  {
+    icon: 'tabler:home',
+    title: 'Détails Société',
+  },
+  {
+    icon: 'tabler:percentage',
+    title: 'TVA ',
+  },
+  {
+    icon: 'tabler:building-bank',
+    title: 'Banque ',
+  },
+  {
+    icon: 'tabler:user',
+    title: "Plus d'information",
+  },
+  {
+    icon: 'tabler:user-plus',
+    title: "Ajouter contact",
+  }
 ]
+
 const Step = styled(MuiStep)<StepProps>(({ theme }) => ({
   paddingLeft: theme.spacing(5),
   paddingRight: theme.spacing(5),
@@ -137,212 +152,14 @@ const FormIndividual = () => {
     switch (activeStep) {
       case 0:
         return (
-          // chane all the select list with react-select
-          <Fragment>
-            <Grid item xs={12} sm={6}>
-              <p>Forme juridique</p>
-            <Grid item xs={12} sm={6}>
-              <p>Forme juridique</p>
-              <FormControl fullWidth>
-                <Select value={juridique} onChange={e => setJuridique(e.target.value)}>
-                <Select value={juridique} onChange={e => setJuridique(e.target.value)}>
-                  <MenuItem value='Société à responsabilité limitée'>Société à responsabilité limitée</MenuItem>
-                  <MenuItem value='Société anonyme'>Société anonyme</MenuItem>
-                  <MenuItem value='Société unipersonnelle à responsabilité limitée'>
-                    Société unipersonnelle à responsabilité limitée
-                  </MenuItem>
-                  <MenuItem value='Société en nom collectif'>Société en nom collectif</MenuItem>
-                  <MenuItem value='Société en commandite simple'>Société en commandite simple</MenuItem>
-                  <MenuItem value='Société en participation'>Société en participation</MenuItem>
-                </Select>
-              </FormControl>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              {/* chane all the TextField with anis input */}
-              <CustomTextField
-                label={'Dénomination '}
-                name={'Denomination'}
-                placeholder={'Dénomination'}
-                value={dénomination}
-                onChange={e => setDenomination(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <p>Nom de commerce </p>
-              <TextField fullWidth value={nom_com} onChange={e => setNom_com(e.target.value)} />
-              <TextField fullWidth value={nom_com} onChange={e => setNom_com(e.target.value)} />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-            <Grid item xs={12} sm={6}>
-              <p>Register de commerce</p>
-              <TextField fullWidth value={reg_com} onChange={e => setRegistre_com(e.target.value)} />
-              <TextField fullWidth value={reg_com} onChange={e => setRegistre_com(e.target.value)} />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <p>Activité</p>
-              <FormControl fullWidth>
-                <Select value={activite} onChange={e => setActivite(e.target.value)}>
-                  <MenuItem value='ACTIVITE INCONNUE'>ACTIVITE INCONNUE</MenuItem>
-                  <MenuItem value='Culture de céréales'>Culture de céréales</MenuItem>
-                  <MenuItem value='Culture de fourrages'>Culture de fourrages</MenuItem>
-                  <MenuItem value='Culture de légumineuses et cultures industrielles'>
-                    Culture de légumineuses et cultures industrielles
-                  </MenuItem>
-                  <MenuItem value="Culture d'agrumes et vergers ">Culture d'agrumes et vergers</MenuItem>
-                </Select>
-              </FormControl>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-            <Grid item xs={12} sm={6}>
-              <p>Activité</p>
-              <FormControl fullWidth>
-                <Select value={activite} onChange={e => setActivite(e.target.value)}>
-                  <MenuItem value='ACTIVITE INCONNUE'>ACTIVITE INCONNUE</MenuItem>
-                  <MenuItem value='Culture de céréales'>Culture de céréales</MenuItem>
-                  <MenuItem value='Culture de fourrages'>Culture de fourrages</MenuItem>
-                  <MenuItem value='Culture de légumineuses et cultures industrielles'>
-                    Culture de légumineuses et cultures industrielles
-                  </MenuItem>
-                  <MenuItem value="Culture d'agrumes et vergers ">Culture d'agrumes et vergers</MenuItem>
-                </Select>
-              </FormControl>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <p>Lieu</p>
-              <TextField fullWidth value={lieu} onChange={e => setLieu(e.target.value)} />
-              <TextField fullWidth value={lieu} onChange={e => setLieu(e.target.value)} />
-            </Grid>
-            <Grid container alignItems='center' item xs={12} sm={6}>
-            <Grid container alignItems='center' item xs={12} sm={6}>
-              <p>Groupe de sociétés</p>
-              <RadioGroup row name='groupe-de-societes' onChange={handleRadioChange} value={grp_soc}>
-                <FormControlLabel value='Oui' control={<Radio />} label='Oui' />
-                <FormControlLabel value='Non' control={<Radio />} label='Non' />
-              </RadioGroup>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <p>Groupe de sociétés</p>
-              <FormControl fullWidth>
-                <Select value={grp_soc} onChange={e => setGroupeSocietes(e.target.value)} disabled={selectDisabled}>
-              <FormControl fullWidth>
-                <Select value={grp_soc} onChange={e => setGroupeSocietes(e.target.value)} disabled={selectDisabled}>
-                  <MenuItem value='Poulina'>Poulina</MenuItem>
-                  <MenuItem value='Test'>Test</MenuItem>
-                  <MenuItem value='Ajouter groupe'>Ajouter groupe</MenuItem>
-                </Select>
-              </FormControl>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              </FormControl>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <p>Date de création</p>
-              <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
-                <div>
-                  <DatePicker
-                    selected={date}
-                    onChange={(date: Date) => setDate(date)}
-                    customInput={<PickersComponent />}
-                  />
-                </div>
-              </Box>
-              <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
-                <div>
-                  <DatePicker selected={date} onChange={(date: Date) => setDate(date)} customInput={<CustomInput />} />
-                </div>
-              </Box>
-            </Grid>
-          </Fragment>
-        )
-        )
+          <Company
+            onSearch={(value: any): void => {
+              throw new Error('Function not implemented.');
+            }}
+          />
+        );
       case 1:
-        return (
-          <Fragment key={step}>
-            <Grid item xs={12} sm={6}>
-              <CustomTextField
-                label={'Code TVA '}
-                name={'Code_TVA'}
-                placeholder={'Code Tva'}
-                onChange={e => setCdTVA(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <p>Exonération TVA </p>
-              <RadioGroup row onChange={e => handleExonerationTVAChange(e)}>
-                <FormControlLabel value='Oui' control={<Radio />} label='Oui' />
-                <FormControlLabel value='Non' control={<Radio />} label='Non' />
-              </RadioGroup>
-            </Grid>
-            <Grid item xs={12} sm={6} disabled={exonerationDisabled}>
-              <p>Date Début Exonération TVA</p>
-              <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
-                <div>
-                  <DatePicker
-                    selected={dateDebutExonerationTVA}
-                    onChange={(date: Date) => setDateDebutExonerationTVA(date)}
-                    customInput={<PickersComponent />}
-                    disabled={exonerationDisabled}
-                  />
-                </div>
-              </Box>
-            </Grid>
-            <Grid item xs={12} sm={6} disabled={exonerationDisabled}>
-              <p>Date Fin Exonération TVA</p>
-              <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
-                <div>
-                  <DatePicker
-                    selected={dateFinExonerationTVA}
-                    onChange={(date: Date) => setDateFinExonerationTVA(date)}
-                    customInput={<PickersComponent />}
-                    disabled={exonerationDisabled}
-                  />
-                </div>
-              </Box>
-            </Grid>
-          </Fragment>
-        )
-
-          <Fragment key={step}>
-            <Grid item xs={12} sm={6}>
-              <p>Code TVA </p>
-              <TextField value={code_TVA} onChange={e => setCdTVA(e.target.value)} />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <p>Exonération TVA </p>
-              <RadioGroup row onChange={e => handleExonerationTVAChange(e)}>
-                <FormControlLabel value='Oui' control={<Radio />} label='Oui' />
-                <FormControlLabel value='Non' control={<Radio />} label='Non' />
-              </RadioGroup>
-            </Grid>
-            <Grid item xs={12} sm={6} disabled={exonerationDisabled}>
-              <p>Date Début Exonération TVA</p>
-              <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
-                <div>
-                  <DatePicker
-                    selected={dateDebutExonerationTVA}
-                    onChange={(date: Date) => setDateDebutExonerationTVA(date)}
-                    customInput={<CustomInput />}
-                    disabled={exonerationDisabled}
-                  />
-                </div>
-              </Box>
-            </Grid>
-            <Grid item xs={12} sm={6} disabled={exonerationDisabled}>
-              <p>Date Fin Exonération TVA</p>
-              <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
-                <div>
-                  <DatePicker
-                    selected={dateFinExonerationTVA}
-                    onChange={(date: Date) => setDateFinExonerationTVA(date)}
-                    customInput={<CustomInput />}
-                    disabled={exonerationDisabled}
-                  />
-                </div>
-              </Box>
-            </Grid>
-          </Fragment>
-        )
-
+        return <TVA />;
       case 2:
         return <Bank />;
       case 3:
@@ -437,6 +254,7 @@ const FormIndividual = () => {
                       </RenderAvatar>
                       <div>
                         <Typography className='step-title'>{step.title}</Typography>
+                        
                       </div>
                     </div>
                   </StepLabel>
