@@ -1,6 +1,6 @@
 import React from 'react'
 import { useForm, Controller } from 'react-hook-form'
-import CustomTextField from '../../../SharedComponents/StyledTextField/StyledTextField '
+import CustomTextField from 'src/@core/components/mui/text-field'
 
 function Index() {
   const { control, handleSubmit } = useForm()
