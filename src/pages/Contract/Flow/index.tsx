@@ -1,4 +1,4 @@
-import Edit from '../ModifContract/Edit'
+import Edit from '../EditContract/Edit'
 
 const ContractFlow = () => {
   return <Edit />
