@@ -1,5 +1,5 @@
 import React from 'react'
-import { Checkbox, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
 import CustomTextField from 'src/@core/components/mui/text-field'
 
 const tableRows = [
@@ -21,10 +21,9 @@ const FondsDeGarantie = () => {
         <TableHead>
           <TableRow>
             <TableCell>Libellé FDG</TableCell>
-            <TableCell>Taux FDG </TableCell>
+            <TableCell>Taux FDG</TableCell>
             <TableCell>Montant Max FDG</TableCell>
             <TableCell>Montant Min FDG</TableCell>
-
             <TableCell align='center'></TableCell>
           </TableRow>
         </TableHead>
@@ -32,34 +31,58 @@ const FondsDeGarantie = () => {
         <TableBody sx={{ '& .MuiTableRow-root:nth-of-type(odd)': { backgroundColor: 'action.hover' } }}>
           {tableRows.map(row => (
             <TableRow key={row.id}>
-              <TableCell>Bon de Commande </TableCell>
-              <CustomTextField sx={{ fontSize: '1rem' }}>{row.TauxFDG}</CustomTextField>
-              <CustomTextField sx={{ fontSize: '1rem' }}>{row.MontantMaxFDG}</CustomTextField>
-              <CustomTextField sx={{ fontSize: '1rem' }}>{row.MontantMinFDG}</CustomTextField>
+              <TableCell>Bon de Commande</TableCell>
+              <TableCell>
+                <CustomTextField sx={{ fontSize: '1rem' }}>{row.TauxFDG}</CustomTextField>
+              </TableCell>
+              <TableCell>
+                <CustomTextField sx={{ fontSize: '1rem' }}>{row.MontantMaxFDG}</CustomTextField>
+              </TableCell>
+              <TableCell>
+                <CustomTextField sx={{ fontSize: '1rem' }}>{row.MontantMinFDG}</CustomTextField>
+              </TableCell>
             </TableRow>
           ))}
           {tableRows.map(row => (
             <TableRow key={row.id}>
-              <TableCell>Caution </TableCell>
-              <CustomTextField sx={{ fontSize: '1rem' }}>{row.TauxFDG}</CustomTextField>
-              <CustomTextField sx={{ fontSize: '1rem' }}>{row.MontantMaxFDG}</CustomTextField>
-              <CustomTextField sx={{ fontSize: '1rem' }}>{row.MontantMinFDG}</CustomTextField>
+              <TableCell>Caution</TableCell>
+              <TableCell>
+                <CustomTextField sx={{ fontSize: '1rem' }}>{row.TauxFDG}</CustomTextField>
+              </TableCell>
+              <TableCell>
+                <CustomTextField sx={{ fontSize: '1rem' }}>{row.MontantMaxFDG}</CustomTextField>
+              </TableCell>
+              <TableCell>
+                <CustomTextField sx={{ fontSize: '1rem' }}>{row.MontantMinFDG}</CustomTextField>
+              </TableCell>
             </TableRow>
           ))}
           {tableRows.map(row => (
             <TableRow key={row.id}>
-              <TableCell>Facture </TableCell>
-              <CustomTextField sx={{ fontSize: '1rem' }}>{row.TauxFDG}</CustomTextField>
-              <CustomTextField sx={{ fontSize: '1rem' }}>{row.MontantMaxFDG}</CustomTextField>
-              <CustomTextField sx={{ fontSize: '1rem' }}>{row.MontantMinFDG}</CustomTextField>
+              <TableCell>Facture</TableCell>
+              <TableCell>
+                <CustomTextField sx={{ fontSize: '1rem' }}>{row.TauxFDG}</CustomTextField>
+              </TableCell>
+              <TableCell>
+                <CustomTextField sx={{ fontSize: '1rem' }}>{row.MontantMaxFDG}</CustomTextField>
+              </TableCell>
+              <TableCell>
+                <CustomTextField sx={{ fontSize: '1rem' }}>{row.MontantMinFDG}</CustomTextField>
+              </TableCell>
             </TableRow>
           ))}
           {tableRows.map(row => (
             <TableRow key={row.id}>
-              <TableCell>Marché </TableCell>
-              <CustomTextField sx={{ fontSize: '1rem' }}>{row.TauxFDG}</CustomTextField>
-              <CustomTextField sx={{ fontSize: '1rem' }}>{row.MontantMaxFDG}</CustomTextField>
-              <CustomTextField sx={{ fontSize: '1rem' }}>{row.MontantMinFDG}</CustomTextField>
+              <TableCell>Marché</TableCell>
+              <TableCell>
+                <CustomTextField sx={{ fontSize: '1rem' }}>{row.TauxFDG}</CustomTextField>
+              </TableCell>
+              <TableCell>
+                <CustomTextField sx={{ fontSize: '1rem' }}>{row.MontantMaxFDG}</CustomTextField>
+              </TableCell>
+              <TableCell>
+                <CustomTextField sx={{ fontSize: '1rem' }}>{row.MontantMinFDG}</CustomTextField>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

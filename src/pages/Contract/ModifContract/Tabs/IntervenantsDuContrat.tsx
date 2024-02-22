@@ -1,18 +1,17 @@
 import React from 'react'
-import { Checkbox, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
 
 const tableRows = [
   {
     id: 1,
     NomIntervenant: 'achmoataz',
-    Role: '',
+    Role: 'ACH',
     RéférenceIntervenant: 'X1',
-    RéférenceAdhérent: '8',
-    checked: true
+    RéférenceAdhérent: '8'
   }
 ]
 
-const IntervenatsDuContrat = () => {
+const IntervenantsDuContrat = () => {
   return (
     <TableContainer>
       <Table sx={{ minWidth: 500 }}>
@@ -32,9 +31,6 @@ const IntervenatsDuContrat = () => {
               <TableCell sx={{ fontSize: '1rem' }}>{row.Role}</TableCell>
               <TableCell sx={{ fontSize: '1rem' }}>{row.RéférenceIntervenant}</TableCell>
               <TableCell sx={{ fontSize: '1rem' }}>{row.RéférenceAdhérent}</TableCell>
-              <TableCell align='center' sx={{ pt: '0 !important', pb: '0 !important' }}>
-                <Checkbox defaultChecked={row.checked} />
-              </TableCell>
             </TableRow>
           ))}
         </TableBody>
@@ -43,4 +39,4 @@ const IntervenatsDuContrat = () => {
   )
 }
 
-export default IntervenatsDuContrat
+export default IntervenantsDuContrat
