@@ -5,22 +5,18 @@ import TabContext from '@mui/lab/TabContext'
 
 import ModifierContract from './Tabs/ModifierContract'
 import FondsDeGarantie from './Tabs/FondsDeGarantie'
+import IntervenantsDuContrat from './Tabs/IntervenantsDuContrat'
 import FraisDePaiement from './Tabs/FraisDePaiement'
 import FraisDivers from './Tabs/FraisDivers'
 import CommissionsDeFactoring from './Tabs/commissionsDeFactoring'
-import InteretDeFinancement from './Tabs/IntéretDeFinancement'
+import InteretDeFinancement from './Tabs/InteretDeFinancement'
 
 import { Button, CardHeader, Typography, Grid } from '@mui/material'
 import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker'
 import { useState } from 'react'
-import IntervenantsDuContrat from './Tabs/IntervenantsDuContrat'
 
-//import { useRouter } from 'next/router'//
-
-const Modif = () => {
+const Edit = () => {
   const [value, setValue] = useState('ModifierContract')
-
-  //const router = useRouter()//
 
   const handleTabsChange = (event: React.ChangeEvent<any>, newValue: string) => {
     setValue(newValue)
@@ -81,9 +77,9 @@ const Modif = () => {
                 label={<div style={{ display: 'flex', alignItems: 'center' }}>Intervenants Du Contrat</div>}
               />
             </TabList>
-            {value === ' ModifierContract' && <ModifierContract />}
+            {value === 'ModifierContract' && <ModifierContract />}
             {value === 'FondsDeGarantie' && <FondsDeGarantie />}
-            {value === ' FraisDePaiement ' && <FraisDePaiement />}
+            {value === 'FraisDePaiement' && <FraisDePaiement />}
             {value === 'FraisDivers' && <FraisDivers />}
             {value === 'CommissionsDeFactoring' && <CommissionsDeFactoring />}
             {value === 'IntervenantsDuContrat' && <IntervenantsDuContrat />}
@@ -94,4 +90,4 @@ const Modif = () => {
     </>
   )
 }
-export default Modif
+export default Edit

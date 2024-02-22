@@ -1,6 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
 import CustomTextField from 'src/@core/components/mui/text-field'
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
+import { DateType } from 'src/types/forms/reactDatepickerTypes'
+import CustomInput from '../PickersCustomInput'
 
 const tableRows = [
   {
@@ -16,6 +20,8 @@ const tableRows = [
 ]
 
 const InteretDeFinancement = () => {
+  const [date, setDate] = useState<DateType>(new Date())
+
   return (
     <TableContainer>
       <Table sx={{ minWidth: 500 }}>
@@ -31,7 +37,6 @@ const InteretDeFinancement = () => {
             <TableCell align='center'></TableCell>
           </TableRow>
         </TableHead>
-
         <TableBody sx={{ '& .MuiTableRow-root:nth-of-type(odd)': { backgroundColor: 'action.hover' } }}>
           {tableRows.map(row => (
             <TableRow key={row.id}>
@@ -52,7 +57,7 @@ const InteretDeFinancement = () => {
                 <CustomTextField sx={{ fontSize: '1rem' }}>{row.Major}</CustomTextField>
               </TableCell>
               <TableCell>
-                <CustomTextField sx={{ fontSize: '1rem' }}>{row.DateDébutValidité}</CustomTextField>
+                <DatePicker selected={date} onChange={(date: Date) => setDate(date)} customInput={<CustomInput />} />
               </TableCell>
             </TableRow>
           ))}
