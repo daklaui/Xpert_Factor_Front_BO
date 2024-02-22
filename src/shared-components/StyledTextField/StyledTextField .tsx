@@ -17,7 +17,6 @@ const CustomTextField: React.FC<CustomTextFieldProps> = ({ label, name, placehol
   return (
     <>
       <StyledLabel htmlFor={name}>{label}</StyledLabel>
-      <br />
       <StyledTextField
         name={name}
         placeholder={placeholder || label}

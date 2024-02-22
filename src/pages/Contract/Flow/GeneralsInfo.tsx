@@ -14,7 +14,8 @@ import CustomTextField from 'src/shared-components/StyledTextField/StyledTextFie
 
 interface GeneralsInfoProps {
   popperPlacement: ReactDatePickerProps['popperPlacement']
-  onFormChange: (values: any) => void // Nouvelle prop pour la fonction de mise à jour du formulaire
+  onFormChange: (values: any) => void 
+  fullWidth?: boolean;
 }
 
 function GeneralsInfo({ popperPlacement, onFormChange }: GeneralsInfoProps) {
@@ -43,7 +44,7 @@ function GeneralsInfo({ popperPlacement, onFormChange }: GeneralsInfoProps) {
         />
       </Grid>
       <Grid item sm={3}>
-        <StyledLabel>Type contrat </StyledLabel>
+        <>Type contrat </>
         <Select className='basic-single' classNamePrefix='select' isClearable={isClearable} name='color' />
       </Grid>
       <Grid item sm={3}>
@@ -65,11 +66,11 @@ function GeneralsInfo({ popperPlacement, onFormChange }: GeneralsInfoProps) {
         />
       </Grid>
       <Grid item sm={3}>
-        <StyledLabel> Status Contract </StyledLabel>
+        <StyledLabel htmlFor='Status Contract'> Status Contract </StyledLabel>
         <Select className='basic-single' classNamePrefix='select' isClearable={isClearable} name='color' />
       </Grid>
       <Grid item sm={3}>
-        <StyledLabel>Devise</StyledLabel>
+        <StyledLabel htmlFor='Devise'>Devise</StyledLabel>
         <SelectAdherent onSearch={handleSearch} labelText='Select Adherent' />
       </Grid>
       <Grid item sm={3}>
@@ -93,12 +94,12 @@ function GeneralsInfo({ popperPlacement, onFormChange }: GeneralsInfoProps) {
       </Grid>
 
       <Grid item sm={3}>
-        <StyledLabel> Nom Adhérent </StyledLabel>
+        <StyledLabel htmlFor='Nom Adhérent'> Nom Adhérent </StyledLabel>
         <SelectIndividus onSearch={handleSearch} labelText='Select Adherent' />
       </Grid>
 
       <Grid item sm={3}>
-        <StyledLabel> Date de résiliation </StyledLabel>
+        <StyledLabel htmlFor='Date de résiliation'> Date de résiliation </StyledLabel>
         <StyledDatePicker
           selected={date}
           id='basic-input'
@@ -126,7 +127,7 @@ function GeneralsInfo({ popperPlacement, onFormChange }: GeneralsInfoProps) {
         />
       </Grid>
       <Grid item sm={3}>
-        <StyledLabel> Date Signature </StyledLabel>
+        <StyledLabel htmlFor='Date Signature'> Date Signature </StyledLabel>
         <StyledDatePicker
           selected={date}
           id='basic-input'
@@ -137,7 +138,7 @@ function GeneralsInfo({ popperPlacement, onFormChange }: GeneralsInfoProps) {
       </Grid>
 
       <Grid item sm={3}>
-        <StyledLabel>Date de prochaine révision</StyledLabel>
+        <StyledLabel htmlFor='Date de prochaine révision'>Date de prochaine révision</StyledLabel>
         <StyledDatePicker
           selected={date}
           id='basic-input'
@@ -166,7 +167,7 @@ function GeneralsInfo({ popperPlacement, onFormChange }: GeneralsInfoProps) {
       </Grid>
 
       <Grid item sm={3}>
-        <StyledLabel>Date Démarrage</StyledLabel>
+        <StyledLabel htmlFor='Date Démarrage'>Date Démarrage</StyledLabel>
         <StyledDatePicker
           selected={date}
           id='basic-input'
@@ -206,7 +207,7 @@ function GeneralsInfo({ popperPlacement, onFormChange }: GeneralsInfoProps) {
         />
       </Grid>
       <Grid item sm={3}>
-        <StyledLabel> Nbr de remise Prévues </StyledLabel>
+        <StyledLabel htmlFor='Nbr de remise Prévues'> Nbr de remise Prévues </StyledLabel>
         <CustomTextField
           fullWidth
           placeholder={'Nbr de remise Prévues '}
