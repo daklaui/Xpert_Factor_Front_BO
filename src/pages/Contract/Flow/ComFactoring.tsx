@@ -38,6 +38,45 @@ const StyledTableRow = styled(TableRow)<TableRowProps>(({ theme }) => ({
   }
 }))
 
+const data = [
+  {
+    type: 'Facture',
+    placeholders: [
+      '% du FDG',
+      'Commission de Factoring',
+      'Montant Minimum Contrat de factoring',
+      'Montant Minimum Document de factoring'
+    ]
+  },
+  {
+    type: 'Bon de Commande',
+    placeholders: [
+      '% du FDG',
+      'Commission de Factoring',
+      'Montant Minimum Contrat de factoring',
+      'Montant Minimum Document de factoring'
+    ]
+  },
+  {
+    type: 'Marché',
+    placeholders: [
+      '% du FDG',
+      'Commission de Factoring',
+      'Montant Minimum Contrat de factoring',
+      'Montant Minimum Document de factoring'
+    ]
+  },
+  {
+    type: 'Caution',
+    placeholders: [
+      '% du FDG',
+      'Commission de Factoring',
+      'Montant Minimum Contrat de factoring',
+      'Montant Minimum Document de factoring'
+    ]
+  }
+]
+
 interface ComFactoringProps {
   popperPlacement: ReactDatePickerProps['popperPlacement']
   onFormChange: (values: any) => void
@@ -46,6 +85,9 @@ interface ComFactoringProps {
 function ComFactoring({ popperPlacement, onFormChange }: ComFactoringProps) {
   const [date, setDate] = useState<DateType>(new Date())
   const [isChecked, setIsChecked] = useState(false)
+  const [isCheckedR1, setIsCheckedR1] = useState(false)
+  const [isCheckedR2, setIsCheckedR2] = useState(false)
+  const [isCheckedR3, setIsCheckedR3] = useState(false)
 
   const handleInputChange = (name: string, value: any) => {
     onFormChange({ [name]: value })
@@ -58,173 +100,31 @@ function ComFactoring({ popperPlacement, onFormChange }: ComFactoringProps) {
         <Table aria-label='customized table'>
           <TableHead>
             <TableRow>
-              <StyledTableCell style={{ borderTopLeftRadius: '20%' }}> Type </StyledTableCell>
-              <StyledTableCell align='left'> % du FDG</StyledTableCell>
-              <StyledTableCell align='left'> % du Commission de Factoring</StyledTableCell>
-              <StyledTableCell align='left'> Montant Minimum Contrat de factoring</StyledTableCell>
-              <StyledTableCell align='left' style={{ borderTopRightRadius: '20%' }}>
-                {' '}
-                Montant Minimum Document de factoring
-              </StyledTableCell>
+              <StyledTableCell style={{ borderTopLeftRadius: '10%' }}>Type</StyledTableCell>
+              {data[0].placeholders.map((placeholder, index) => (
+                <StyledTableCell align='left' key={index}>
+                  {placeholder}
+                </StyledTableCell>
+              ))}
             </TableRow>
           </TableHead>
           <TableBody>
-            <StyledTableRow>
-              <StyledTableCell component='th'>Facture</StyledTableCell>
-              <StyledTableCell align='left'>
-                <CustomTextField
-                  fullWidth
-                  placeholder={''}
-                  name={''}
-                  label={''}
-                  onChange={(e: any) => handleInputChange('pourcentageFDGFacture', e.target.value)}
-                />
-              </StyledTableCell>
-              <StyledTableCell align='left'>
-                <CustomTextField
-                  fullWidth
-                  placeholder={'pourcentageCommissionFacture'}
-                  name={''}
-                  label={''}
-                  onChange={(e: any) => handleInputChange('pourcentageCommissionFacture', e.target.value)}
-                />
-              </StyledTableCell>
-              <StyledTableCell align='left'>
-                <CustomTextField
-                  fullWidth
-                  placeholder={'pourcentageCommissionFacture'}
-                  name={''}
-                  label={''}
-                  onChange={(e: any) => handleInputChange('pourcentageCommissionFacture', e.target.value)}
-                />
-              </StyledTableCell>
-              <StyledTableCell align='left'>
-                <CustomTextField
-                  fullWidth
-                  placeholder={'pourcentageCommissionFacture'}
-                  name={''}
-                  label={''}
-                  onChange={(e: any) => handleInputChange('pourcentageCommissionFacture', e.target.value)}
-                />
-              </StyledTableCell>
-            </StyledTableRow>
-            <StyledTableRow>
-              <StyledTableCell component='th'>Bon de Commande </StyledTableCell>
-              <StyledTableCell align='left'>
-                <CustomTextField
-                  fullWidth
-                  placeholder={'pourcentageCommissionFacture'}
-                  name={''}
-                  label={''}
-                  onChange={(e: any) => handleInputChange('pourcentageCommissionFacture', e.target.value)}
-                />
-              </StyledTableCell>
-              <StyledTableCell align='left'>
-                <CustomTextField
-                  fullWidth
-                  placeholder={'pourcentageCommissionFacture'}
-                  name={''}
-                  label={''}
-                  onChange={(e: any) => handleInputChange('pourcentageCommissionFacture', e.target.value)}
-                />
-              </StyledTableCell>
-              <StyledTableCell align='left'>
-                <CustomTextField
-                  fullWidth
-                  placeholder={'pourcentageCommissionFacture'}
-                  name={''}
-                  label={''}
-                  onChange={(e: any) => handleInputChange('pourcentageCommissionFacture', e.target.value)}
-                />
-              </StyledTableCell>
-              <StyledTableCell align='left'>
-                <CustomTextField
-                  fullWidth
-                  placeholder={'pourcentageCommissionFacture'}
-                  name={''}
-                  label={''}
-                  onChange={(e: any) => handleInputChange('pourcentageCommissionFacture', e.target.value)}
-                />
-              </StyledTableCell>
-            </StyledTableRow>
-            <StyledTableRow>
-              <StyledTableCell component='th'>Marché</StyledTableCell>
-              <StyledTableCell align='left'>
-                <CustomTextField
-                  fullWidth
-                  placeholder={'pourcentageCommissionFacture'}
-                  name={''}
-                  label={''}
-                  onChange={(e: any) => handleInputChange('pourcentageCommissionFacture', e.target.value)}
-                />
-              </StyledTableCell>
-              <StyledTableCell align='left'>
-                <CustomTextField
-                  fullWidth
-                  placeholder={'pourcentageCommissionFacture'}
-                  name={''}
-                  label={''}
-                  onChange={(e: any) => handleInputChange('pourcentageCommissionFacture', e.target.value)}
-                />
-              </StyledTableCell>
-              <StyledTableCell align='left'>
-                <CustomTextField
-                  fullWidth
-                  placeholder={'pourcentageCommissionFacture'}
-                  name={''}
-                  label={''}
-                  onChange={(e: any) => handleInputChange('pourcentageCommissionFacture', e.target.value)}
-                />
-              </StyledTableCell>
-              <StyledTableCell align='left'>
-                <CustomTextField
-                  fullWidth
-                  placeholder={'pourcentageCommissionFacture'}
-                  name={''}
-                  label={''}
-                  onChange={(e: any) => handleInputChange('pourcentageCommissionFacture', e.target.value)}
-                />
-              </StyledTableCell>
-            </StyledTableRow>
-            <StyledTableRow>
-              <StyledTableCell component='th'>Caution</StyledTableCell>
-              <StyledTableCell align='left'>
-                <CustomTextField
-                  fullWidth
-                  placeholder={'pourcentageCommissionFacture'}
-                  name={''}
-                  label={''}
-                  onChange={(e: any) => handleInputChange('pourcentageCommissionFacture', e.target.value)}
-                />
-              </StyledTableCell>
-              <StyledTableCell align='left'>
-                <CustomTextField
-                  fullWidth
-                  placeholder={'pourcentageCommissionFacture'}
-                  name={''}
-                  label={''}
-                  onChange={(e: any) => handleInputChange('pourcentageCommissionFacture', e.target.value)}
-                />
-              </StyledTableCell>
-              <StyledTableCell align='left'>
-                <CustomTextField
-                  fullWidth
-                  placeholder={'pourcentageCommissionFacture'}
-                  name={''}
-                  label={''}
-                  onChange={(e: any) => handleInputChange('pourcentageCommissionFacture', e.target.value)}
-                />
-              </StyledTableCell>
-              <StyledTableCell align='left'>
-                <CustomTextField
-                  fullWidth
-                  placeholder={'pourcentageCommissionFacture'}
-                  name={''}
-                  label={''}
-                  onChange={(e: any) => handleInputChange('pourcentageCommissionFacture', e.target.value)}
-                />
-              </StyledTableCell>
-            </StyledTableRow>
+            {data.map((row, rowIndex) => (
+              <StyledTableRow key={rowIndex}>
+                <StyledTableCell component='th'>{row.type}</StyledTableCell>
+                {row.placeholders.map((placeholder, cellIndex) => (
+                  <StyledTableCell align='left' key={cellIndex}>
+                    <CustomTextField
+                      fullWidth
+                      placeholder={placeholder}
+                      name={`${row.type}${cellIndex}`}
+                      label={''}
+                      onChange={e => handleInputChange(`${row.type}${cellIndex}`, e.target.value)}
+                    />
+                  </StyledTableCell>
+                ))}
+              </StyledTableRow>
+            ))}
           </TableBody>
         </Table>
       </TableContainer>
@@ -248,10 +148,11 @@ function ComFactoring({ popperPlacement, onFormChange }: ComFactoringProps) {
               <StyledTableCell component='th'>Cheque/Virement </StyledTableCell>
               <StyledTableCell align='left'>
                 <Checkbox
+                  name='chequeFDG'
                   checked={isChecked} // utilisez l'état approprié ici
                   onChange={e => {
                     setIsChecked(e.target.checked)
-                    handleInputChange('chequeVirement', e.target.checked.toString())
+                    handleInputChange('chequeFDG', e.target.checked.toString())
                   }}
                 />
               </StyledTableCell>
@@ -261,37 +162,38 @@ function ComFactoring({ popperPlacement, onFormChange }: ComFactoringProps) {
               <StyledTableCell align='left'>
                 <CustomTextField
                   fullWidth
-                  placeholder={'pourcentageCommissionFacture'}
-                  name={''}
+                  placeholder={''}
+                  name={'ChequeTauxMarge'}
                   label={''}
-                  onChange={(e: any) => handleInputChange('pourcentageCommissionFacture', e.target.value)}
+                  onChange={(e: any) => handleInputChange('ChequeTauxMarge', e.target.value)}
                 />
               </StyledTableCell>
               <StyledTableCell align='left'>
                 <CustomTextField
                   fullWidth
-                  placeholder={'pourcentageCommissionFacture'}
-                  name={''}
+                  placeholder={''}
+                  name={'ChequeDelaiMax'}
                   label={''}
-                  onChange={(e: any) => handleInputChange('pourcentageCommissionFacture', e.target.value)}
+                  onChange={(e: any) => handleInputChange('ChequeDelaiMax', e.target.value)}
                 />
               </StyledTableCell>
               <StyledTableCell align='left'>
                 <Checkbox
-                  checked={isChecked} // utilisez l'état approprié ici
+                  name='ChequePrecomter'
+                  checked={isCheckedR1}
                   onChange={e => {
-                    setIsChecked(e.target.checked)
-                    handleInputChange('chequeVirement', e.target.checked.toString())
+                    setIsCheckedR1(e.target.checked)
+                    handleInputChange('ChequePrecomter', e.target.checked.toString())
                   }}
                 />
               </StyledTableCell>
               <StyledTableCell align='left'>
                 <CustomTextField
                   fullWidth
-                  placeholder={'pourcentageCommissionFacture'}
-                  name={''}
+                  placeholder={''}
+                  name={'ChequeInteretMajore'}
                   label={''}
-                  onChange={(e: any) => handleInputChange('pourcentageCommissionFacture', e.target.value)}
+                  onChange={(e: any) => handleInputChange('ChequeInteretMajore', e.target.value)}
                 />
               </StyledTableCell>
               <StyledTableCell align='left'>
@@ -308,10 +210,11 @@ function ComFactoring({ popperPlacement, onFormChange }: ComFactoringProps) {
               <StyledTableCell component='th'>Billet à Ordre </StyledTableCell>
               <StyledTableCell align='left'>
                 <Checkbox
-                  checked={isChecked}
+                  name='BilletFDG'
+                  checked={isCheckedR2}
                   onChange={e => {
-                    setIsChecked(e.target.checked)
-                    handleInputChange('chequeVirement', e.target.checked.toString())
+                    setIsCheckedR2(e.target.checked)
+                    handleInputChange('BilletFDG', e.target.checked.toString())
                   }}
                 />
               </StyledTableCell>
@@ -321,37 +224,38 @@ function ComFactoring({ popperPlacement, onFormChange }: ComFactoringProps) {
               <StyledTableCell align='left'>
                 <CustomTextField
                   fullWidth
-                  placeholder={'pourcentageCommissionFacture'}
-                  name={''}
+                  placeholder={''}
+                  name={'BilletTauxMarge'}
                   label={''}
-                  onChange={(e: any) => handleInputChange('pourcentageCommissionFacture', e.target.value)}
+                  onChange={(e: any) => handleInputChange('BilletTauxMarge', e.target.value)}
                 />
               </StyledTableCell>
               <StyledTableCell align='left'>
                 <CustomTextField
                   fullWidth
-                  placeholder={'pourcentageCommissionFacture'}
-                  name={''}
+                  placeholder={''}
+                  name={'BilletDelai'}
                   label={''}
-                  onChange={(e: any) => handleInputChange('pourcentageCommissionFacture', e.target.value)}
+                  onChange={(e: any) => handleInputChange('BilletDelai', e.target.value)}
                 />
               </StyledTableCell>
               <StyledTableCell align='left'>
                 <Checkbox
-                  checked={isChecked}
+                  name='BilletPrecomter'
+                  checked={isCheckedR3}
                   onChange={e => {
-                    setIsChecked(e.target.checked)
-                    handleInputChange('chequeVirement', e.target.checked.toString())
+                    setIsCheckedR3(e.target.checked)
+                    handleInputChange('BilletPrecomter', e.target.checked.toString())
                   }}
                 />
               </StyledTableCell>
               <StyledTableCell align='left'>
                 <CustomTextField
                   fullWidth
-                  placeholder={'pourcentageCommissionFacture'}
-                  name={''}
+                  placeholder={''}
+                  name={'BilletInteretMajore'}
                   label={''}
-                  onChange={(e: any) => handleInputChange('pourcentageCommissionFacture', e.target.value)}
+                  onChange={(e: any) => handleInputChange('BilletInteretMajore', e.target.value)}
                 />
               </StyledTableCell>
               <StyledTableCell align='left'>
