@@ -113,9 +113,7 @@ const Index = ({ popperPlacement }: { popperPlacement: ReactDatePickerProps['pop
         <>
           <Typography>All steps are completed!</Typography>
           <Box sx={{ mt: 4, display: 'flex', justifyContent: 'flex-end' }}>
-            <Button size='large' variant='contained'>
-              Reset
-            </Button>
+            
           </Box>
         </>
       )
