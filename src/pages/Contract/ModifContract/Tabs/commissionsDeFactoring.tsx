@@ -1,5 +1,5 @@
 import React from 'react'
-import { Checkbox, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
 import CustomTextField from 'src/@core/components/mui/text-field'
 
 const tableRows = [
@@ -14,7 +14,7 @@ const tableRows = [
   }
 ]
 
-const CommissionDeFactoring = () => {
+const CommissionsDeFactoring = () => {
   return (
     <TableContainer>
       <Table sx={{ minWidth: 500 }}>
@@ -33,48 +33,58 @@ const CommissionDeFactoring = () => {
           {tableRows.map(row => (
             <TableRow key={row.id}>
               <TableCell>BC </TableCell>
-              <CustomTextField sx={{ fontSize: '1rem' }}>{row.TauxCommission}</CustomTextField>
-              <CustomTextField sx={{ fontSize: '1rem' }}>{row.MontantMinDocument}</CustomTextField>
-              <CustomTextField sx={{ fontSize: '1rem' }}>{row.MontantMinContart}</CustomTextField>
-
-              <TableCell align='center' sx={{ pt: '0 !important', pb: '0 !important' }}>
-                <Checkbox defaultChecked={row.checked} />
+              <TableCell>
+                <CustomTextField sx={{ fontSize: '1rem' }}>{row.TauxCommission}</CustomTextField>
+              </TableCell>
+              <TableCell>
+                <CustomTextField sx={{ fontSize: '1rem' }}>{row.MontantMinDocument}</CustomTextField>
+              </TableCell>
+              <TableCell>
+                <CustomTextField sx={{ fontSize: '1rem' }}>{row.MontantMinContart}</CustomTextField>
               </TableCell>
             </TableRow>
           ))}
           {tableRows.map(row => (
             <TableRow key={row.id}>
               <TableCell>C </TableCell>
-              <CustomTextField sx={{ fontSize: '1rem' }}>{row.TauxCommission}</CustomTextField>
-              <CustomTextField sx={{ fontSize: '1rem' }}>{row.MontantMinDocument}</CustomTextField>
-              <CustomTextField sx={{ fontSize: '1rem' }}>{row.MontantMinContart}</CustomTextField>
-
-              <TableCell align='center' sx={{ pt: '0 !important', pb: '0 !important' }}>
-                <Checkbox defaultChecked={row.checked} />
+              <TableCell>
+                <CustomTextField sx={{ fontSize: '1rem' }}>{row.TauxCommission}</CustomTextField>
+              </TableCell>
+              <TableCell>
+                {' '}
+                <CustomTextField sx={{ fontSize: '1rem' }}>{row.MontantMinDocument}</CustomTextField>
+              </TableCell>
+              <TableCell>
+                {' '}
+                <CustomTextField sx={{ fontSize: '1rem' }}>{row.MontantMinContart}</CustomTextField>
               </TableCell>
             </TableRow>
           ))}
           {tableRows.map(row => (
             <TableRow key={row.id}>
               <TableCell>F </TableCell>
-              <CustomTextField sx={{ fontSize: '1rem' }}>{row.TauxCommission}</CustomTextField>
-              <CustomTextField sx={{ fontSize: '1rem' }}>{row.MontantMinDocument}</CustomTextField>
-              <CustomTextField sx={{ fontSize: '1rem' }}>{row.MontantMinContart}</CustomTextField>
-
-              <TableCell align='center' sx={{ pt: '0 !important', pb: '0 !important' }}>
-                <Checkbox defaultChecked={row.checked} />
+              <TableCell>
+                <CustomTextField sx={{ fontSize: '1rem' }}>{row.TauxCommission}</CustomTextField>
+              </TableCell>
+              <TableCell>
+                <CustomTextField sx={{ fontSize: '1rem' }}>{row.MontantMinDocument}</CustomTextField>
+              </TableCell>
+              <TableCell>
+                <CustomTextField sx={{ fontSize: '1rem' }}>{row.MontantMinContart}</CustomTextField>
               </TableCell>
             </TableRow>
           ))}
           {tableRows.map(row => (
             <TableRow key={row.id}>
               <TableCell>M </TableCell>
-              <CustomTextField sx={{ fontSize: '1rem' }}>{row.TauxCommission}</CustomTextField>
-              <CustomTextField sx={{ fontSize: '1rem' }}>{row.MontantMinDocument}</CustomTextField>
-              <CustomTextField sx={{ fontSize: '1rem' }}>{row.MontantMinContart}</CustomTextField>
-
-              <TableCell align='center' sx={{ pt: '0 !important', pb: '0 !important' }}>
-                <Checkbox defaultChecked={row.checked} />
+              <TableCell>
+                <CustomTextField sx={{ fontSize: '1rem' }}>{row.TauxCommission}</CustomTextField>
+              </TableCell>
+              <TableCell>
+                <CustomTextField sx={{ fontSize: '1rem' }}>{row.MontantMinDocument}</CustomTextField>
+              </TableCell>
+              <TableCell>
+                <CustomTextField sx={{ fontSize: '1rem' }}>{row.MontantMinContart}</CustomTextField>
               </TableCell>
             </TableRow>
           ))}
@@ -84,4 +94,4 @@ const CommissionDeFactoring = () => {
   )
 }
 
-export default CommissionDeFactoring
+export default CommissionsDeFactoring

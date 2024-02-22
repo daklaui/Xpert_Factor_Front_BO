@@ -1,19 +1,19 @@
-import { useEffect, useState } from 'react'
 import Tab from '@mui/material/Tab'
 import Card from '@mui/material/Card'
 import TabList from '@mui/lab/TabList'
 import TabContext from '@mui/lab/TabContext'
 
-import ModifierContract from './ModifierContract'
+import ModifierContract from './Tabs/ModifierContract'
 import FondsDeGarantie from './Tabs/FondsDeGarantie'
 import FraisDePaiement from './Tabs/FraisDePaiement'
 import FraisDivers from './Tabs/FraisDivers'
-import CommissionDeFactoring from './Tabs/commissionsDeFactoring'
+import CommissionsDeFactoring from './Tabs/commissionsDeFactoring'
 import InteretDeFinancement from './Tabs/IntéretDeFinancement'
-import IntervenantsDuContrat from './Tabs/IntervenantsDuContrat'
 
 import { Button, CardHeader, Typography, Grid } from '@mui/material'
 import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker'
+import { useState } from 'react'
+import IntervenantsDuContrat from './Tabs/IntervenantsDuContrat'
 
 //import { useRouter } from 'next/router'//
 
@@ -34,7 +34,7 @@ const Modif = () => {
             Contrat
           </Typography>
           <Grid item>
-            <Button variant='contained'>Modifier </Button>
+            <Button variant='contained'>Exporter </Button>
             <Button variant='contained' sx={{ marginLeft: '8px' }}>
               Liste des contrat
             </Button>
@@ -66,7 +66,7 @@ const Modif = () => {
               />
               <Tab
                 value='FraisDePaiement'
-                label={<div style={{ display: 'flex', alignItems: 'center' }}>Frais De paiement</div>}
+                label={<div style={{ display: 'flex', alignItems: 'center' }}>Frais De Paiement</div>}
               />
               <Tab
                 value='CommissionsDeFactoring'
@@ -81,12 +81,12 @@ const Modif = () => {
                 label={<div style={{ display: 'flex', alignItems: 'center' }}>Intervenants Du Contrat</div>}
               />
             </TabList>
-            {value === 'ModifierContract' && <ModifierContract />}
+            {value === ' ModifierContract' && <ModifierContract />}
             {value === 'FondsDeGarantie' && <FondsDeGarantie />}
             {value === ' FraisDePaiement ' && <FraisDePaiement />}
             {value === 'FraisDivers' && <FraisDivers />}
-            {value === 'CommissionDeFactoring' && <CommissionDeFactoring />}
-            {value === 'IntervenantsDuContract' && <IntervenantsDuContrat />}
+            {value === 'CommissionsDeFactoring' && <CommissionsDeFactoring />}
+            {value === 'IntervenantsDuContrat' && <IntervenantsDuContrat />}
             {value === 'InteretDeFinancement' && <InteretDeFinancement />}
           </TabContext>
         </Card>
