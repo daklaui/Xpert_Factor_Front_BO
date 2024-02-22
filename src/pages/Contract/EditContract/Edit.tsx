@@ -3,27 +3,27 @@ import Card from '@mui/material/Card'
 import TabList from '@mui/lab/TabList'
 import TabContext from '@mui/lab/TabContext'
 
-import ModifierContract from './Tabs/ModifierContract'
 import FondsDeGarantie from './Tabs/FondsDeGarantie'
 import IntervenantsDuContrat from './Tabs/IntervenantsDuContrat'
 import FraisDePaiement from './Tabs/FraisDePaiement'
 import FraisDivers from './Tabs/FraisDivers'
 import CommissionsDeFactoring from './Tabs/commissionsDeFactoring'
 import InteretDeFinancement from './Tabs/InteretDeFinancement'
+import EditDetails from './Tabs/EditDetails'
 
 import { Button, CardHeader, Typography, Grid } from '@mui/material'
 import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker'
 import { useState } from 'react'
 
 const Edit = () => {
-  const [value, setValue] = useState('ModifierContract')
+  const [value, setValue] = useState('EditDetails')
 
   const handleTabsChange = (event: React.ChangeEvent<any>, newValue: string) => {
     setValue(newValue)
   }
 
   return (
-    <>
+    <Grid>
       <DatePickerWrapper sx={{ '& .react-datepicker-wrapper': { width: 'auto' } }}>
         <Grid container alignItems='center' justifyContent='space-between'>
           <Typography variant='h2' component='div' sx={{ mb: 2 }}>
@@ -49,7 +49,7 @@ const Edit = () => {
               }}
             >
               <Tab
-                value='ModifierContract'
+                value='EditDetails'
                 label={<div style={{ display: 'flex', alignItems: 'center' }}>Modifier Contrat</div>}
               />
               <Tab
@@ -77,7 +77,7 @@ const Edit = () => {
                 label={<div style={{ display: 'flex', alignItems: 'center' }}>Intervenants Du Contrat</div>}
               />
             </TabList>
-            {value === 'ModifierContract' && <ModifierContract />}
+            {value === 'EditDetails' && <EditDetails />}
             {value === 'FondsDeGarantie' && <FondsDeGarantie />}
             {value === 'FraisDePaiement' && <FraisDePaiement />}
             {value === 'FraisDivers' && <FraisDivers />}
@@ -87,7 +87,7 @@ const Edit = () => {
           </TabContext>
         </Card>
       </DatePickerWrapper>
-    </>
+    </Grid>
   )
 }
 export default Edit
