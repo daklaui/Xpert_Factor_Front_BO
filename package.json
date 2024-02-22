@@ -33,7 +33,11 @@
     "@mui/material": "^5.15.10",
     "@mui/system": "5.12.1",
     "@mui/x-data-grid": "5.17.18",
+<<<<<<< HEAD
     "@popperjs/core": "^2.11.7",
+=======
+    "@popperjs/core": "2.11.7",
+>>>>>>> dbfb9e274c0325b31c34f36fce7a87353e15c5ef
     "@reduxjs/toolkit": "1.9.5",
     "apexcharts-clevision": "3.28.5",
     "axios": "1.4.0",
