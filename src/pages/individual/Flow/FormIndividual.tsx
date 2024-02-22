@@ -1,30 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useState, Fragment } from 'react';
-import { styled } from '@mui/material/styles';
-import Stepper from '@mui/material/Stepper';
-import MuiStep from '@mui/material/Step';
-import StepLabel from '@mui/material/StepLabel';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Divider from '@mui/material/Divider';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Avatar from '@mui/material/Avatar';
-import { hexToRGBA } from 'src/@core/utils/hex-to-rgba';
-import toast from 'react-hot-toast';
-import Icon from 'src/@core/components/icon';
-import StepperCustomDot from './Form_Individual/StepperCustomDot';
-import StepperWrapper from 'src/@core/styles/mui/stepper';
-import DatePicker from 'react-datepicker';
-import CustomInput from './Form_Individual/PickersCustomInput';
-import Company from './Form_Individual/Steps/Company';
-import TVA from './Form_Individual/Steps/TVA';
-import Bank from './Form_Individual/Steps/Bank';
-import MoreInfo from './Form_Individual/Steps/MoreInfo';
-import AddContact from './Form_Individual/Steps/AddContact';
-import { Grid } from '@mui/material';
-import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker';
+// ** React Imports
+import { ChangeEvent, Fragment, useState } from 'react'
 
 // ** MUI Imports
 import Avatar from '@mui/material/Avatar'
@@ -52,6 +28,7 @@ import Icon from 'src/@core/components/icon'
 
 // ** Custom Components Imports
 import CustomAvatar from 'src/@core/components/mui/avatar'
+import StepperCustomDot from './Form_Individual/StepperCustomDot'
 
 // ** Util Import
 import { hexToRGBA } from 'src/@core/utils/hex-to-rgba'
@@ -123,15 +100,16 @@ const Step = styled(MuiStep)<StepProps>(({ theme }) => ({
   '&.Mui-completed + svg': {
     color: theme.palette.primary.main
   }
-}));
+}))
 
 const FormIndividual = () => {
-  const [activeStep, setActiveStep] = useState<number>(0);
-
+  // ** States 
+  const [activeStep, setActiveStep] = useState<number>(0)  
+  
+  
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
-
   const handleNext = () => {
     const isStepValid = validateStep(activeStep);
 
@@ -143,19 +121,48 @@ const FormIndividual = () => {
       }
     }
   };
-
+  
+  
   const handleReset = () => {
-    setActiveStep(0);
-  };
+    setRIB('')
+    setJuridique('')
+    setTVA('')
+    setCdTVA('')
+    setDenomination('')
+    setNom_com('')
+    setRegistre_com('')
+    setLieu('')
+    setGroupeSocietes('')
+    setActivite('')
+    setEmail('')
+    setEmail_Plus('')
+    setSituation('')
+    setNationalite('')
+    setLanguage([]);
+    setAdresse('')
+    setVille('')
+    setUsername('')
+    setBanque('')
+    setAgence('')
+    setTélephone('')
+    setTélephone_Plus('')
+    setFax('')
+    setLogin('')
+    setActiveStep(0)
+  
+  }
 
+  const handleSearchCompany = (value: any): void => {
+    // Implement your search logic here, for example:
+    console.log('Search value:', value);
+   
+  }
   const getStepContent = (activeStep: number): JSX.Element | string => {
     switch (activeStep) {
       case 0:
         return (
           <Company
-            onSearch={(value: any): void => {
-              throw new Error('Function not implemented.');
-            }}
+            onSearch={handleSearchCompany}
           />
         );
       case 1:
@@ -165,28 +172,24 @@ const FormIndividual = () => {
       case 3:
         return (
           <MoreInfo
-            onSearch={(value: any): void => {
-              throw new Error('Function not implemented.');
-            }}
+             onSearch={handleSearchCompany}
           />
         );
       case 4:
         return (
           <AddContact
-            onSearch={(value: any): void => {
-              throw new Error('Function not implemented.');
-            }}
+             onSearch={handleSearchCompany}
           />
         );
       default:
         return 'Unknown Step';
     }
   };
-
+  
   function validateStep(activeStep: number): boolean {
-    return true; // Add your validation logic here if needed
+    // Add your validation logic here if needed
+    return true;
   }
-
   const renderContent = () => {
     if (activeStep === steps.length) {
       return (
@@ -222,7 +225,7 @@ const FormIndividual = () => {
         </form>
       )
     }
-  };
+  }
 
   return (
     <Card>
@@ -230,7 +233,7 @@ const FormIndividual = () => {
         <StepperWrapper>
           <Stepper activeStep={activeStep} connector={<Icon icon='tabler:chevron-right' />}>
             {steps.map((step, index) => {
-              const RenderAvatar = activeStep >= index ? Avatar : Icon;
+              const RenderAvatar = activeStep >= index ? CustomAvatar : Avatar
 
               return (
                 <Step key={index}>
@@ -267,7 +270,107 @@ const FormIndividual = () => {
         </DatePickerWrapper>
       </CardContent>
     </Card>
-  );
-};
+  )
+}
 
-export default FormIndividual;
+export default FormIndividual
+
+function setRIB(arg0: string) {
+  throw new Error('Function not implemented.')
+}
+
+function setJuridique(arg0: string) {
+  throw new Error('Function not implemented.')
+}
+
+function setTVA(arg0: string) {
+  throw new Error('Function not implemented.')
+}
+
+function setCdTVA(arg0: string) {
+  throw new Error('Function not implemented.')
+}
+
+function setDenomination(arg0: string) {
+  throw new Error('Function not implemented.')
+}
+
+function setNom_com(arg0: string) {
+  throw new Error('Function not implemented.')
+}
+
+function setRegistre_com(arg0: string) {
+  throw new Error('Function not implemented.')
+}
+
+function setLieu(arg0: string) {
+  throw new Error('Function not implemented.')
+}
+
+function setGroupeSocietes(arg0: string) {
+  throw new Error('Function not implemented.')
+}
+
+function setActivite(arg0: string) {
+  throw new Error('Function not implemented.')
+}
+
+function setEmail(arg0: string) {
+  throw new Error('Function not implemented.')
+}
+
+function setEmail_Plus(arg0: string) {
+  throw new Error('Function not implemented.')
+}
+
+function setSituation(arg0: string) {
+  throw new Error('Function not implemented.')
+}
+
+function setNationalite(arg0: string) {
+  throw new Error('Function not implemented.')
+}
+
+function setLanguage(arg0: never[]) {
+  throw new Error('Function not implemented.')
+}
+
+function setAdresse(arg0: string) {
+  throw new Error('Function not implemented.')
+}
+
+function setVille(arg0: string) {
+  throw new Error('Function not implemented.')
+}
+
+function setUsername(arg0: string) {
+  throw new Error('Function not implemented.')
+}
+
+function setBanque(arg0: string) {
+  throw new Error('Function not implemented.')
+}
+
+function setAgence(arg0: string) {
+  throw new Error('Function not implemented.')
+}
+
+function setTélephone(arg0: string) {
+  throw new Error('Function not implemented.')
+}
+
+function setTélephone_Plus(arg0: string) {
+  throw new Error('Function not implemented.')
+}
+
+function setFax(arg0: string) {
+  throw new Error('Function not implemented.')
+}
+
+function setLogin(arg0: string) {
+  throw new Error('Function not implemented.')
+}
+
+function setDate(date: Date): void {
+  throw new Error('Function not implemented.')
+}        
