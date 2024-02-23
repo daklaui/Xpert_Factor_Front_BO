@@ -1,9 +1,13 @@
 export interface PickerProps {
   label?: string
   readOnly?: boolean
+  label?: string
+  readOnly?: boolean
 }
 
 export interface State {
+  password: string
+  showPassword: boolean
   password: string
   showPassword: boolean
 }
@@ -14,9 +18,4 @@ export interface SelectInerface {
 export interface CustomSelectProps {
   onSearch: (value: any) => void
   labelText?: string
-}
-export interface CompanyData {
-  RIB: string
-  Agency: string
-  Bank: string
 }

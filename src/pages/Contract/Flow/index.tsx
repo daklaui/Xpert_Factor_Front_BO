@@ -29,6 +29,7 @@ import OtherCommets from './OtherCommets'
 import ComFactoring from './ComFactoring'
 import { Avatar } from '@mui/material'
 import { hexToRGBA } from 'src/@core/utils/hex-to-rgba'
+import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker'
 
 const steps = [
   {
@@ -112,9 +113,7 @@ const Index = ({ popperPlacement }: { popperPlacement: ReactDatePickerProps['pop
       return (
         <>
           <Typography>All steps are completed!</Typography>
-          <Box sx={{ mt: 4, display: 'flex', justifyContent: 'flex-end' }}>
-            
-          </Box>
+          <Box sx={{ mt: 4, display: 'flex', justifyContent: 'flex-end' }}></Box>
         </>
       )
     } else {
@@ -185,7 +184,11 @@ const Index = ({ popperPlacement }: { popperPlacement: ReactDatePickerProps['pop
         </Stepper>
       </CardContent>
       <Divider sx={{ m: '0 !important' }} />
-      <CardContent>{renderContent()}</CardContent>
+      <CardContent>
+        <DatePickerWrapper sx={{ '& .react-datepicker-wrapper': { width: 'auto' } }}>
+          {renderContent()}
+        </DatePickerWrapper>
+      </CardContent>
     </Card>
   )
 }
