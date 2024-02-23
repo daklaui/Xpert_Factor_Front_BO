@@ -59,7 +59,7 @@ const Step = styled(MuiStep)<StepProps>(({ theme }) => ({
     paddingRight: 0
   },
   '& .MuiStepLabel-iconContainer': {
-    display: 'none'
+    display: ''
   },
   '& .step-subtitle': {
     color: `${theme.palette.text.disabled} !important`
@@ -78,6 +78,7 @@ const Step = styled(MuiStep)<StepProps>(({ theme }) => ({
 const Index = ({ popperPlacement }: { popperPlacement: ReactDatePickerProps['popperPlacement'] }) => {
   const [activeStep, setActiveStep] = useState<number>(0)
   const [formValues, setFormValues] = useState<any>({})
+  const [, setActiveIcon] = useState<string>(steps[0].icon);
 
   const handleBack = () => {
     setActiveStep(prevActiveStep => prevActiveStep - 1)
@@ -107,6 +108,14 @@ const Index = ({ popperPlacement }: { popperPlacement: ReactDatePickerProps['pop
         return 'Unknown Step'
     }
   }
+
+  const handleIconClick = (icon: string) => {
+    const stepIndex = steps.findIndex(step => step.icon === icon);
+    if (stepIndex !== -1) {
+      setActiveStep(stepIndex);
+      setActiveIcon(icon);
+    }
+  };
 
   const renderContent = () => {
     if (activeStep === steps.length) {
@@ -154,10 +163,10 @@ const Index = ({ popperPlacement }: { popperPlacement: ReactDatePickerProps['pop
       <CardContent>
         <Stepper activeStep={activeStep} connector={<Icon icon='tabler:chevron-right' />}>
           {steps.map((step, index) => {
-            const RenderAvatar = activeStep >= index ? CustomAvatar : Avatar
+            const RenderAvatar = activeStep >= index ? CustomAvatar : Avatar;
 
             return (
-              <Step key={index}>
+              <Step key={index} onClick={() => handleIconClick(step.icon)}> {/* Ajout du gestionnaire d'événements onClick */}
                 <StepLabel StepIconComponent={StepperCustomDot}>
                   <div className='step-label'>
                     <RenderAvatar
@@ -179,7 +188,7 @@ const Index = ({ popperPlacement }: { popperPlacement: ReactDatePickerProps['pop
                   </div>
                 </StepLabel>
               </Step>
-            )
+            );
           })}
         </Stepper>
       </CardContent>
