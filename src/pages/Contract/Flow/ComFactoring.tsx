@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { Fragment } from 'react'
 import Grid from '@mui/material/Grid'
-import Select from 'react-select'
 import CustomInput from './PickersCustomInput'
+import CustomSelect from './StyledInputs/CustomSelect'
 
 import Table from '@mui/material/Table'
 import TableHead from '@mui/material/TableHead'
@@ -21,7 +21,7 @@ import CustomTextField from 'src/shared-components/StyledTextField/StyledTextFie
 const StyledTableCell = styled(TableCell)<TableCellProps>(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     color: theme.palette.common.white,
-    backgroundColor: '#28c76f'
+    backgroundColor: theme.palette.primary.main
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14
@@ -157,7 +157,7 @@ function ComFactoring({ popperPlacement, onFormChange }: ComFactoringProps) {
                 />
               </StyledTableCell>
               <StyledTableCell align='left'>
-                <Select />
+                <CustomSelect />
               </StyledTableCell>
               <StyledTableCell align='left'>
                 <CustomTextField
@@ -219,7 +219,7 @@ function ComFactoring({ popperPlacement, onFormChange }: ComFactoringProps) {
                 />
               </StyledTableCell>
               <StyledTableCell align='left'>
-                <Select />
+                <CustomSelect />
               </StyledTableCell>
               <StyledTableCell align='left'>
                 <CustomTextField
