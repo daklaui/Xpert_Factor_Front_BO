@@ -56,23 +56,23 @@ import Company from './Form_Individual/Steps/Company'
 const steps = [
   {
     icon: 'tabler:home',
-    title: 'Détails Société',
+    title: 'Détails Société'
   },
   {
     icon: 'tabler:percentage',
-    title: 'TVA ',
+    title: 'TVA '
   },
   {
     icon: 'tabler:building-bank',
-    title: 'Banque ',
+    title: 'Banque '
   },
   {
     icon: 'tabler:user',
-    title: "Plus d'information",
+    title: "Plus d'information"
   },
   {
     icon: 'tabler:user-plus',
-    title: "Ajouter contact",
+    title: 'Ajouter contact'
   }
 ]
 
@@ -103,26 +103,24 @@ const Step = styled(MuiStep)<StepProps>(({ theme }) => ({
 }))
 
 const FormIndividual = () => {
-  // ** States 
-  const [activeStep, setActiveStep] = useState<number>(0)  
-  
-  
+  // ** States
+  const [activeStep, setActiveStep] = useState<number>(0)
+
   const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
+    setActiveStep(prevActiveStep => prevActiveStep - 1)
+  }
   const handleNext = () => {
-    const isStepValid = validateStep(activeStep);
+    const isStepValid = validateStep(activeStep)
 
     if (isStepValid) {
-      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+      setActiveStep(prevActiveStep => prevActiveStep + 1)
 
       if (activeStep === steps.length - 1) {
-        toast.success('Formulaire soumis');
+        toast.success('Formulaire soumis')
       }
     }
-  };
-  
-  
+  }
+
   const handleReset = () => {
     setRIB('')
     setJuridique('')
@@ -138,7 +136,7 @@ const FormIndividual = () => {
     setEmail_Plus('')
     setSituation('')
     setNationalite('')
-    setLanguage([]);
+    setLanguage([])
     setAdresse('')
     setVille('')
     setUsername('')
@@ -149,50 +147,32 @@ const FormIndividual = () => {
     setFax('')
     setLogin('')
     setActiveStep(0)
-  
   }
 
   const handleSearchCompany = (value: any): void => {
     // Implement your search logic here, for example:
-    console.log('Search value:', value);
-   
+    console.log('Search value:', value)
   }
   const getStepContent = (activeStep: number): JSX.Element | string => {
     switch (activeStep) {
       case 0:
-        return (
-          <Company
-            onSearch={handleSearchCompany}
-          />
-        );
+        return <Company onSearch={handleSearchCompany} />
       case 1:
-        return <TVA />;
+        return <TVA />
       case 2:
-        return <Bank />;
+        return <Bank />
       case 3:
-        return (
-          <MoreInfo
-             onSearch={handleSearchCompany}
-          />
-        );
+        return <MoreInfo onSearch={handleSearchCompany} />
       case 4:
-        return (
-          <Fragment key={step}>
-            <Grid item xs={12} sm={6}>
-      case 4:
-        return (
-          <AddContact
-             onSearch={handleSearchCompany}
-          />
-        );
+        return <AddContact onSearch={handleSearchCompany} />
       default:
-        return 'Unknown Step';
+        return 'Unknown Step'
     }
-  };
-  
+  }
+
   function validateStep(activeStep: number): boolean {
     // Add your validation logic here if needed
-    return true;
+    return true
   }
   const renderContent = () => {
     if (activeStep === steps.length) {
@@ -257,7 +237,6 @@ const FormIndividual = () => {
                       </RenderAvatar>
                       <div>
                         <Typography className='step-title'>{step.title}</Typography>
-                        
                       </div>
                     </div>
                   </StepLabel>
@@ -377,4 +356,4 @@ function setLogin(arg0: string) {
 
 function setDate(date: Date): void {
   throw new Error('Function not implemented.')
-}        
+}

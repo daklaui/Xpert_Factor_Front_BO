@@ -6,32 +6,17 @@ import { Grid, RadioGroup, FormControlLabel, Radio, Box } from '@mui/material'
 import { getJuridique, getActivite, getGroupeSociete } from '../mock'
 import { CustomSelectProps, SelectInerface } from '../interface/FormIndividual.interface'
 import CustomTextField from 'src/@core/components/mui/text-field'
-import React, { useState, Fragment, useEffect } from 'react'
-import DatePicker from 'react-datepicker'
-import Select from 'react-select'
-import 'react-datepicker/dist/react-datepicker.css'
-import { Grid, RadioGroup, FormControlLabel, Radio, Box } from '@mui/material'
-import { getJuridique, getActivite, getGroupeSociete } from '../mock'
-import { CustomSelectProps, SelectInerface } from '../interface/FormIndividual.interface'
-import CustomTextField from 'src/@core/components/mui/text-field'
 
 // ** Custom Component Imports
-import CustomInput from '../PickersCustomInput'
 import CustomInput from '../PickersCustomInput'
 
 const Company = ({ onSearch }: CustomSelectProps) => {
   const [optionsJuridique, setOptionsJuridique] = useState<SelectInerface[]>([])
   const [statusValueJuridique, setStatusValueJuridique] = useState('')
-  const [optionsJuridique, setOptionsJuridique] = useState<SelectInerface[]>([])
-  const [statusValueJuridique, setStatusValueJuridique] = useState('')
 
   const [optionsActivite, setOptionsActivite] = useState<SelectInerface[]>([])
   const [statusValueActivite, setStatusValueActivite] = useState('')
-  const [optionsActivite, setOptionsActivite] = useState<SelectInerface[]>([])
-  const [statusValueActivite, setStatusValueActivite] = useState('')
 
-  const [optionsGroupeSociete, setOptionsGroupeSociete] = useState<SelectInerface[]>([])
-  const [statusValueGroupeSociete, setStatusValueGroupeSociete] = useState('')
   const [optionsGroupeSociete, setOptionsGroupeSociete] = useState<SelectInerface[]>([])
   const [statusValueGroupeSociete, setStatusValueGroupeSociete] = useState('')
 
@@ -40,26 +25,15 @@ const Company = ({ onSearch }: CustomSelectProps) => {
       try {
         const responseJuridique = await getJuridique()
         setOptionsJuridique(responseJuridique.optionsJuridique)
-        const responseJuridique = await getJuridique()
-        setOptionsJuridique(responseJuridique.optionsJuridique)
 
         const responseActivite = await getActivite()
         setOptionsActivite(responseActivite.optionsActivite)
-        const responseActivite = await getActivite()
-        setOptionsActivite(responseActivite.optionsActivite)
 
-        const responseGroupeSociete = await getGroupeSociete()
-        setOptionsGroupeSociete(responseGroupeSociete.optionsGroupeSociete)
         const responseGroupeSociete = await getGroupeSociete()
         setOptionsGroupeSociete(responseGroupeSociete.optionsGroupeSociete)
       } catch (error) {
         console.error('Erreur lors de la récupération des options :', error)
-        console.error('Erreur lors de la récupération des options :', error)
       }
-    }
-    fetchData()
-  }, [])
-  const [date, setDate] = useState(new Date())
     }
     fetchData()
   }, [])
@@ -75,22 +49,16 @@ const Company = ({ onSearch }: CustomSelectProps) => {
     Activite: '',
     selectDisabled: false
   }
-    selectDisabled: false
-  }
 
-  const [companyData, setCompanyData] = useState(initialCompanyState)
   const [companyData, setCompanyData] = useState(initialCompanyState)
 
   function handleChange(field: string, value: string): void {
     let updatedData = { ...companyData, [field]: value }
-    let updatedData = { ...companyData, [field]: value }
 
     if (field === 'Grp_soc') {
       updatedData = { ...updatedData, selectDisabled: value === 'Non' }
-      updatedData = { ...updatedData, selectDisabled: value === 'Non' }
     }
 
-    setCompanyData(updatedData)
     setCompanyData(updatedData)
   }
 
@@ -106,8 +74,6 @@ const Company = ({ onSearch }: CustomSelectProps) => {
             onChange={(value: any) => {
               console.log('Search value:', value)
               onSearch ? onSearch(value) : setStatusValueJuridique(value)
-              console.log('Search value:', value)
-              onSearch ? onSearch(value) : setStatusValueJuridique(value)
             }}
             options={optionsJuridique}
           />
@@ -119,7 +85,6 @@ const Company = ({ onSearch }: CustomSelectProps) => {
             placeholder={'---Sélectionnez un activité---'}
             defaultValue={statusValueActivite}
             onChange={(value: any) => {
-              onSearch ? onSearch(value) : setStatusValueActivite(value)
               onSearch ? onSearch(value) : setStatusValueActivite(value)
             }}
             options={optionsActivite}
@@ -136,7 +101,6 @@ const Company = ({ onSearch }: CustomSelectProps) => {
             placeholder={'Tapez nom '}
             value={companyData.Dénomination}
             onChange={e => handleChange('Dénomination', e.target.value)}
-            onChange={e => handleChange('Dénomination', e.target.value)}
           />
         </Grid>
         <Grid sm={1}></Grid>
@@ -147,7 +111,6 @@ const Company = ({ onSearch }: CustomSelectProps) => {
             name={'Nom_com'}
             placeholder={'Tapez nom commerce '}
             value={companyData.Nom_com}
-            onChange={e => handleChange('Nom_com', e.target.value)}
             onChange={e => handleChange('Nom_com', e.target.value)}
           />
         </Grid>
@@ -162,7 +125,6 @@ const Company = ({ onSearch }: CustomSelectProps) => {
             placeholder={'Tapez register '}
             value={companyData.Reg_com}
             onChange={e => handleChange('Reg_com', e.target.value)}
-            onChange={e => handleChange('Reg_com', e.target.value)}
           />
         </Grid>
         <Grid sm={1}></Grid>
@@ -173,7 +135,6 @@ const Company = ({ onSearch }: CustomSelectProps) => {
             name={'Lieu'}
             placeholder={'Tapez lieu '}
             value={companyData.Lieu}
-            onChange={e => handleChange('Lieu', e.target.value)}
             onChange={e => handleChange('Lieu', e.target.value)}
           />
         </Grid>
@@ -196,7 +157,6 @@ const Company = ({ onSearch }: CustomSelectProps) => {
             row
             name='Grp_soc'
             onChange={event => handleChange('Grp_soc', event.target.value)}
-            onChange={event => handleChange('Grp_soc', event.target.value)}
             value={companyData.Grp_soc}
           >
             <FormControlLabel value='Oui' control={<Radio />} label='Oui' />
@@ -214,8 +174,6 @@ const Company = ({ onSearch }: CustomSelectProps) => {
             onChange={(value: any) => {
               console.log('Search value:', value)
               onSearch ? onSearch(value) : setStatusValueGroupeSociete(value)
-              console.log('Search value:', value)
-              onSearch ? onSearch(value) : setStatusValueGroupeSociete(value)
             }}
             options={optionsGroupeSociete}
           />
@@ -227,9 +185,5 @@ const Company = ({ onSearch }: CustomSelectProps) => {
     </>
   )
 }
-  )
-}
-
-export default Company
 
 export default Company

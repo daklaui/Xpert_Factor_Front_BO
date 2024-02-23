@@ -14,18 +14,11 @@ const TVA = () => {
     selectDisabled: false
   })
   const [date, setDate] = useState(new Date())
-    selectDisabled: false
-  })
-  const [date, setDate] = useState(new Date())
 
   const handleChange = (field: string, value: string | Date): void => {
     setCompanyData(prevData => ({
-    setCompanyData(prevData => ({
       ...prevData,
       [field]: value,
-      selectDisabled: field === 'ExonerationTVA' ? value === 'Non' : prevData.selectDisabled
-    }))
-  }
       selectDisabled: field === 'ExonerationTVA' ? value === 'Non' : prevData.selectDisabled
     }))
   }
@@ -41,12 +34,11 @@ const TVA = () => {
           placeholder={'Tapez code '}
           value={companyData.Code_TVA}
           onChange={e => handleChange('Code_TVA', e.target.value)}
-          onChange={e => handleChange('Code_TVA', e.target.value)}
         />
       </Grid>
       <Grid sm={1}></Grid>
       <Grid item sm={3}>
-        Exonération TVA
+        <StyledLabel>Exonération TVA</StyledLabel>
         <RadioGroup
           row
           name='ExonerationTVA'
@@ -58,7 +50,7 @@ const TVA = () => {
         </RadioGroup>
       </Grid>
       <Grid item xs={12} sm={3}>
-        Date Début Exonération
+        <StyledLabel>Date Début Exonération</StyledLabel>
         <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
           <div>
             <DatePicker selected={date} onChange={(date: Date) => setDate(date)} customInput={<CustomInput />} />
@@ -67,7 +59,7 @@ const TVA = () => {
       </Grid>
       <Grid sm={8.5}></Grid>
       <Grid item xs={12} sm={3}>
-        Date Fin Exonération
+        <StyledLabel>Date Fin Exonération</StyledLabel>
         <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
           <div>
             <DatePicker selected={date} onChange={(date: Date) => setDate(date)} customInput={<CustomInput />} />
@@ -78,5 +70,4 @@ const TVA = () => {
   )
 }
 
-export default TVA
 export default TVA

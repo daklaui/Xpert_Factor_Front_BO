@@ -4,12 +4,6 @@ import { ChangeEvent, Fragment, useEffect, useState } from 'react'
 import CustomTextField from 'src/@core/components/mui/text-field'
 import { CustomSelectProps, SelectInerface, State } from '../interface/FormIndividual.interface'
 import { getLangue, getNationalite, getVille } from '../mock'
-import { FormControl, Grid, Icon, IconButton, InputAdornment, OutlinedInput } from '@mui/material'
-import Select from 'react-select'
-import { ChangeEvent, Fragment, useEffect, useState } from 'react'
-import CustomTextField from 'src/@core/components/mui/text-field'
-import { CustomSelectProps, SelectInerface, State } from '../interface/FormIndividual.interface'
-import { getLangue, getNationalite, getVille } from '../mock'
 
 const MoreInfo = ({ onSearch }: CustomSelectProps) => {
   const [optionsLangue, setOptionsLangue] = useState<SelectInerface[]>([])
@@ -78,7 +72,6 @@ const MoreInfo = ({ onSearch }: CustomSelectProps) => {
             placeholder={'Tapez adresse'}
             value={companyData.Adresse}
             onChange={e => handleChange('Adresse', e.target.value)}
-            onChange={e => handleChange('Adresse', e.target.value)}
           />
         </Grid>
         <Grid sm={2}></Grid>
@@ -88,7 +81,6 @@ const MoreInfo = ({ onSearch }: CustomSelectProps) => {
             placeholder={'---Sélectionnez une ville---'}
             defaultValue={statusValueVille}
             onChange={(value: any) => {
-              onSearch ? onSearch(value) : setStatusValueVille(value)
               onSearch ? onSearch(value) : setStatusValueVille(value)
             }}
             options={optionsVille}
@@ -104,7 +96,6 @@ const MoreInfo = ({ onSearch }: CustomSelectProps) => {
             placeholder={'Tapez numéro'}
             value={companyData.Télephone}
             onChange={e => handleChange('Télephone', e.target.value)}
-            onChange={e => handleChange('Télephone', e.target.value)}
           />
         </Grid>
         <Grid sm={2}></Grid>
@@ -115,7 +106,6 @@ const MoreInfo = ({ onSearch }: CustomSelectProps) => {
             name={'Fax'}
             placeholder={'Tapez fax'}
             value={companyData.Fax}
-            onChange={e => handleChange('Fax', e.target.value)}
             onChange={e => handleChange('Fax', e.target.value)}
           />
         </Grid>
@@ -129,7 +119,6 @@ const MoreInfo = ({ onSearch }: CustomSelectProps) => {
             placeholder={'Tapez email'}
             value={companyData.Email}
             onChange={e => handleChange('Email', e.target.value)}
-            onChange={e => handleChange('Email', e.target.value)}
           />
         </Grid>
         <Grid sm={2}></Grid>
@@ -140,7 +129,6 @@ const MoreInfo = ({ onSearch }: CustomSelectProps) => {
             name={'Login'}
             placeholder={'Tapez login'}
             value={companyData.Login}
-            onChange={e => handleChange('Login', e.target.value)}
             onChange={e => handleChange('Login', e.target.value)}
           />
         </Grid>
