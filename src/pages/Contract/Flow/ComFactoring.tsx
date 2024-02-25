@@ -149,7 +149,7 @@ function ComFactoring({ popperPlacement, onFormChange }: ComFactoringProps) {
               <StyledTableCell align='left'>
                 <Checkbox
                   name='chequeFDG'
-                  checked={isChecked} // utilisez l'état approprié ici
+                  checked={isChecked} 
                   onChange={e => {
                     setIsChecked(e.target.checked)
                     handleInputChange('chequeFDG', e.target.checked.toString())

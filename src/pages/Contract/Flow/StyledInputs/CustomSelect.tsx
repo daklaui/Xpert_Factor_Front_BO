@@ -1,5 +1,3 @@
-// MyCustomSelect.jsx
-
 import { useTheme } from '@mui/material';
 import React from 'react';
 import Select from 'react-select';
