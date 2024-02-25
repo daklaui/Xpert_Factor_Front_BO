@@ -1,5 +1,3 @@
-// StyledDatePicker.tsx
-
 import styled from '@mui/system/styled'
 import DatePicker from 'react-datepicker'
 import styled from '@mui/system/styled'

@@ -166,7 +166,7 @@ const Index = ({ popperPlacement }: { popperPlacement: ReactDatePickerProps['pop
             const RenderAvatar = activeStep >= index ? CustomAvatar : Avatar;
 
             return (
-              <Step key={index} onClick={() => handleIconClick(step.icon)}> {/* Ajout du gestionnaire d'événements onClick */}
+              <Step key={index} onClick={() => handleIconClick(step.icon)}> {}
                 <StepLabel StepIconComponent={StepperCustomDot}>
                   <div className='step-label'>
                     <RenderAvatar

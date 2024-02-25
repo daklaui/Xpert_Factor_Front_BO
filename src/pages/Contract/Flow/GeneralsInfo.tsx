@@ -26,26 +26,21 @@ function GeneralsInfo({ popperPlacement, onFormChange }: GeneralsInfoProps) {
   });
 
   const handleSearch = (value: any) => {
-    // Handle the selected value as needed
     console.log('Selected value:', value)
   }
 
   const handleInputChange = (name: string, value: any) => {
-    // Fonction pour mettre à jour le formulaire
     onFormChange({ [name]: value })
 
 
-      // Fonction pour mettre à jour le formulaire
       let updatedDates = { ...dates, [name]: value };
 
-      // Update EndDate if StartDate is changed
       if (name === 'StartDate') {
         const newEndDate = new Date(value);
         newEndDate.setFullYear(newEndDate.getFullYear() + 1);
         updatedDates = { ...updatedDates, EndDate: newEndDate };
       }
 
-      // Update the state and call onFormChange
       setDates(updatedDates);
       onFormChange(updatedDates);
     };
