@@ -38,7 +38,7 @@ const TVA = () => {
       </Grid>
       <Grid sm={1}></Grid>
       <Grid item sm={3}>
-        <StyledLabel>Exonération TVA</StyledLabel>
+        Exonération TVA
         <RadioGroup
           row
           name='ExonerationTVA'
@@ -50,7 +50,7 @@ const TVA = () => {
         </RadioGroup>
       </Grid>
       <Grid item xs={12} sm={3}>
-      <StyledLabel>Date Début Exonération</StyledLabel>
+        Date Début Exonération
         <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
           <div>
             <DatePicker selected={date} onChange={(date: Date) => setDate(date)} customInput={<CustomInput />} />
@@ -59,7 +59,7 @@ const TVA = () => {
       </Grid>
       <Grid sm={8.5}></Grid>
       <Grid item xs={12} sm={3}>
-        <StyledLabel>Date Fin Exonération</StyledLabel>
+        Date Fin Exonération
         <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
           <div>
             <DatePicker selected={date} onChange={(date: Date) => setDate(date)} customInput={<CustomInput />} />

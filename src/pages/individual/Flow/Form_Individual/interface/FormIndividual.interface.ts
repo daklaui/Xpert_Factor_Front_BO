@@ -15,4 +15,10 @@ export interface SelectInerface {
     onSearch: (value: any) => void
     labelText?: string
   }
+ export interface CompanyData {
+    RIB: string
+    Agency: string
+    Bank: string
+  }
+  
   
