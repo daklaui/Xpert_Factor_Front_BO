@@ -153,7 +153,6 @@ const FormIndividual = () => {
   }
 
   const handleSearchCompany = (value: any): void => {
-    // Implement your search logic here, for example:
     console.log('Search value:', value);
    
   }
@@ -187,7 +186,6 @@ const FormIndividual = () => {
   };
   
   function validateStep(activeStep: number): boolean {
-    // Add your validation logic here if needed
     return true;
   }
   const renderContent = () => {
