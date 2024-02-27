@@ -3,10 +3,11 @@ import Select from 'react-select'
 import { CustomSelectProps, SelectInerface } from '../interface/customSelect.interface'
 import { getPaymentsMethod } from '../mock'
 
-const SelectDevise = ({ onSearch, }: CustomSelectProps) => {
+
+const SelectPaymentType = ({ onSearch }: CustomSelectProps) => {
   const [options, setOptions] = useState<SelectInerface[]>([])
   const [statusValue, setStatusValue] = useState('')
-  const [isClearable, ] = useState(true)
+  const [isClearable, setIsClearable] = useState(true)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -34,4 +35,6 @@ const SelectDevise = ({ onSearch, }: CustomSelectProps) => {
   )
 }
 
-export default SelectDevise
+
+export default SelectPaymentType
+

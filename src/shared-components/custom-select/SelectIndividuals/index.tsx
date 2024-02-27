@@ -9,6 +9,7 @@ const SelectIndividus = ({ onSearch }: CustomSelectProps) => {
   const [statusValue, setStatusValue] = useState('')
   const [isClearable, ] = useState(true)
 
+
   useEffect(() => {
     const fetchData = async () => {
       try {

@@ -46,6 +46,7 @@ const IndividualList = ({ fakeData }: any) => {
     setFilteredData(currentPageItems);
   };
 
+
   const onNumberRowPageChange = (numberOfRows: string) => {
     const { currentPageItems, totalPages } = paginate<DataGridRowType>(contract, {
       currentPage: page,
@@ -82,17 +83,17 @@ const IndividualList = ({ fakeData }: any) => {
       onCustomSort={onSort}
       title={'Liste des contrats'}
     />
-  );
-};
+  )
+}
 
-export default IndividualList;
+export default ContractList
 
 export async function getStaticProps() {
-  const fakeData = generateFakeData(60);
+  const fakeData = generateFakeData(60)
 
   return {
     props: {
-      fakeData,
-    },
-  };
-}
+      fakeData
+    }
+  }
+};
