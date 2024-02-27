@@ -33,9 +33,7 @@
   "npm.packageManager": "yarn",
   // Extension: cSpell
   "cSpell.words": [
-    "Customizer",
-    "Financement",
-    "Interet"
+
   ],
   "search-node-modules.path": "node_modules",
   "markdown.extension.toc.updateOnSave": false,
