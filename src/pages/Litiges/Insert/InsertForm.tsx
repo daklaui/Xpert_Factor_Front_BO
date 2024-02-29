@@ -23,15 +23,19 @@ import SelectAcheteur from '../SelectAcheteur/select'
 
 const InsertForm = () => {
   // ** States
-  const [selectedValue] = useState('')
 
   const [date, setDate] = useState<DateType>(new Date())
   const [date1, setDate1] = useState<DateType>(new Date())
   const [TypeLitige] = useState()
-  const [MontantLitige] = useState()
+  const [MontantLitige, setMontantLitige] = useState()
   const fakeData = generateFakeData(5)
+
   const handleSearch = (value: any) => {
     console.log('Selected value:', value)
+  }
+
+  const handleMontantTTCClick = (MontantTTC: any) => {
+    setMontantLitige(MontantTTC)
   }
 
   return (
@@ -58,7 +62,7 @@ const InsertForm = () => {
                   <Grid item xs={12}>
                     <p>Montant du Litige</p>
                     <Grid xs={12}>
-                      <CustomTextField value={selectedValue} disabled>
+                      <CustomTextField value={MontantLitige} disabled>
                         {MontantLitige}
                       </CustomTextField>
                     </Grid>
@@ -117,7 +121,7 @@ const InsertForm = () => {
         <Grid item sm={8} xs={12}>
           <Card>
             <CardContent>
-              <TabLitiges TableData={fakeData} />
+              <TabLitiges TableData={fakeData} onMontantTTCClick={handleMontantTTCClick} />
             </CardContent>
           </Card>
         </Grid>

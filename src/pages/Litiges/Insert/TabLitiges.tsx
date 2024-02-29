@@ -1,19 +1,13 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
 import TableRows from '../Mock/tabData'
 
 interface TabLitigesProps {
   TableData: TableRows[]
+  onMontantTTCClick?: (montantTTC: number) => void // Optional callback for external usage
 }
 
-const TabLitiges = ({ TableData }: TabLitigesProps) => {
-  const [, setSelectedValue] = useState('')
-
-  const handleCellClick = (event: any) => {
-    const value = event.target.textContent
-    setSelectedValue(value)
-  }
-
+const TabLitiges = ({ TableData, onMontantTTCClick }: TabLitigesProps) => {
   return (
     <TableContainer>
       <Table sx={{ minWidth: 500 }}>
@@ -23,7 +17,9 @@ const TabLitiges = ({ TableData }: TabLitigesProps) => {
             <TableCell>Nom Acheteur</TableCell>
             <TableCell>Date</TableCell>
             <TableCell>Retenue</TableCell>
-            <TableCell onClick={handleCellClick}>Montant TTC</TableCell>
+            <TableCell onClick={event => onMontantTTCClick && onMontantTTCClick(Number(event.target.textContent))}>
+              Montant TTC
+            </TableCell>
             <TableCell>Montant Ouvert</TableCell>
           </TableRow>
         </TableHead>
@@ -35,7 +31,10 @@ const TabLitiges = ({ TableData }: TabLitigesProps) => {
               <TableCell sx={{ fontSize: '1rem' }}>{row.NomAcheteur}</TableCell>
               <TableCell sx={{ fontSize: '1rem' }}>{row.Date}</TableCell>
               <TableCell sx={{ fontSize: '1rem' }}>{row.Retenu}</TableCell>
-              <TableCell sx={{ fontSize: '1rem' }} onClick={handleCellClick}>
+              <TableCell
+                sx={{ fontSize: '1rem' }}
+                onClick={event => onMontantTTCClick && onMontantTTCClick(Number(event.target.textContent))}
+              >
                 {row.MontantTTC}
               </TableCell>
               <TableCell sx={{ fontSize: '1rem' }}>{row.MontantOuvert}</TableCell>
