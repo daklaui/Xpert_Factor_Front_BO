@@ -7,7 +7,7 @@ export const generateFakeData = (count: number): TableRows[] => {
     fakeData.push({
       id: i + 1,
       RéfFacture: `REF-${Math.floor(Math.random() * 1000000)}`,
-      NomAcheteur: generateRandomName(),
+      NomAcheteur: getAcheteurList().toString(),
       Date: generateRandomDate(),
       Retenu: Math.random() > 0.5 ? 'Oui' : 'Non',
       MontantTTC: getRandomAmount().toString(),
@@ -18,38 +18,19 @@ export const generateFakeData = (count: number): TableRows[] => {
 
   return fakeData
 }
-function generateRandomName() {
-  const names = [
-    'Alice',
-    'Bob',
-    'Charlie',
-    'David',
-    'Eve',
-    'Frank',
-    'Grace',
-    'Hannah',
-    'Ivy',
-    'Jack',
-    'Katie',
-    'Liam',
-    'Mia',
-    'Noah',
-    'Olivia',
-    'Peter',
-    'Quinn',
-    'Rachel',
-    'Sam',
-    'Taylor',
-    'Uma',
-    'Victor',
-    'Wendy',
-    'Xander',
-    'Yara',
-    'Zane'
+function getAcheteurList() {
+  const mockOptions = [
+    { value: 'option1', label: 'XF1' },
+    { value: 'option2', label: 'XF2' },
+    { value: 'option3', label: 'XF3' },
+    { value: 'option4', label: 'XF4' },
+    { value: 'option5', label: 'XF5' },
+    { value: 'option6', label: 'XF6' },
+    { value: 'option7', label: 'XF7' },
+    { value: 'option8', label: 'XF8' }
   ]
-  const randomIndex = Math.floor(Math.random() * names.length)
 
-  return names[randomIndex]
+  return { options: mockOptions }
 }
 
 function generateRandomDate() {

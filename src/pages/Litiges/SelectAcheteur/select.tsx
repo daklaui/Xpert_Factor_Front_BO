@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import Select from 'react-select'
 import { CustomSelectProps, SelectInerface } from '../interface/customSelect.interface'
-import { Grid } from '@mui/material'
-
-/*
 import { getAcheteurList } from '../Mock/acheteurList'
-*/
+
+/*import { getAcheteurList } from '../Mock/acheteurList'
+ */
 
 const SelectAcheteur = ({ onSearch }: CustomSelectProps) => {
   const [options, setOptions] = useState<SelectInerface[]>([])
@@ -40,6 +39,8 @@ const SelectAcheteur = ({ onSearch }: CustomSelectProps) => {
 }
 
 export default SelectAcheteur
+
+/*
 function getAcheteurList() {
   throw new Error('Function not implemented.')
-}
+}*/
