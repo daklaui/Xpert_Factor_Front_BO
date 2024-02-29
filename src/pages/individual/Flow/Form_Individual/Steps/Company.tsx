@@ -91,7 +91,6 @@ const Company = ({ onSearch }: CustomSelectProps) => {
           />
         </Grid>
         <Grid sm={1.5}></Grid>
-
         <Grid sm={1.5}></Grid>
         <Grid item xs={12} sm={4}>
           <CustomTextField
