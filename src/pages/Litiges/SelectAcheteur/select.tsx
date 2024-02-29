@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import Select from 'react-select'
 import { CustomSelectProps, SelectInerface } from '../interface/customSelect.interface'
-import { getAdhrents } from '../mock'
+import { Grid } from '@mui/material'
 
-const SelectAdherent = ({ onSearch, onAdherentSelect }: CustomSelectProps) => {
+/*
+import { getAcheteurList } from '../Mock/acheteurList'
+*/
+
+const SelectAcheteur = ({ onSearch }: CustomSelectProps) => {
   const [options, setOptions] = useState<SelectInerface[]>([])
   const [statusValue, setStatusValue] = useState('')
   const [isClearable] = useState(true)
@@ -11,37 +15,31 @@ const SelectAdherent = ({ onSearch, onAdherentSelect }: CustomSelectProps) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await getAdhrents()
+        const response = await getAcheteurList()
         setOptions(response.options)
       } catch (error) {
-        console.error('Error fetching adherents:', error)
+        console.error('Erreur lors de la récupération des options :', error)
       }
     }
 
     fetchData()
   }, [])
 
-  const handleAdherentSelect = (value: any) => {
-    //console.log('Adherent selected:', value)
-    if (onAdherentSelect) {
-      onAdherentSelect(value)
-    } else {
-      setStatusValue(value)
-    }
-  }
-
   return (
     <Select
-      placeholder={'---Sélectionnez un adhérent---'}
+      placeholder={'Sélectionnez un Acheteur'}
       defaultValue={statusValue}
       onChange={(value: any) => {
-        //  console.log('Change event triggered with value:', value)
-        handleAdherentSelect(value)
+        onSearch ? onSearch(value) : setStatusValue(value)
       }}
       options={options}
       isClearable={isClearable}
+      isSearchable
     />
   )
 }
 
-export default SelectAdherent
+export default SelectAcheteur
+function getAcheteurList() {
+  throw new Error('Function not implemented.')
+}

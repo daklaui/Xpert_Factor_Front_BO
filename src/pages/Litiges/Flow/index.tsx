@@ -1,8 +1,7 @@
+import InsertForm from '../Insert/InsertForm'
 
-import Resolution from "../Resolution"
-
-const ProrogationForm = () => {
-  return <Resolution/>
+const IndexFlow = () => {
+  return <InsertForm />
 }
 
-export default ProrogationForm
+export default IndexFlow
