@@ -4,10 +4,10 @@ import Select from 'react-select'
 import { CustomSelectProps, SelectInerface } from '../interface/customSelect.interface'
 import { getDeviseList } from '../mock'
 
-const SelectListOfDevises = ({ onSearch, }: CustomSelectProps) => {
+const SelectListOfDevises = ({ onSearch }: CustomSelectProps) => {
   const [options, setOptions] = useState<SelectInerface[]>([])
   const [statusValue, setStatusValue] = useState('')
-  const [isClearable, ] = useState(true)
+  const [isClearable] = useState(true)
 
   useEffect(() => {
     const fetchData = async () => {

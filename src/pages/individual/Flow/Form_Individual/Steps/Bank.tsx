@@ -1,19 +1,14 @@
 import { Grid, Button } from '@mui/material'
 import { Fragment, useState } from 'react'
 import CustomTextField from 'src/@core/components/mui/text-field'
-
-interface CompanyData {
-  RIB: string
-  agence: string
-  banque: string
-}
+import CompanyData from 'src/pages/individual/Flow/Form_Individual/interface/FormIndividual.interface'
 
 const Bank = () => {
   const [companyData, setCompanyData] = useState<CompanyData[]>([
     {
       RIB: '',
-      agence: '',
-      banque: ''
+      Bank: '',
+      Agency: ''
     }
   ])
 
@@ -27,7 +22,7 @@ const Bank = () => {
   }
 
   const handleAddField = () => {
-    setCompanyData(prevData => [...prevData, { RIB: '', agence: '', banque: '' }])
+    setCompanyData(prevData => [...prevData, { RIB: '', Agency: '', Bank: '' }])
   }
 
   return (
@@ -52,8 +47,8 @@ const Bank = () => {
               label={`Banque ${index + 1}`}
               name={`Bank_${index}`}
               placeholder={'Tapez banque '}
-              value={data.banque}
-              onChange={e => handleChange(index, 'banque', e.target.value)}
+              value={data.Bank}
+              onChange={e => handleChange(index, 'Bank', e.target.value)}
             />
           </Grid>
           <Grid sm={0.6}></Grid>
@@ -62,9 +57,9 @@ const Bank = () => {
               fullWidth
               label={`Agence ${index + 1}`}
               name={`Agency_${index}`}
-              placeholder={'Tapez agence '}
-              value={data.agence}
-              onChange={e => handleChange(index, 'agence', e.target.value)}
+              placeholder={'Tapez Agence '}
+              value={data.Agency}
+              onChange={e => handleChange(index, 'Agency', e.target.value)}
             />
           </Grid>
         </Grid>
