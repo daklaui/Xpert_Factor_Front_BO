@@ -19,8 +19,21 @@ const CustomTextField: React.FC<CustomTextFieldProps> = ({
   placeholder,
   fullWidth,
   onChange,
+  value,
+  onChangeWithValueAndIndex,
+  index,
   ...rest
 }) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = event.target.value
+
+    if (onChangeWithValueAndIndex && typeof index === 'number') {
+      onChangeWithValueAndIndex(newValue, index)
+    } else if (onChange) {
+      onChange(event)
+    }
+  }
+
   return (
     <>
       <StyledLabel htmlFor={name}>{label}</StyledLabel>
@@ -28,7 +41,8 @@ const CustomTextField: React.FC<CustomTextFieldProps> = ({
         name={name}
         placeholder={placeholder || label}
         fullWidth={fullWidth}
-        onChange={onChange}
+        onChange={handleChange}
+        value={value}
         {...rest}
       />
     </>

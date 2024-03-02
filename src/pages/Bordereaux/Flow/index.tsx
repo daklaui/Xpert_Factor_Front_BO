@@ -1,29 +1,61 @@
 import React, { useEffect, useState } from 'react'
-import DatePicker from 'react-datepicker'
+import { ReactDatePickerProps } from 'react-datepicker'
 import SelectAdherent from 'src/shared-components/custom-select/SelectAdherentList'
 import { getContractsForAdherent } from '../mock/Mock.Contract'
 import { getBordereauxForContract } from '../mock/Mock.Bordereaux'
 import 'react-datepicker/dist/react-datepicker.css'
+import StyledLabel from 'src/pages/Contract/Flow/StyledInputs/StyledLabel'
+import CustomTextField from 'src/shared-components/StyledTextField/StyledTextField '
+import StyledDatePicker from 'src/pages/Contract/Flow/StyledInputs/StyledDatePicker'
+import CustomInput from 'src/pages/Buyer/PickersComponent'
+import StyledSelect from '../StyledInputs/StyledSelect'
+import { SingleValue } from 'react-select'
+import Option from '../StyledInputs/SelectInterface'
+import CustomSelect from '../StyledInputs/CustomSelectBorderaux'
+import Button from '@mui/material/Button'
 
 interface FormData {
+  contractOption: string
   numeroBordereau: string
   anneeBordereau: string
   nombreDocuments: string
   montantTotal: string
   dateBordereau: Date
+  additionalDates: Date[]
   nomAcheteurOptions: string[]
+  typeDocumentOptions: string[]
+  modeReglementOptions: string[]
+  refDocuments: string[]
+  montantDocument: number[]
+  echeance: number[]
+}
+interface OptionType {
+  label: string
+  value: string
+}
+interface AddBordereauxProps {
+  popperPlacement: ReactDatePickerProps['popperPlacement']
+
+  fullWidth?: boolean
 }
 
-const AddBordereaux: React.FC = () => {
+const AddBordereaux: React.FC = ({ popperPlacement }: AddBordereauxProps) => {
   const [selectedAdherent, setSelectedAdherent] = useState<string>('')
   const [contractOptions, setContractOptions] = useState<any[]>([])
   const [formData, setFormData] = useState<FormData>({
+    contractOption: '',
     numeroBordereau: '',
     anneeBordereau: '',
     nombreDocuments: '',
     montantTotal: '',
     dateBordereau: new Date(),
-    nomAcheteurOptions: []
+    additionalDates: [],
+    nomAcheteurOptions: [],
+    typeDocumentOptions: [],
+    modeReglementOptions: [],
+    refDocuments: [],
+    montantDocument: [],
+    echeance: []
   })
   const [additionalInputs, setAdditionalInputs] = useState<JSX.Element[]>([])
   const [showAdditionalInputs, setShowAdditionalInputs] = useState<boolean>(false)
@@ -31,6 +63,20 @@ const AddBordereaux: React.FC = () => {
   const [additionalInputFieldValue, setAdditionalInputFieldValue] = useState<number>(0)
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(true)
   const [dateValues, setDateValues] = useState<Date[]>([])
+
+  const saveFormDataToLocal = (formData: FormData) => {
+    localStorage.setItem('formData', JSON.stringify(formData))
+  }
+
+  const loadFormDataFromLocal = () => {
+    const storedFormData = localStorage.getItem('formData')
+    if (storedFormData) {
+      const parsedFormData = JSON.parse(storedFormData)
+      // Convert string representation of date back to Date object
+      parsedFormData.dateBordereau = new Date(parsedFormData.dateBordereau)
+      setFormData(parsedFormData)
+    }
+  }
   const handleAdherentSelect = async (selectedAdherent: any) => {
     if (selectedAdherent) {
       setSelectedAdherent(selectedAdherent.value)
@@ -41,12 +87,19 @@ const AddBordereaux: React.FC = () => {
       setContractOptions([])
 
       setFormData({
+        contractOption: '',
         numeroBordereau: '',
         anneeBordereau: '',
         nombreDocuments: '',
         montantTotal: '',
         dateBordereau: new Date(),
-        nomAcheteurOptions: []
+        additionalDates: [],
+        nomAcheteurOptions: [],
+        typeDocumentOptions: [],
+        modeReglementOptions: [],
+        refDocuments: [],
+        montantDocument: [],
+        echeance: []
       })
       setShowAdditionalInputs(false)
     }
@@ -60,30 +113,84 @@ const AddBordereaux: React.FC = () => {
   const handleDateChange = (date: Date) => {
     setFormData({ ...formData, dateBordereau: date })
   }
-
   const handleAdditionalDateChange = (date: Date, index: number) => {
-    // const newDateValues = [...dateValues]
-    // newDateValues[index] = date
-    // console.log(newDateValues)
-    setDateValues(prevState => {
-      return [...prevState, date]
+    setFormData(prevFormData => {
+      const updatedDates = [...prevFormData.additionalDates]
+      updatedDates[index] = date
+      return { ...prevFormData, additionalDates: updatedDates }
     })
   }
+
   useEffect(() => {
     console.log(dateValues)
   }, [dateValues])
 
-  const handleSelectChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const { name, value } = e.target
-    setFormData({ ...formData, [name]: value })
+  const handleSelectChange = async (newValue: SingleValue<Option>) => {
+    const selectedOption = newValue?.value
 
-    const { numeroBordereau, anneeBordereau, nomAcheteurOptions } = await getBordereauxForContract(value)
-    setFormData({ ...formData, numeroBordereau, anneeBordereau, nomAcheteurOptions })
+    if (selectedOption) {
+      try {
+        const { numeroBordereau, anneeBordereau, nomAcheteurOptions } = await getBordereauxForContract(selectedOption)
+
+        setFormData(prevFormData => ({
+          ...prevFormData,
+          contractOption: selectedOption,
+          numeroBordereau,
+          anneeBordereau,
+          nomAcheteurOptions
+        }))
+      } catch (error) {
+        console.error('Error fetching bordereaux:', error)
+      }
+    } else {
+      console.log('No option selected.')
+    }
   }
 
+  const handleNomAcheteurChange = (selectedOption: OptionType | null, rowIndex: number) => {
+    setFormData(prevFormData => {
+      const updatedNomAcheteurOptions = [...prevFormData.nomAcheteurOptions]
+      updatedNomAcheteurOptions[rowIndex] = selectedOption ? selectedOption.value : ''
+      return {
+        ...prevFormData,
+        nomAcheteurOptions: updatedNomAcheteurOptions
+      }
+    })
+  }
+  const handleTypeDocumentChange = (selectedOption: OptionType | null, rowIndex: number) => {
+    const updatedFormData = { ...formData }
+
+    updatedFormData.typeDocumentOptions[rowIndex] = selectedOption ? selectedOption.value : ''
+
+    setFormData(updatedFormData)
+  }
+  const handleModeReglementChange = (selectedOption: OptionType | null, rowIndex: number) => {
+    const updatedFormData = { ...formData }
+
+    updatedFormData.modeReglementOptions[rowIndex] = selectedOption ? selectedOption.value : ''
+
+    setFormData(updatedFormData)
+  }
+
+  const handleRefDocumentChange = (value: string, index: number) => {
+    const isDuplicate = formData.refDocuments.some((ref, i) => i !== index && ref === value)
+
+    if (isDuplicate) {
+      window.alert('Duplicate reference document found')
+      return
+    }
+
+    setFormData(prevFormData => {
+      prevFormData.refDocuments[index] = value
+      return { ...prevFormData }
+    })
+  }
+
+  const handleEcheanceChange = (value: number, index: number) => {
+    formData.echeance[index] = value
+  }
   const handleSave = () => {
     setShowAdditionalInputs(true)
-
     const numDocuments = parseInt(formData.nombreDocuments)
     const inputs = []
     const typeDocumentOptions = ['MIN_CREDIT', 'FACTURE', 'CAUTION', 'BON DE COMMANDE', 'MARCHE']
@@ -94,53 +201,62 @@ const AddBordereaux: React.FC = () => {
       inputs.push(
         <tr key={`additionalInput-${i}`}>
           <td>
-            <select name={`nomAcheteur-${i}`} required>
-              {formData.nomAcheteurOptions.map((option, index) => (
-                <option key={index} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
-          </td>
-          <td>
-            <select name={`typeDocument-${i}`} required>
-              {typeDocumentOptions.map((option, index) => (
-                <option key={index} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
-          </td>
-          <td>
-            <input type='text' name={`refDocument-${i}`} required />
-          </td>
-          <td>
-            <DatePicker
-              //selected={dateValues[i] || null}
-              value={new Date(dateValues[i])}
-              onChange={(date: Date) => handleAdditionalDateChange(date, i)}
-              required
+            <CustomSelect
+              options={formData.nomAcheteurOptions.map(option => ({ label: option, value: option }))}
+              handleSelectChange={selectedOption => handleNomAcheteurChange(selectedOption, i)}
             />
           </td>
           <td>
-            <input
-              type='number'
+            <CustomSelect
+              options={typeDocumentOptions.map(option => ({ label: option, value: option }))}
+              handleSelectChange={selectedOption => handleTypeDocumentChange(selectedOption, i)}
+            />
+          </td>
+          <td>
+            <CustomTextField
+              fullWidth
+              placeholder={'Ref document'}
+              name={`refDocument-${i}`}
+              onChangeWithValueAndIndex={handleRefDocumentChange}
+              value={formData.refDocuments[i]}
+              index={i}
+            />
+          </td>
+          <td>
+            <StyledDatePicker
+              selected={dateValues[i] || null}
+              value={new Date(dateValues[i])}
+              id='basic-input'
+              popperPlacement={popperPlacement}
+              onChange={(date: Date) => handleAdditionalDateChange(date, i)}
+              customInput={<CustomInput label='' />}
+            />
+          </td>
+          <td>
+            <CustomTextField
+              fullWidth
+              placeholder={'montant document'}
               name={`montantDocument-${i}`}
               onChange={e => handleMontantDocumentChange(i, parseInt(e.target.value))}
-              required
+              value={formData.montantDocument[i]}
+              index={i}
             />
           </td>
           <td>
-            <input type='text' name={`echeance-${i}`} required />
+            <CustomTextField
+              fullWidth
+              placeholder={'Echéance '}
+              name={`echeance-${i}`}
+              onChangeWithValueAndIndex={handleEcheanceChange}
+              value={formData.echeance[i]}
+              index={i}
+            />
           </td>
           <td>
-            <select name={`modeReglement-${i}`} required>
-              {modeReglementOptions.map((option, index) => (
-                <option key={index} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
+            <CustomSelect
+              options={modeReglementOptions.map(option => ({ label: option, value: option }))}
+              handleSelectChange={selectedOption => handleModeReglementChange(selectedOption, i)}
+            />
           </td>
         </tr>
       )
@@ -150,11 +266,9 @@ const AddBordereaux: React.FC = () => {
   }
 
   const handleMontantDocumentChange = (index: number, value: number) => {
-    montantDocumentValues[index] = value
-    const sum = montantDocumentValues.reduce((acc, curr) => acc + (isNaN(curr) ? 0 : curr), 0)
+    formData.montantDocument[index] = value
+    const sum = formData.montantDocument.reduce((acc, curr) => acc + curr, 0)
     setAdditionalInputFieldValue(sum)
-    console.log('additionalInputFieldValue updated:', sum)
-
     setIsButtonDisabled(sum !== parseInt(formData.montantTotal))
   }
 
@@ -165,79 +279,105 @@ const AddBordereaux: React.FC = () => {
     setAdditionalInputs([])
   }
 
+  function handleRestaurerBorderaux(): void {
+    loadFormDataFromLocal()
+  }
+
+  const handleSauvegarder = () => {
+    saveFormDataToLocal(formData)
+  }
+
   return (
     <div>
-      <SelectAdherent
-        onSearch={(selectedOption: any) => {
-          //   console.log('Search triggered with option:', selectedOption)
-        }}
-        onAdherentSelect={handleAdherentSelect}
-      />
+      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
+        <Button variant='contained' onClick={handleRestaurerBorderaux}>
+          Restaurer Bordereaux
+        </Button>
+        <Button variant='contained' onClick={handleSauvegarder}>
+          Sauvegarder temporairement
+        </Button>
+      </div>
+      <SelectAdherent onSearch={(selectedOption: any) => {}} onAdherentSelect={handleAdherentSelect} />
       <table>
         <tbody>
           <tr>
-            <td>Ref Contract</td>
-            <td>Numéro Bordereau</td>
-            <td>Année Bordereau</td>
-            <td>Nombre des documents</td>
-            <td>Montant Total</td>
-            <td>Date Bordereau</td>
+            <td>
+              <StyledLabel htmlFor='Ref Contract'> Ref Contract </StyledLabel>
+            </td>
+            <td>
+              <StyledLabel htmlFor='Numéro Bordereau'> Numéro Bordereau </StyledLabel>
+            </td>
+            <td>
+              <StyledLabel htmlFor='Année Bordereau'> Année Bordereau </StyledLabel>
+            </td>
+            <td>
+              <StyledLabel htmlFor='Nombre des documents'> Nombre des documents </StyledLabel>
+            </td>
+            <td>
+              <StyledLabel htmlFor='Montant Total'> Montant Total </StyledLabel>
+            </td>
+            <td>
+              <StyledLabel htmlFor='Date Bordereau'> Date Bordereau </StyledLabel>
+            </td>
           </tr>
           <tr>
             <td>
-              <select id='refContract' name='refContract' onChange={handleSelectChange} required>
-                <option value=''>Sélectionner un contrat</option>
-                {contractOptions.map(option => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </select>
+              <StyledSelect Options={contractOptions} handleSelectChange={handleSelectChange} />
             </td>
             <td>
-              <input
-                type='text'
+              <CustomTextField
+                fullWidth
+                placeholder={'numeroBordereau '}
                 name='numeroBordereau'
+                onChange={handleInputChange}
                 value={formData.numeroBordereau}
-                onChange={handleInputChange}
-                required
               />
             </td>
             <td>
-              <input
-                type='text'
+              <CustomTextField
+                fullWidth
+                placeholder={'Année Bordereau'}
                 name='anneeBordereau'
+                onChange={handleInputChange}
                 value={formData.anneeBordereau}
-                onChange={handleInputChange}
-                required
               />
             </td>
             <td>
-              <input
-                type='text'
+              <CustomTextField
+                fullWidth
+                placeholder={'Nombre des documents'}
                 name='nombreDocuments'
+                onChange={handleInputChange}
                 value={formData.nombreDocuments}
-                onChange={handleInputChange}
-                required
               />
             </td>
             <td>
-              <input
-                type='text'
+              <CustomTextField
+                fullWidth
+                placeholder={'Montant Total'}
                 name='montantTotal'
-                value={formData.montantTotal}
                 onChange={handleInputChange}
-                required
+                value={formData.montantTotal}
               />
             </td>
             <td>
-              <DatePicker selected={formData.dateBordereau} onChange={handleDateChange} required />
+              <StyledDatePicker
+                selected={formData.dateBordereau}
+                id='basic-input'
+                popperPlacement={popperPlacement}
+                onChange={handleDateChange}
+                customInput={<CustomInput label='' />}
+              />
             </td>
           </tr>
           <tr>
             <td colSpan={6}>
-              <button onClick={handleSave}>Enregistrer</button>
-              <button onClick={handleCancel}>Annuler</button>
+              <Button variant='contained' onClick={handleSave}>
+                Enregistrer
+              </Button>
+              <Button variant='contained' onClick={handleCancel}>
+                Annuler
+              </Button>
             </td>
           </tr>
         </tbody>
@@ -247,27 +387,36 @@ const AddBordereaux: React.FC = () => {
         <table>
           <tbody>
             <tr>
-              <td>Nom Acheteur</td>
-              <td>Type de document</td>
-              <td>Ref document</td>
-              <td>Date document</td>
-              <td>Montant document</td>
-              <td>Echéance</td>
-              <td>Mode de réglement</td>
+              <td>
+                <StyledLabel htmlFor='Nom Acheteur'> Nom Acheteur </StyledLabel>
+              </td>
+              <td>
+                <StyledLabel htmlFor='Type de document'>Type de document</StyledLabel>
+              </td>
+              <td>
+                <StyledLabel htmlFor='Ref document'>Ref document</StyledLabel>
+              </td>
+              <td>
+                <StyledLabel htmlFor='Date document'>Date document</StyledLabel>
+              </td>
+              <td>
+                <StyledLabel htmlFor='Montant document'>Montant document</StyledLabel>
+              </td>
+              <td>
+                <StyledLabel htmlFor='Echéance'>Echéance</StyledLabel>
+              </td>
+              <td>
+                <StyledLabel htmlFor='Mode de réglement'>Mode de réglement</StyledLabel>
+              </td>
             </tr>
             {additionalInputs}
             <tr key='additionalInputsFooter'>
               <td colSpan={8}>
-                <input
-                  type='text'
-                  name='additionalInputField'
-                  value={additionalInputFieldValue.toString()} // Convert number to string
-                  //onChange={e => setAdditionalInputFieldValue(parseFloat(e.target.value))}
-                />
+                <CustomTextField name='additionalInputField' value={additionalInputFieldValue.toString()} />
 
-                <button onClick={handleAdditionalSave} disabled={isButtonDisabled}>
+                <Button variant='contained' onClick={handleAdditionalSave} disabled={isButtonDisabled}>
                   Valider
-                </button>
+                </Button>
               </td>
             </tr>
           </tbody>

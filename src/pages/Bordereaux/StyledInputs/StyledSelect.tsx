@@ -1,8 +1,15 @@
-import { useTheme } from '@mui/material'
 import React from 'react'
-import Select from 'react-select'
+import Select, { SingleValue } from 'react-select'
+import { useTheme } from '@mui/material'
 
-const StyledSelect = () => {
+import Option from './SelectInterface'
+
+interface StyledSelectProps {
+  Options: Option[]
+  handleSelectChange: (newValue: SingleValue<Option>) => Promise<void>
+}
+
+const StyledSelect: React.FC<StyledSelectProps> = ({ Options, handleSelectChange }) => {
   const theme = useTheme()
 
   const customStyles = {
@@ -21,13 +28,9 @@ const StyledSelect = () => {
     })
   }
 
-  const options = [
-    { value: 'option1', label: 'Option 1' },
-    { value: 'option2', label: 'Option 2' },
-    { value: 'option3', label: 'Option 3' }
-  ]
-
-  return <Select options={options} styles={customStyles} />
+  return (
+    <Select options={Options} styles={customStyles} onChange={handleSelectChange} placeholder='' isClearable required />
+  )
 }
 
 export default StyledSelect
