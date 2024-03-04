@@ -1,26 +1,26 @@
-import React, { Fragment, useEffect, useState } from 'react';
-import { Checkbox, FormControl, FormControlLabel, Grid, Button, Typography } from '@mui/material';
-import Select from 'react-select';
-import CustomTextField from 'src/@core/components/mui/text-field';
-import { CustomSelectProps, SelectInerface } from '../interface/FormIndividual.interface';
-import { getVille } from '../mock';
-import CompanyData from 'src/pages/individual/Flow/Form_Individual/interface/FormIndividual.interface';
+import React, { Fragment, useEffect, useState } from 'react'
+import { Checkbox, FormControl, FormControlLabel, Grid, Button, Typography } from '@mui/material'
+import Select from 'react-select'
+import CustomTextField from 'src/@core/components/mui/text-field'
+import { CustomSelectProps, SelectInerface } from '../interface/FormIndividual.interface'
+import { getVille } from '../mock'
+import CompanyData from 'src/pages/individual/Flow/Form_Individual/interface/FormIndividual.interface'
 
 const AddContact = ({ onSearch }: CustomSelectProps) => {
-  const [optionsVille, setOptionsVille] = useState<SelectInerface[]>([]);
-  const [statusValueVille, setStatusValueVille] = useState('');
+  const [optionsVille, setOptionsVille] = useState<SelectInerface[]>([])
+  const [statusValueVille, setStatusValueVille] = useState('')
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const responseVille = await getVille();
-        setOptionsVille(responseVille.optionsVille);
+        const responseVille = await getVille()
+        setOptionsVille(responseVille.optionsVille)
       } catch (error) {
-        console.error('Erreur lors de la récupération des options :', error);
+        console.error('Erreur lors de la récupération des options :', error)
       }
-    };
-    fetchData();
-  }, []);
+    }
+    fetchData()
+  }, [])
 
   const initialCompanyState = {
     Name: '',
@@ -29,30 +29,31 @@ const AddContact = ({ onSearch }: CustomSelectProps) => {
     Fax: '',
     Email: '',
     Situation: '',
-    Contact: '',
-  };
+    Contact: ''
+  }
 
-  const [companyData, setCompanyData] = useState<CompanyData[]>([initialCompanyState]);
+  const [companyData, setCompanyData] = useState<CompanyData[]>([initialCompanyState])
 
   const handleChange = (field: keyof CompanyData, value: string): void => {
-    setCompanyData((prevData) => {
-      const updatedData = { ...prevData[0], [field]: value };
-      return [updatedData];
-    });
-  };
+    setCompanyData(prevData => {
+      const updatedData = { ...prevData[0], [field]: value }
+
+      return [updatedData]
+    })
+  }
 
   const handleAddContact = () => {
-    setCompanyData((prevData) => [...prevData, { ...initialCompanyState }]);
-  };
+    setCompanyData(prevData => [...prevData, { ...initialCompanyState }])
+  }
 
   return (
     <>
       <Fragment>
         {companyData.map((data, index) => (
           <Grid key={index} container spacing={1} alignItems='center' style={{ padding: '2%' }}>
-            <Typography variant="subtitle1" gutterBottom >
+            <Typography variant='subtitle1' gutterBottom>
               {`Contact ${index + 1}`}
-              </Typography>
+            </Typography>
             <Grid sm={1.5}></Grid>
             <Grid item xs={12} sm={4}>
               <CustomTextField
@@ -61,7 +62,7 @@ const AddContact = ({ onSearch }: CustomSelectProps) => {
                 name={'Nom et prénom '}
                 placeholder={'Tapez nom'}
                 value={companyData[0].Name}
-                onChange={(e) => handleChange('Name', e.target.value)}
+                onChange={e => handleChange('Name', e.target.value)}
               />
             </Grid>
             <Grid sm={1}></Grid>
@@ -71,7 +72,7 @@ const AddContact = ({ onSearch }: CustomSelectProps) => {
                 placeholder={'---Sélectionnez une position---'}
                 defaultValue={statusValueVille}
                 onChange={(value: any) => {
-                  onSearch ? onSearch(value) : setStatusValueVille(value);
+                  onSearch ? onSearch(value) : setStatusValueVille(value)
                 }}
                 options={optionsVille}
               />
@@ -85,7 +86,7 @@ const AddContact = ({ onSearch }: CustomSelectProps) => {
                 name={'Télephone'}
                 placeholder={'Tapez numéro'}
                 value={companyData[0].Télephone}
-                onChange={(e) => handleChange('Télephone', e.target.value)}
+                onChange={e => handleChange('Télephone', e.target.value)}
               />
             </Grid>
             <Grid sm={1}></Grid>
@@ -96,7 +97,7 @@ const AddContact = ({ onSearch }: CustomSelectProps) => {
                 name={'Fax'}
                 placeholder={'Tapez fax'}
                 value={companyData[0].Fax}
-                onChange={(e) => handleChange('Fax', e.target.value)}
+                onChange={e => handleChange('Fax', e.target.value)}
               />
             </Grid>
             <Grid sm={1}></Grid>
@@ -108,7 +109,7 @@ const AddContact = ({ onSearch }: CustomSelectProps) => {
                 name={'Email'}
                 placeholder={'Tapez email'}
                 value={companyData[0].Email}
-                onChange={(e) => handleChange('Email', e.target.value)}
+                onChange={e => handleChange('Email', e.target.value)}
               />
             </Grid>
             <Grid sm={1}></Grid>
@@ -116,12 +117,12 @@ const AddContact = ({ onSearch }: CustomSelectProps) => {
               <FormControl>
                 <Grid item xs={12} sm={4}>
                   <FormControlLabel
-                    label="Situation"
+                    label='Situation'
                     control={
                       <Checkbox
                         checked={Boolean(companyData[0].Situation)}
-                        onChange={(e) => handleChange('Situation', e.target.checked.toString())}
-                        color="primary"
+                        onChange={e => handleChange('Situation', e.target.checked.toString())}
+                        color='primary'
                       />
                     }
                   />
@@ -131,13 +132,13 @@ const AddContact = ({ onSearch }: CustomSelectProps) => {
           </Grid>
         ))}
         <Grid style={{ display: 'flex', justifyContent: 'center', padding: '2%' }} sm={12}>
-          <Button variant="contained" color="primary" onClick={handleAddContact}>
+          <Button variant='contained' color='primary' onClick={handleAddContact}>
             Ajouter un contact
           </Button>
         </Grid>
       </Fragment>
     </>
-  );
-};
+  )
+}
 
-export default AddContact;
+export default AddContact

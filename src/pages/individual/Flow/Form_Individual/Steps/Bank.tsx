@@ -2,12 +2,13 @@ import { Grid, Button } from '@mui/material'
 import { Fragment, useState } from 'react'
 import CustomTextField from 'src/@core/components/mui/text-field'
 import CompanyData from 'src/pages/individual/Flow/Form_Individual/interface/FormIndividual.interface'
+
 const Bank = () => {
   const [companyData, setCompanyData] = useState<CompanyData[]>([
     {
       RIB: '',
-      Bank : '',
-      Agency : '',
+      Bank: '',
+      Agency: ''
     }
   ])
 

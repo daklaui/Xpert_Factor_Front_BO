@@ -8,9 +8,7 @@ const tableRows = [
     LibelléFDG: '',
     TauxFDG: '',
     MontantMaxFDG: '',
-    MontantMinFDG: '',
-
-    checked: true
+    MontantMinFDG: ''
   }
 ]
 

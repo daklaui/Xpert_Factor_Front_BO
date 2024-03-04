@@ -1,3 +1,4 @@
+ 
 import { useEffect, useState } from 'react'
 import { DataGridRowType } from 'src/@fake-db/types'
 import CustomDataGrid from 'src/shared-components/data-grid/dataGrid'
@@ -91,6 +92,16 @@ const IndividualList = ({ fakeData }: any) => {
 }
 
 export default IndividualList
+
+export async function getStaticProps() {
+  const fakeData = generateFakeData(60)
+
+  return {
+    props: {
+      fakeData
+    }
+  }
+}
 
 export async function getStaticProps() {
   const fakeData = generateFakeData(60)

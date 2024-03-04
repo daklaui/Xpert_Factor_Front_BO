@@ -32,9 +32,7 @@
   "eslint.packageManager": "yarn",
   "npm.packageManager": "yarn",
   // Extension: cSpell
-  "cSpell.words": [
-
-  ],
+  "cSpell.words": [],
   "search-node-modules.path": "node_modules",
   "markdown.extension.toc.updateOnSave": false,
   "i18n-ally.localesPaths": [
