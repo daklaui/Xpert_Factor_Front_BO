@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { ReactDatePickerProps } from 'react-datepicker'
 import SelectAdherent from 'src/shared-components/custom-select/SelectAdherentList'
 import { getContractsForAdherent } from '../mock/Mock.Contract'
 import { getBordereauxForContract } from '../mock/Mock.Bordereaux'
@@ -13,36 +12,14 @@ import { SingleValue } from 'react-select'
 import Option from '../StyledInputs/SelectInterface'
 import CustomSelect from '../StyledInputs/CustomSelectBorderaux'
 import Button from '@mui/material/Button'
-
-interface FormData {
-  contractOption: string
-  numeroBordereau: string
-  anneeBordereau: string
-  nombreDocuments: string
-  montantTotal: string
-  dateBordereau: Date
-  additionalDates: Date[]
-  nomAcheteurOptions: string[]
-  typeDocumentOptions: string[]
-  modeReglementOptions: string[]
-  refDocuments: string[]
-  montantDocument: number[]
-  echeance: number[]
-}
-interface OptionType {
-  label: string
-  value: string
-}
-interface AddBordereauxProps {
-  popperPlacement: ReactDatePickerProps['popperPlacement']
-
-  fullWidth?: boolean
-}
+import { AddBordereauxProps, FormData, OptionType } from '../Interface/InterfaceBordereaux'
 
 const AddBordereaux: React.FC = ({ popperPlacement }: AddBordereauxProps) => {
-  const [selectedAdherent, setSelectedAdherent] = useState<string>('')
+  // const [selectedAdherent, setSelectedAdherent] = useState<string>('')
+  const [selectedAdherent, setSelectedAdherent] = useState<{ value: string; label: string }>({ value: '', label: '' })
   const [contractOptions, setContractOptions] = useState<any[]>([])
   const [formData, setFormData] = useState<FormData>({
+    AdherentValue: { value: '', label: '' },
     contractOption: '',
     numeroBordereau: '',
     anneeBordereau: '',
@@ -63,30 +40,48 @@ const AddBordereaux: React.FC = ({ popperPlacement }: AddBordereauxProps) => {
   const [additionalInputFieldValue, setAdditionalInputFieldValue] = useState<number>(0)
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(true)
   const [dateValues, setDateValues] = useState<Date[]>([])
+  const [selectedOption, setSelectedOption] = useState<any>(null)
 
   const saveFormDataToLocal = (formData: FormData) => {
     localStorage.setItem('formData', JSON.stringify(formData))
   }
 
-  const loadFormDataFromLocal = () => {
+  const loadFormDataFromLocal = async () => {
     const storedFormData = localStorage.getItem('formData')
+    console.log('Stored Form Data:', storedFormData)
+
     if (storedFormData) {
       const parsedFormData = JSON.parse(storedFormData)
-      // Convert string representation of date back to Date object
       parsedFormData.dateBordereau = new Date(parsedFormData.dateBordereau)
+      console.log('Parsed Form Data:', parsedFormData)
+
       setFormData(parsedFormData)
+
+      if (parsedFormData.AdherentValue) {
+        setSelectedAdherent(parsedFormData.AdherentValue)
+        console.log('Selected Adherent:', parsedFormData.AdherentValue)
+        handleAdherentSelect(parsedFormData.AdherentValue)
+      }
+      const selectedOption = contractOptions.find(option => option.value === parsedFormData.contractOption)
+      setSelectedOption(selectedOption)
     }
   }
+
   const handleAdherentSelect = async (selectedAdherent: any) => {
     if (selectedAdherent) {
-      setSelectedAdherent(selectedAdherent.value)
+      setSelectedAdherent(selectedAdherent)
       const contracts = await getContractsForAdherent(selectedAdherent.value)
       setContractOptions(contracts)
+      setFormData(prevFormData => ({
+        ...prevFormData,
+        AdherentValue: { value: selectedAdherent.value, label: selectedAdherent.label }
+      }))
     } else {
-      setSelectedAdherent('')
+      setSelectedAdherent({ value: '', label: '' })
       setContractOptions([])
 
       setFormData({
+        AdherentValue: { value: '', label: '' },
         contractOption: '',
         numeroBordereau: '',
         anneeBordereau: '',
@@ -319,6 +314,9 @@ const AddBordereaux: React.FC = ({ popperPlacement }: AddBordereauxProps) => {
             <td>
               <StyledLabel htmlFor='Date Bordereau'> Date Bordereau </StyledLabel>
             </td>
+            <td>
+              <StyledLabel htmlFor='Actions'> Actions </StyledLabel>
+            </td>
           </tr>
           <tr>
             <td>
@@ -369,17 +367,18 @@ const AddBordereaux: React.FC = ({ popperPlacement }: AddBordereauxProps) => {
                 customInput={<CustomInput label='' />}
               />
             </td>
-          </tr>
-          <tr>
             <td colSpan={6}>
-              <Button variant='contained' onClick={handleSave}>
-                Enregistrer
-              </Button>
-              <Button variant='contained' onClick={handleCancel}>
-                Annuler
-              </Button>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <Button variant='contained' onClick={handleSave}>
+                  Enregistrer
+                </Button>
+                <Button variant='contained' onClick={handleCancel}>
+                  Annuler
+                </Button>
+              </div>
             </td>
           </tr>
+          <tr></tr>
         </tbody>
       </table>
 

@@ -7,9 +7,10 @@ import Option from './SelectInterface'
 interface StyledSelectProps {
   Options: Option[]
   handleSelectChange: (newValue: SingleValue<Option>) => Promise<void>
+  value?: SingleValue<Option>
 }
 
-const StyledSelect: React.FC<StyledSelectProps> = ({ Options, handleSelectChange }) => {
+const StyledSelect: React.FC<StyledSelectProps> = ({ Options, handleSelectChange, value }) => {
   const theme = useTheme()
 
   const customStyles = {
@@ -29,7 +30,15 @@ const StyledSelect: React.FC<StyledSelectProps> = ({ Options, handleSelectChange
   }
 
   return (
-    <Select options={Options} styles={customStyles} onChange={handleSelectChange} placeholder='' isClearable required />
+    <Select
+      options={Options}
+      styles={customStyles}
+      onChange={handleSelectChange}
+      placeholder=''
+      isClearable
+      required
+      value={value}
+    />
   )
 }
 
