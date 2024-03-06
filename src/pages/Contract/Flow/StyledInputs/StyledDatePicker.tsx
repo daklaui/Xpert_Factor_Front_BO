@@ -1,7 +1,5 @@
 import styled from '@mui/system/styled'
 import DatePicker from 'react-datepicker'
-import styled from '@mui/system/styled'
-import DatePicker from 'react-datepicker'
 
 const StyledDatePicker = styled(DatePicker)({
   '& .MuiInputBase-root': {
@@ -21,9 +19,5 @@ const StyledDatePicker = styled(DatePicker)({
     color: '#fff'
   }
 })
-    color: '#fff'
-  }
-})
 
-export default StyledDatePicker
 export default StyledDatePicker
