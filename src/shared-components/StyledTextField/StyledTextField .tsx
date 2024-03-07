@@ -2,7 +2,7 @@ import React from 'react'
 import TextField from '@mui/material/TextField'
 import { styled } from '@mui/material/styles'
 import CustomTextFieldProps from './Interface/CustomTextFieldInterface'
-import StyledLabel from 'src/pages/Contract/Flow/StyledInputs/StyledLabel'
+import StyledLabel from 'src/shared-components/StyledInputs/StyledLabel'
 
 const StyledTextField: any = styled(TextField)(({ fullWidth }: CustomTextFieldProps) => ({
   '& .MuiInputBase-root': {

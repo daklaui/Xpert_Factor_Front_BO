@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 // ** React Imports
-import { ChangeEvent, Fragment, useState } from 'react'
+import { useState } from 'react'
 
 // ** MUI Imports
 import Avatar from '@mui/material/Avatar'
@@ -9,16 +9,13 @@ import Button from '@mui/material/Button'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import Divider from '@mui/material/Divider'
-import OutlinedInput from '@mui/material/OutlinedInput'
-import Select, { SelectChangeEvent } from '@mui/material/Select'
 import MuiStep, { StepProps } from '@mui/material/Step'
 import StepLabel from '@mui/material/StepLabel'
 import Stepper from '@mui/material/Stepper'
 import { styled } from '@mui/material/styles'
-import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 
-import { Checkbox, FormControl, FormHelperText, Grid, InputLabel, MenuItem } from '@mui/material'
+import {  Grid } from '@mui/material'
 
 // ** Third Party Imports
 import toast from 'react-hot-toast'
@@ -34,19 +31,16 @@ import StepperCustomDot from './Form_Individual/StepperCustomDot'
 import { hexToRGBA } from 'src/@core/utils/hex-to-rgba'
 
 // ** Styled Component
-import { FormControlLabel, IconButton, InputAdornment, Radio, RadioGroup } from '@mui/material'
+
 import StepperWrapper from 'src/@core/styles/mui/stepper'
 
-import DatePicker from 'react-datepicker'
+
 
 // ** Custom Component Imports
 import CustomInput from './Form_Individual/PickersCustomInput'
 
 // ** Types
 import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker'
-import { DateType } from 'src/types/forms/reactDatepickerTypes'
-import Login from '@mui/icons-material/Login'
-import { date } from 'yup'
 import TVA from './Form_Individual/Steps/TVA'
 import AddContact from './Form_Individual/Steps/AddContact'
 import Bank from './Form_Individual/Steps/Bank'
@@ -103,10 +97,11 @@ const Step = styled(MuiStep)<StepProps>(({ theme }) => ({
 }))
 
 const FormIndividual = () => {
-  // ** States 
-  const [activeStep, setActiveStep] = useState<number>(0)  
-  
-  
+  // ** States
+  const [activeStep, setActiveStep] = useState<number>(0)
+  const [, setActiveIcon] = useState<string>(steps[0].icon)
+
+
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
@@ -121,8 +116,17 @@ const FormIndividual = () => {
       }
     }
   };
-  
-  
+
+
+  const handleIconClick = (icon: string) => {
+    const stepIndex = steps.findIndex(step => step.icon === icon)
+    if (stepIndex !== -1) {
+      setActiveStep(stepIndex)
+      setActiveIcon(icon)
+    }
+  }
+
+
   const handleReset = () => {
     setRIB('')
     setJuridique('')
@@ -149,13 +153,12 @@ const FormIndividual = () => {
     setFax('')
     setLogin('')
     setActiveStep(0)
-  
+
   }
 
   const handleSearchCompany = (value: any): void => {
-    // Implement your search logic here, for example:
     console.log('Search value:', value);
-   
+
   }
   const getStepContent = (activeStep: number): JSX.Element | string => {
     switch (activeStep) {
@@ -185,21 +188,16 @@ const FormIndividual = () => {
         return 'Unknown Step';
     }
   };
-  
+
   function validateStep(activeStep: number): boolean {
-    // Add your validation logic here if needed
+
     return true;
   }
   const renderContent = () => {
     if (activeStep === steps.length) {
       return (
         <>
-          <Typography>All steps are completed!</Typography>
-          <Box sx={{ mt: 5, display: 'flex', justifyContent: 'flex-end' }}>
-            <Button size='large' variant='contained' onClick={handleReset}>
-              Reset
-            </Button>
-          </Box>
+
         </>
       )
     } else {
@@ -236,7 +234,7 @@ const FormIndividual = () => {
               const RenderAvatar = activeStep >= index ? CustomAvatar : Avatar
 
               return (
-                <Step key={index}>
+                <Step key={index} onClick={() => handleIconClick(step.icon)}>
                   <StepLabel StepIconComponent={StepperCustomDot}>
                     <div className='step-label'>
                       <RenderAvatar
@@ -253,7 +251,7 @@ const FormIndividual = () => {
                       </RenderAvatar>
                       <div>
                         <Typography className='step-title'>{step.title}</Typography>
-                        
+
                       </div>
                     </div>
                   </StepLabel>
@@ -373,4 +371,4 @@ function setLogin(arg0: string) {
 
 function setDate(date: Date): void {
   throw new Error('Function not implemented.')
-}        
+}

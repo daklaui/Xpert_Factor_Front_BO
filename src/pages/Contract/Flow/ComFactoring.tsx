@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Fragment } from 'react'
 import Grid from '@mui/material/Grid'
 import CustomInput from './PickersCustomInput'
-import CustomSelect from './StyledInputs/CustomSelect'
+import CustomSelect from '../../../shared-components/StyledInputs/CustomSelect'
 
 import Table from '@mui/material/Table'
 import TableHead from '@mui/material/TableHead'
@@ -15,7 +15,7 @@ import { Checkbox } from '@mui/material'
 import { ReactDatePickerProps } from 'react-datepicker'
 import { DateType } from 'src/types/forms/reactDatepickerTypes'
 import Paper from '@mui/material/Paper'
-import StyledDatePicker from './StyledInputs/StyledDatePicker'
+import StyledDatePicker from '../../../shared-components/StyledInputs/StyledDatePicker'
 import CustomTextField from 'src/shared-components/StyledTextField/StyledTextField '
 
 const StyledTableCell = styled(TableCell)<TableCellProps>(({ theme }) => ({
@@ -149,7 +149,7 @@ function ComFactoring({ popperPlacement, onFormChange }: ComFactoringProps) {
               <StyledTableCell align='left'>
                 <Checkbox
                   name='chequeFDG'
-                  checked={isChecked} 
+                  checked={isChecked}
                   onChange={e => {
                     setIsChecked(e.target.checked)
                     handleInputChange('chequeFDG', e.target.checked.toString())

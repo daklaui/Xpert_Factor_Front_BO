@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Grid, Typography, Card, CardHeader } from '@mui/material';
+import { Grid, Typography, Card } from '@mui/material';
 
 import InfoAcheteur from './BuyerInfo';
 import TableAcheteur from './TableBuyer';
 
 const AddBuyer= () => {
   const [selectedAdherent, setSelectedAdherent] = useState(null);
+
 
   return (
     <>

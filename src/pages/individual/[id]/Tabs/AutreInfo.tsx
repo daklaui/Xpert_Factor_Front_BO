@@ -1,6 +1,5 @@
 import React from 'react'
-import { CardContent, Grid } from '@mui/material'
-import TabPanel from '@mui/lab/TabPanel'
+import { Grid } from '@mui/material'
 import InfoItem from '../components/InfoItem '
 import InfoCard from '../components/InfoCard'
 
@@ -31,10 +30,10 @@ const AutreInfo = () => {
 
   return (
     <Grid container spacing={2}>
-      <Grid item xs={6}>
+      <Grid item xs={6} style={{ height: '100%' }}>
         <InfoCardAdresse data={data} />
       </Grid>
-      <Grid item xs={6}>
+      <Grid item xs={6} style={{ height: '100%' }}>
         <InfoCardContact data={data} />
       </Grid>
     </Grid>

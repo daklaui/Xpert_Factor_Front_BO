@@ -4,10 +4,12 @@ import Select from 'react-select'
 import CustomTextField from 'src/@core/components/mui/text-field'
 import { CustomSelectProps, SelectInerface } from '../interface/FormIndividual.interface'
 import { getVille } from '../mock'
+import useCustomSelectStyles from '../../../../../shared-components/StyledInputs/CustomSelectStyles'
 
 const AddContact = ({ onSearch }: CustomSelectProps) => {
   const [optionsVille, setOptionsVille] = useState<SelectInerface[]>([])
   const [statusValueVille, setStatusValueVille] = useState('')
+  const customStyles = useCustomSelectStyles();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -20,20 +22,9 @@ const AddContact = ({ onSearch }: CustomSelectProps) => {
     }
     fetchData()
   }, [])
-  const initialCompanyState = {
-    Name: 'Anis Allagui',
-    Télephone: '123-456-7890',
-    Position: 'PONT DE BIZERTE | 2061',
-    Fax: '987-654-3210',
-    Email: 'john.doe@example.com'
-  }
 
-  const [companyData, setCompanyData] = useState(initialCompanyState)
 
-  function handleChange(field: string, value: string): void {
-    const updatedData = { ...companyData, [field]: value }
-    setCompanyData(updatedData)
-  }
+
 
   return (
     <>
@@ -45,8 +36,8 @@ const AddContact = ({ onSearch }: CustomSelectProps) => {
             label={'Nom et prénom '}
             name={'Name'}
             placeholder={'Tapez nom et prénom'}
-            value={companyData.Name}
-            onChange={e => handleChange('Name', e.target.value)}
+
+
           />
         </Grid>
         <Grid sm={1}></Grid>
@@ -59,6 +50,7 @@ const AddContact = ({ onSearch }: CustomSelectProps) => {
               onSearch ? onSearch(value) : setStatusValueVille(value)
             }}
             options={optionsVille}
+            styles={customStyles}
           />
         </Grid>
         <Grid sm={1}></Grid>
@@ -69,8 +61,8 @@ const AddContact = ({ onSearch }: CustomSelectProps) => {
             label={'Télèphone '}
             name={'Télephone'}
             placeholder={'Tapez numéro'}
-            value={companyData.Télephone}
-            onChange={e => handleChange('Télephone', e.target.value)}
+
+
           />
         </Grid>
         <Grid sm={1}></Grid>
@@ -80,8 +72,8 @@ const AddContact = ({ onSearch }: CustomSelectProps) => {
             label={'Fax '}
             name={'Fax'}
             placeholder={'Tapez fax'}
-            value={companyData.Fax}
-            onChange={e => handleChange('Fax', e.target.value)}
+
+
           />
         </Grid>
         <Grid sm={1}></Grid>
@@ -92,8 +84,8 @@ const AddContact = ({ onSearch }: CustomSelectProps) => {
             label={'Email '}
             name={'Email'}
             placeholder={'Tapez email'}
-            value={companyData.Email}
-            onChange={e => handleChange('Email', e.target.value)}
+
+
           />
         </Grid>
       </Fragment>

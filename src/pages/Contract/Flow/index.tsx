@@ -2,7 +2,6 @@
 import { useState } from 'react'
 
 // ** MUI Imports
-import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
 import Grid from '@mui/material/Grid'
 import Button from '@mui/material/Button'
@@ -59,7 +58,7 @@ const Step = styled(MuiStep)<StepProps>(({ theme }) => ({
     paddingRight: 0
   },
   '& .MuiStepLabel-iconContainer': {
-    display: ''
+    display: 'none'
   },
   '& .step-subtitle': {
     color: `${theme.palette.text.disabled} !important`
@@ -78,7 +77,7 @@ const Step = styled(MuiStep)<StepProps>(({ theme }) => ({
 const Index = ({ popperPlacement }: { popperPlacement: ReactDatePickerProps['popperPlacement'] }) => {
   const [activeStep, setActiveStep] = useState<number>(0)
   const [formValues, setFormValues] = useState<any>({})
-  const [, setActiveIcon] = useState<string>(steps[0].icon);
+  const [, setActiveIcon] = useState<string>(steps[0].icon)
 
   const handleBack = () => {
     setActiveStep(prevActiveStep => prevActiveStep - 1)
@@ -119,12 +118,9 @@ const Index = ({ popperPlacement }: { popperPlacement: ReactDatePickerProps['pop
 
   const renderContent = () => {
     if (activeStep === steps.length) {
-      return (
-        <>
-          <Typography>All steps are completed!</Typography>
-          <Box sx={{ mt: 4, display: 'flex', justifyContent: 'flex-end' }}></Box>
-        </>
-      )
+      return <>
+      {/* here to add the final step */}
+      </>
     } else {
       return (
         <form onSubmit={e => e.preventDefault()}>

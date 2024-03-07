@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react'
 import Select from 'react-select'
 import { CustomSelectProps, SelectInerface } from '../interface/customSelect.interface'
 import { getindividualList } from '../mock'
+import useCustomSelectStyles from '../../StyledInputs/CustomSelectStyles';
 
 const SelectIndividus = ({ onSearch }: CustomSelectProps) => {
   const [options, setOptions] = useState<SelectInerface[]>([])
   const [statusValue, setStatusValue] = useState('')
-  const [isClearable, setIsClearable] = useState(true)
+  const [isClearable, ] = useState(true)
+  const customStyles = useCustomSelectStyles();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,6 +33,7 @@ const SelectIndividus = ({ onSearch }: CustomSelectProps) => {
       options={options}
       isClearable={isClearable}
       isSearchable
+      styles={customStyles}
     />
   )
 }

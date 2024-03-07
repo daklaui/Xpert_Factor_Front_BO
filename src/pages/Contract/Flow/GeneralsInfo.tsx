@@ -7,10 +7,10 @@ import CustomInput from './PickersCustomInput'
 import SelectIndividus from 'src/shared-components/custom-select/SelectIndividuals'
 import { DateType } from 'src/types/forms/reactDatepickerTypes'
 
-import StyledDatePicker from './StyledInputs/StyledDatePicker'
-import StyledLabel from './StyledInputs/StyledLabel'
+import StyledDatePicker from '../../../shared-components/StyledInputs/StyledDatePicker'
+import StyledLabel from '../../../shared-components/StyledInputs/StyledLabel'
 import CustomTextField from 'src/shared-components/StyledTextField/StyledTextField '
-import CustomSelect from './StyledInputs/CustomSelect'
+import CustomSelect from '../../../shared-components/StyledInputs/CustomSelect'
 
 interface GeneralsInfoProps {
   popperPlacement: ReactDatePickerProps['popperPlacement']
@@ -22,8 +22,8 @@ function GeneralsInfo({ popperPlacement, onFormChange }: GeneralsInfoProps) {
   const [date, setDate] = useState<DateType>(new Date())
   const [dates, setDates] = useState({
     StartDate: new Date(),
-    EndDate: new Date(),
-  });
+    EndDate: new Date()
+  })
 
   const handleSearch = (value: any) => {
     console.log('Selected value:', value)
@@ -32,20 +32,17 @@ function GeneralsInfo({ popperPlacement, onFormChange }: GeneralsInfoProps) {
   const handleInputChange = (name: string, value: any) => {
     onFormChange({ [name]: value })
 
+    let updatedDates = { ...dates, [name]: value }
 
-      let updatedDates = { ...dates, [name]: value };
+    if (name === 'StartDate') {
+      const newEndDate = new Date(value)
+      newEndDate.setFullYear(newEndDate.getFullYear() + 1)
+      updatedDates = { ...updatedDates, EndDate: newEndDate }
+    }
 
-      if (name === 'StartDate') {
-        const newEndDate = new Date(value);
-        newEndDate.setFullYear(newEndDate.getFullYear() + 1);
-        updatedDates = { ...updatedDates, EndDate: newEndDate };
-      }
-
-      setDates(updatedDates);
-      onFormChange(updatedDates);
-    };
-
-
+    setDates(updatedDates)
+    onFormChange(updatedDates)
+  }
 
   return (
     <Fragment>
@@ -60,7 +57,7 @@ function GeneralsInfo({ popperPlacement, onFormChange }: GeneralsInfoProps) {
       </Grid>
       <Grid item sm={3}>
         <>Type contrat </>
-        <CustomSelect  />
+        <CustomSelect />
       </Grid>
       <Grid item sm={3}>
         <CustomTextField
@@ -82,8 +79,7 @@ function GeneralsInfo({ popperPlacement, onFormChange }: GeneralsInfoProps) {
       </Grid>
       <Grid item sm={3}>
         <StyledLabel htmlFor='Status Contract'> Status Contract </StyledLabel>
-        <CustomSelect
-        />
+        <CustomSelect />
       </Grid>
       <Grid item sm={3}>
         <StyledLabel htmlFor='Devise'>Devise</StyledLabel>
@@ -159,12 +155,12 @@ function GeneralsInfo({ popperPlacement, onFormChange }: GeneralsInfoProps) {
         <StyledLabel htmlFor='Date de prochaine révision'>Date de prochaine révision</StyledLabel>
         <br />
         <StyledDatePicker
-        selected={dates.EndDate}
-        id='endDatePicker'
-        popperPlacement={popperPlacement}
-        onChange={(date: Date) => handleInputChange('EndDate', date)}
-        customInput={<CustomInput label='' />}
-      />
+          selected={dates.EndDate}
+          id='endDatePicker'
+          popperPlacement={popperPlacement}
+          onChange={(date: Date) => handleInputChange('EndDate', date)}
+          customInput={<CustomInput label='' />}
+        />
       </Grid>
       <Grid item sm={3}>
         <CustomTextField
@@ -186,16 +182,16 @@ function GeneralsInfo({ popperPlacement, onFormChange }: GeneralsInfoProps) {
       </Grid>
 
       <Grid item sm={3}>
-      <StyledLabel htmlFor='Date Démarrage'>Date Démarrage</StyledLabel>
-      <br />
-      <StyledDatePicker
-        selected={dates.StartDate}
-        id='startDatePicker'
-        popperPlacement={popperPlacement}
-        onChange={(date: Date) => handleInputChange('StartDate', date)}
-        customInput={<CustomInput label='' />}
-      />
-    </Grid>
+        <StyledLabel htmlFor='Date Démarrage'>Date Démarrage</StyledLabel>
+        <br />
+        <StyledDatePicker
+          selected={dates.StartDate}
+          id='startDatePicker'
+          popperPlacement={popperPlacement}
+          onChange={(date: Date) => handleInputChange('StartDate', date)}
+          customInput={<CustomInput label='' />}
+        />
+      </Grid>
       <Grid item sm={3}></Grid>
       <Grid item sm={3}>
         <CustomTextField

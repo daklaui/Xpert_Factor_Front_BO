@@ -6,6 +6,7 @@ import { Grid, RadioGroup, FormControlLabel, Radio, Box } from '@mui/material'
 import { getJuridique, getActivite, getGroupeSociete } from '../mock'
 import { CustomSelectProps, SelectInerface } from '../interface/FormIndividual.interface'
 import CustomTextField from 'src/@core/components/mui/text-field'
+import useCustomSelectStyles from '../../../../../shared-components/StyledInputs/CustomSelectStyles'
 
 // ** Custom Component Imports
 import CustomInput from '../PickersCustomInput'
@@ -19,6 +20,7 @@ const Company = ({ onSearch }: CustomSelectProps) => {
 
   const [optionsGroupeSociete, setOptionsGroupeSociete] = useState<SelectInerface[]>([])
   const [statusValueGroupeSociete, setStatusValueGroupeSociete] = useState('')
+  const customStyles = useCustomSelectStyles();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -76,6 +78,7 @@ const Company = ({ onSearch }: CustomSelectProps) => {
               onSearch ? onSearch(value) : setStatusValueJuridique(value)
             }}
             options={optionsJuridique}
+            styles={customStyles}
           />
         </Grid>
         <Grid sm={1}></Grid>
@@ -88,6 +91,7 @@ const Company = ({ onSearch }: CustomSelectProps) => {
               onSearch ? onSearch(value) : setStatusValueActivite(value)
             }}
             options={optionsActivite}
+            styles={customStyles}
           />
         </Grid>
         <Grid sm={1.5}></Grid>
@@ -176,6 +180,7 @@ const Company = ({ onSearch }: CustomSelectProps) => {
               onSearch ? onSearch(value) : setStatusValueGroupeSociete(value)
             }}
             options={optionsGroupeSociete}
+            styles={customStyles}
           />
         </Grid>
         <Grid sm={1.5}></Grid>

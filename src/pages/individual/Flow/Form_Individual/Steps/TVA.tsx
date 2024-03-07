@@ -1,11 +1,11 @@
-import { Box, FormControlLabel, Grid, Radio, RadioGroup, TextField } from '@mui/material'
+import { Box, FormControlLabel, Grid, Radio, RadioGroup } from '@mui/material'
 import { Fragment, useState } from 'react'
 import DatePicker from 'react-datepicker'
 import CustomTextField from 'src/@core/components/mui/text-field'
 
 // ** Custom Component Imports
 import CustomInput from '../PickersCustomInput'
-import StyledLabel from 'src/pages/Contract/Flow/StyledInputs/StyledLabel'
+import StyledLabel from 'src/shared-components/StyledInputs/StyledLabel'
 
 const TVA = () => {
   const [companyData, setCompanyData] = useState({
@@ -50,7 +50,7 @@ const TVA = () => {
         </RadioGroup>
       </Grid>
       <Grid item xs={12} sm={3}>
-      <StyledLabel>Date Début Exonération</StyledLabel>
+        <StyledLabel>Date Début Exonération</StyledLabel>
         <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
           <div>
             <DatePicker selected={date} onChange={(date: Date) => setDate(date)} customInput={<CustomInput />} />

@@ -1,20 +1,22 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { Button, Card, CardHeader, CircularProgress, Grid, Tab, Typography } from '@mui/material'
-import AccountCircleIcon from '@mui/icons-material/AccountCircle'
-import ContactPhoneIcon from '@mui/icons-material/ContactPhone'
-import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered'
 import LoginIcon from '@mui/icons-material/Login'
-import PersonIcon from '@mui/icons-material/PersonAddAlt'
+
+import AccountCircleIcon from '@mui/icons-material/AccountCircle'
+import PersonIcon from '@mui/icons-material/Person'
+import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered'
+import InfoIcon from '@mui/icons-material/Info'
+
 import { Suspense, lazy } from 'react'
 import TabContext from '@mui/lab/TabContext'
 import TabList from '@mui/lab/TabList'
 
 const LazyInfoIndividu = lazy(() => import('./Tabs/InfoIndividu'))
 const LazyAutreInfo = lazy(() => import('./Tabs/AutreInfo'))
-const LazyAutreContact = lazy(() => import('./Tables/TableContact'))
-const LazyLoginWeb = lazy(() => import('./Tables/TableLogin'))
-const LazyListeRib = lazy(() => import('./Tables/TableRib'))
+const LazyAutreContact = lazy(() => import('./tables/TableContact'))
+const LazyLoginWeb = lazy(() => import('./tables/TableLogin'))
+const LazyListeRib = lazy(() => import('./tables/TableRIB'))
 
 const Index = () => {
   const router = useRouter()
@@ -57,9 +59,13 @@ const Index = () => {
             }}
           >
             {[
-              { label: "Info d'individu", icon: <AccountCircleIcon />, value: 'info-individu' },
-              { label: 'Autre informations', icon: <PersonIcon />, value: 'autre-informations' },
-              { label: 'Autre contacts', icon: <ContactPhoneIcon />, value: 'autre-contacts' },
+              {
+                label: "Info d'individu",
+                icon: <AccountCircleIcon />,
+                value: 'info-individu'
+              },
+              { label: 'Autre informations', icon: <InfoIcon />, value: 'autre-informations' },
+              { label: 'Autre contacts', icon: <PersonIcon />, value: 'autre-contacts' },
               { label: 'Login web', icon: <LoginIcon />, value: 'login-web' },
               { label: 'Liste RIB', icon: <FormatListNumberedIcon />, value: 'liste-RIB' }
             ].map(tab => (
@@ -67,7 +73,7 @@ const Index = () => {
                 key={tab.value}
                 value={tab.value}
                 label={
-                  <div style={{ display: 'flex', alignItems: 'center' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', width: '100%' }}>
                     {tab.icon} {tab.label}
                   </div>
                 }

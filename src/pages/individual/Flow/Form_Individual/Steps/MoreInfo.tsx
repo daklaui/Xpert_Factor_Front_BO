@@ -1,4 +1,4 @@
-import { FormControl, Grid, Icon, IconButton, InputAdornment, OutlinedInput } from '@mui/material'
+import { FormControl, Grid } from '@mui/material'
 import Select from 'react-select'
 import { ChangeEvent, Fragment, useEffect, useState } from 'react'
 import CustomTextField from 'src/@core/components/mui/text-field'
@@ -169,17 +169,6 @@ const MoreInfo = ({ onSearch }: CustomSelectProps) => {
               type={state.showPassword ? 'text' : 'password'}
               placeholder={'Tapez password'}
               onChange={handlePasswordChange('password')}
-              endAdornment={
-                <InputAdornment position='end'>
-                  <IconButton
-                    edge='end'
-                    onClick={handlePasswordChange('showPassword')}
-                    onMouseDown={e => e.preventDefault()}
-                  >
-                    <Icon icon={state.showPassword ? 'tabler:eye' : 'tabler:eye-off'} />
-                  </IconButton>
-                </InputAdornment>
-              }
             />
           </FormControl>
         </Grid>

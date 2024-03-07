@@ -3,11 +3,13 @@ import Select from 'react-select'
 
 import { CustomSelectProps, SelectInerface } from '../interface/customSelect.interface'
 import { getDeviseList } from '../mock'
+import useCustomSelectStyles from '../../StyledInputs/CustomSelectStyles';
 
 const SelectListOfDevises = ({ onSearch, }: CustomSelectProps) => {
   const [options, setOptions] = useState<SelectInerface[]>([])
   const [statusValue, setStatusValue] = useState('')
   const [isClearable, ] = useState(true)
+  const customStyles = useCustomSelectStyles();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,6 +33,7 @@ const SelectListOfDevises = ({ onSearch, }: CustomSelectProps) => {
       }}
       options={options}
       isClearable={isClearable}
+      styles={customStyles}
     />
   )
 }

@@ -2,25 +2,25 @@ import { useState } from 'react'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import { Button, Grid, Typography } from '@mui/material'
-import DatePicker from 'react-datepicker'
 import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker'
 import { DateType } from 'src/types/forms/reactDatepickerTypes'
 import PickersComponent from './PickersComponent'
 import CustomTextField from 'src/@core/components/mui/text-field'
 import SelectIndividus from 'src/shared-components/custom-select/SelectIndividuals'
 import SelectAdherent from 'src/shared-components/custom-select/SelectAdherentList'
+import StyledDatePicker from '../../shared-components/StyledInputs/StyledDatePicker'
+import StyledLabel from 'src/shared-components/StyledInputs/StyledLabel'
 
-const BuyerInfo = ({onAdherentSelect}) => {
+const BuyerInfo = ({ onAdherentSelect }) => {
   const [date, setDate] = useState<DateType>(new Date())
   const [MontantFinancement, setMontantFinancement] = useState()
   const [MontantAssurance, setMontantAssurance] = useState()
-  const [selectedAdherent, setSelectedAdherent] = useState(null)
+  const [, setSelectedAdherent] = useState(null)
 
-  const handleAdherentSelect = (adherent) => {
-    setSelectedAdherent(adherent);
-    onAdherentSelect(adherent);
+  const handleAdherentSelect = adherent => {
+    setSelectedAdherent(adherent)
+    onAdherentSelect(adherent)
   }
- 
 
   const handleSearch = (value: any) => {
     console.log('Selected value:', value)
@@ -34,23 +34,22 @@ const BuyerInfo = ({onAdherentSelect}) => {
             <Grid container spacing={5}>
               <Grid item xs={12} sm={12}>
                 <Typography sx={{ fontWeight: 500 }}>
-                  <strong>Nom Adhérent</strong>
+                  <StyledLabel>Nom Adhérent</StyledLabel>
                 </Typography>
-                <SelectAdherent
-                  labelText='Nom adherent'
-                  onSearch={handleAdherentSelect}
-                />
-
+                <SelectAdherent labelText='Nom adherent' onSearch={handleAdherentSelect} />
               </Grid>
               <Grid item xs={12} sm={12}>
                 <Typography sx={{ fontWeight: 500 }}>
-                  <strong>Nom Individu</strong>
+                  <StyledLabel>Nom Individu</StyledLabel>
                 </Typography>
                 <SelectIndividus labelText='Nom individu' onSearch={handleSearch} />
               </Grid>
+              <Grid>
+
+              </Grid>
               <Grid item xs={12} sm={6}>
                 <Typography sx={{ fontWeight: 500 }}>
-                  <strong>Montant de limite Assurance</strong>
+                  <StyledLabel>Montant de limite Assurance</StyledLabel>
                 </Typography>
                 <CustomTextField
                   name={'DMontant de limite Assurance'}
@@ -61,10 +60,10 @@ const BuyerInfo = ({onAdherentSelect}) => {
               </Grid>
               <Grid item xs={12} sm={6}>
                 <Typography sx={{ fontWeight: 500 }}>
-                  <strong>Date de limite Assurance</strong>
+                  <StyledLabel>Date de limite Assurance</StyledLabel>
                 </Typography>
 
-                <DatePicker
+                <StyledDatePicker
                   selected={date}
                   onChange={(date: Date) => setDate(date)}
                   customInput={<PickersComponent />}
@@ -72,7 +71,7 @@ const BuyerInfo = ({onAdherentSelect}) => {
               </Grid>
               <Grid item xs={12} sm={6}>
                 <Typography sx={{ fontWeight: 500 }}>
-                  <strong>Montant de limite financement</strong>
+                  <StyledLabel>Montant de limite financement</StyledLabel>
                 </Typography>
 
                 <CustomTextField
@@ -84,9 +83,9 @@ const BuyerInfo = ({onAdherentSelect}) => {
               </Grid>
               <Grid item xs={12} sm={6}>
                 <Typography sx={{ fontWeight: 500 }}>
-                  <strong>Date de limite financement</strong>
+                  <StyledLabel>Date de limite financement</StyledLabel>
                 </Typography>
-                <DatePicker
+                <StyledDatePicker
                   selected={date}
                   onChange={(date: Date) => setDate(date)}
                   customInput={<PickersComponent />}
