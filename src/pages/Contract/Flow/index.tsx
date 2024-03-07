@@ -110,12 +110,12 @@ const Index = ({ popperPlacement }: { popperPlacement: ReactDatePickerProps['pop
   }
 
   const handleIconClick = (icon: string) => {
-    const stepIndex = steps.findIndex(step => step.icon === icon);
+    const stepIndex = steps.findIndex(step => step.icon === icon)
     if (stepIndex !== -1) {
-      setActiveStep(stepIndex);
-      setActiveIcon(icon);
+      setActiveStep(stepIndex)
+      setActiveIcon(icon)
     }
-  };
+  }
 
   const renderContent = () => {
     if (activeStep === steps.length) {
@@ -163,10 +163,12 @@ const Index = ({ popperPlacement }: { popperPlacement: ReactDatePickerProps['pop
       <CardContent>
         <Stepper activeStep={activeStep} connector={<Icon icon='tabler:chevron-right' />}>
           {steps.map((step, index) => {
-            const RenderAvatar = activeStep >= index ? CustomAvatar : Avatar;
+            const RenderAvatar = activeStep >= index ? CustomAvatar : Avatar
 
             return (
-              <Step key={index} onClick={() => handleIconClick(step.icon)}> {}
+              <Step key={index} onClick={() => handleIconClick(step.icon)}>
+                {' '}
+                {}
                 <StepLabel StepIconComponent={StepperCustomDot}>
                   <div className='step-label'>
                     <RenderAvatar
@@ -188,7 +190,7 @@ const Index = ({ popperPlacement }: { popperPlacement: ReactDatePickerProps['pop
                   </div>
                 </StepLabel>
               </Step>
-            );
+            )
           })}
         </Stepper>
       </CardContent>
