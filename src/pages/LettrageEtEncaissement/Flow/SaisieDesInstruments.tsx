@@ -49,7 +49,7 @@ const SaisieDesInstruments = ({ popperPlacement }: InstrumentsProps) => {
   const [date, setDate] = useState<DateType>(new Date())
   const [selectedAdherent, setSelectedAdherent] = useState(null)
 
-  const handleAdherentChange = value => {
+  const handleAdherentChange = (value: SelectedAdherent | null) => {
     setSelectedAdherent(value)
   }
 
@@ -104,7 +104,6 @@ const SaisieDesInstruments = ({ popperPlacement }: InstrumentsProps) => {
           <CustomTextField fullWidth={true} /* props */ />
         </StyledInputGroup>
         <TableContainer>
-          {' '}
           <TableBasic selectedAdherent={selectedAdherent} />
         </TableContainer>
       </RightContainer>

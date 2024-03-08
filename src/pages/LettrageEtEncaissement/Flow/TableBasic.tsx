@@ -8,7 +8,7 @@ import mockData from '../mock/MockAdherent'
 interface SelectedAdherent {
   value: string // Adjust the type according to your actual data structure
 }
-const TableBasic = ({ selectedAdherent }: { selectedAdherent: SelectedAdherent }) => {
+const TableBasic = ({ selectedAdherent }: { selectedAdherent?: SelectedAdherent }) => {
   // Get mock data based on selected adherent value
   const rows = selectedAdherent ? mockData[selectedAdherent.value as keyof typeof mockData] : []
 
