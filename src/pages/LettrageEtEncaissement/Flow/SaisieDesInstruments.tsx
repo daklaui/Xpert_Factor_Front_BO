@@ -47,10 +47,14 @@ const StyledInputGroup = styled.div`
 
 const SaisieDesInstruments = ({ popperPlacement }: InstrumentsProps) => {
   const [date, setDate] = useState<DateType>(new Date())
-  const [selectedAdherent, setSelectedAdherent] = useState(null)
+  const [selectedAdherent, setSelectedAdherent] = useState<{ value: string; label: string } | null>(null)
 
-  const handleAdherentChange = (value: SelectedAdherent | null) => {
-    setSelectedAdherent(value)
+  const handleAdherentSelect = async (selectedAdherent: { value: string; label: string } | null) => {
+    if (selectedAdherent) {
+      setSelectedAdherent(selectedAdherent)
+    } else {
+      setSelectedAdherent(null)
+    }
   }
 
   return (
@@ -98,10 +102,13 @@ const SaisieDesInstruments = ({ popperPlacement }: InstrumentsProps) => {
       </LeftContainer>
 
       <RightContainer>
+        <br></br>
         <StyledInputGroup>
           <StyledLabel htmlFor='NomAdherent'>Nom Adherent</StyledLabel>
-          <SelectAdherent onAdherentSelect={handleAdherentChange} />
-          <CustomTextField fullWidth={true} /* props */ />
+          <div style={{ marginBottom: '40px' }}>
+            <SelectAdherent onAdherentSelect={handleAdherentSelect} />
+          </div>
+          <CustomTextField fullWidth={true} placeholder={'Recherche par nom'} /* props */ />
         </StyledInputGroup>
         <TableContainer>
           <TableBasic selectedAdherent={selectedAdherent} />

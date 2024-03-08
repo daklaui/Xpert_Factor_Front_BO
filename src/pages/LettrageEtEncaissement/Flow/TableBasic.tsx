@@ -15,31 +15,31 @@ const TableBasic = ({ selectedAdherent }: { selectedAdherent?: SelectedAdherent 
   // Define table columns
   const columns = [
     {
-      flex: 0.1,
+      flex: 0.5,
       field: 'Nom_Acheteur',
       minWidth: 100,
       headerName: 'Nom Acheteur'
     },
     {
-      flex: 0.25,
+      flex: 0.2,
       minWidth: 100,
       field: 'Role',
       headerName: 'Role'
     },
     {
-      flex: 0.25,
+      flex: 0.5,
       minWidth: 100,
       field: 'Ref_Contrat',
       headerName: 'Ref Contrat'
     },
     {
-      flex: 0.15,
+      flex: 0.5,
       minWidth: 100,
       field: 'Ref_Adherent',
       headerName: 'Ref Adherent'
     },
     {
-      flex: 0.15,
+      flex: 0.5,
       minWidth: 100,
       field: 'Ref_Acheteur',
       headerName: 'Ref Acheteur'
