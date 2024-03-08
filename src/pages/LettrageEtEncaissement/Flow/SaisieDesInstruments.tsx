@@ -100,7 +100,7 @@ const SaisieDesInstruments = ({ popperPlacement }: InstrumentsProps) => {
       <RightContainer>
         <StyledInputGroup>
           <StyledLabel htmlFor='NomAdherent'>Nom Adherent</StyledLabel>
-          <SelectAdherent onSearch={handleAdherentChange} />
+          <SelectAdherent onAdherentSelect={handleAdherentChange} />
           <CustomTextField fullWidth={true} /* props */ />
         </StyledInputGroup>
         <TableContainer>
