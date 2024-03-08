@@ -23,7 +23,6 @@ const CustomTextField: React.FC<CustomTextFieldProps> = ({
 }) => {
   return (
     <>
-      <StyledLabel htmlFor={name}>{label}</StyledLabel>
       <StyledTextField
         name={name}
         placeholder={placeholder || label}
