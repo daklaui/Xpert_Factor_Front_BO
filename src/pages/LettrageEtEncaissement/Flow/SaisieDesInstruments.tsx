@@ -75,6 +75,7 @@ const SaisieDesInstruments = ({ popperPlacement }: InstrumentsProps) => {
   }
 
   const handleInstrumentChange = (value: string) => {
+    console.log('handleInstrumentChange called!')
     console.log('Selected instrument:', value)
     setSelectedInstrument(value)
     if (value) {
