@@ -1,6 +1,3 @@
-// mockData.js
-
-// Mock data for demonstration
 const mockData = {
   option1: [
     {
@@ -146,7 +143,6 @@ const mockData = {
       Ref_Acheteur: 'Acheteur 2 AD8'
     }
   ]
-  // Add more mock data as needed...
 }
 
 export default mockData
