@@ -52,6 +52,9 @@ const SaisieDesInstruments = ({ popperPlacement }: InstrumentsProps) => {
   const [selectedInstrument, setSelectedInstrument] = useState<string | null>(null) // Track selected instrument
   const [mockData, setMockData] = useState<{ rib: string; refSequentielle: string }>({ rib: '', refSequentielle: '' })
 
+  const [selectedData, setSelectedData] = useState<(typeof instrumentMockData)[keyof typeof instrumentMockData] | null>(
+    null
+  )
   const instrumentOptions = [
     { value: 'Avoir', label: 'Avoir' },
     { value: 'Rétrocession', label: 'Rétrocession' },
@@ -71,19 +74,14 @@ const SaisieDesInstruments = ({ popperPlacement }: InstrumentsProps) => {
     }
   }
 
-  useEffect(() => {
-    if (selectedInstrument) {
-      const selectedData = instrumentMockData[selectedInstrument as keyof typeof instrumentMockData] // Type assertion
-      console.log('Selected data:', selectedData)
-      setMockData(selectedData || { rib: '', refSequentielle: '' })
+  const handleInstrumentChange = (value: string) => {
+    console.log('Selected instrument:', value)
+    setSelectedInstrument(value)
+    if (value) {
+      setSelectedData(instrumentMockData[value as keyof typeof instrumentMockData])
     } else {
-      setMockData({ rib: '', refSequentielle: '' })
+      setSelectedData(null) // Clear data if no instrument selected
     }
-  }, [selectedInstrument])
-
-  const handleInstrumentChange = (selectedOption: { value: string; label: string }) => {
-    console.log('Selected instrument:', selectedOption)
-    setSelectedInstrument(selectedOption.value)
   }
 
   return (
