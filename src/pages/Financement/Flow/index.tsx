@@ -1,7 +1,7 @@
-import Finance from '../Finance'
+import ValidationTab from '../Validation/ValidationTab'
 
 const index = () => {
-  return <Finance />
+  return <ValidationTab />
 }
 
 export default index
