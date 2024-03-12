@@ -169,7 +169,7 @@ export type DataGridRowTypeCustomized = {
 }
 export type DataGridRowTypeContract = {
   Ref_contrat: number
-  Nom_Adherenet: String
+  Nom_Adherenet: string
   Encours_des_factures: number
   Total_Factures: number
   Total_Financements: number
@@ -184,6 +184,16 @@ export type DataGridRowTypeContract = {
   Nombre_De_remise_prévues: number
   Délai_moyen_de_réglement: number
   Délai_max_de_réglement: number
+}
+
+export type DataGridRowTypeImpaye = {
+  Encaiss: number
+  Nom_Adherenet: string
+  Etab_payeur: number
+  Date_Impaye: string
+  Date_saisie: string
+  Montant: number
+  Type: string
 }
 
 // Help Center

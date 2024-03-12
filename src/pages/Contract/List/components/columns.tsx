@@ -1,6 +1,8 @@
 import { Typography } from '@mui/material'
-import { GridRenderCellParams } from '@mui/x-data-grid'
+
+//import { GridRenderCellParams } from '@mui/x-data-grid'
 import { GridColumns } from 'src/shared-components/data-grid/interface/dataGrid.interface'
+
 export const columns: GridColumns[] = [
   {
     flex: 0.1,
