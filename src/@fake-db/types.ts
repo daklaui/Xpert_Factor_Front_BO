@@ -185,6 +185,14 @@ export type DataGridRowTypeContract = {
   Délai_moyen_de_réglement: number
   Délai_max_de_réglement: number
 }
+export type DataGridRowTypePercu = {
+  Contrat: number
+  Nom_Adherent: string
+  Nom_Acheteur: string
+  Ref_Encaissement: string
+  Mnt_du_lettrage: number
+  Trop_Percu: number
+}
 
 // Help Center
 //------------
