@@ -194,6 +194,17 @@ export type DataGridRowTypePercu = {
   Trop_Percu: number
 }
 
+export type DataGridRowTypeReconcilation = {
+  Ref_Encaissement: string
+  Montant_Encaissement: number
+  Montant_Lettrage: number
+  Date_Valeur: string
+  Nombre_Factures: number
+  Adherent: string
+  Acheteur: string
+  Contract: number
+}
+
 // Help Center
 //------------
 export type HelpCenterSubcategoryArticlesType = {

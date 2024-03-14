@@ -1,4 +1,4 @@
-import { Typography } from '@mui/material'
+import { Button, Typography } from '@mui/material'
 import { GridColumns } from 'src/shared-components/data-grid/interface/dataGrid.interface'
 
 export const columns: GridColumns[] = [
@@ -47,8 +47,15 @@ export const columns: GridColumns[] = [
   {
     flex: 0.1,
     minWidth: 200,
-    field: '#',
-    headerName: '#',
-    renderCell: params => <Typography variant='body2'>{params.row['#']}</Typography>
+    field: 'actions', // Updated field name
+    headerName: 'Actions', // Updated header name
+    renderCell: params => (
+      <Button variant='contained' color='primary' onClick={() => handleButtonClick(params.row)}>
+        Valider
+      </Button>
+    )
   }
 ]
+function handleButtonClick(row: any): void {
+  throw new Error('Function not implemented.')
+}

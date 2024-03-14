@@ -8,10 +8,18 @@ import mockData from '../mock/MockAdherent'
 interface SelectedAdherent {
   value: string // Adjust the type according to your actual data structure
 }
-const TableBasic = ({ selectedAdherent }: { selectedAdherent?: SelectedAdherent }) => {
+interface TableBasicProps {
+  selectedAdherent?: SelectedAdherent
+  searchQuery?: string
+}
+const TableBasic = ({ selectedAdherent, searchQuery }: TableBasicProps) => {
   // Get mock data based on selected adherent value
-  const rows = selectedAdherent ? mockData[selectedAdherent.value as keyof typeof mockData] : []
-
+  let rows = selectedAdherent ? mockData[selectedAdherent.value as keyof typeof mockData] : []
+  if (searchQuery) {
+    rows = rows.filter(row =>
+      Object.values(row).some(value => value && value.toString().toLowerCase().includes(searchQuery.toLowerCase()))
+    )
+  }
   // Define table columns
   const columns = [
     {

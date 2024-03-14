@@ -1,3 +1,5 @@
+import generateFakeDataPercu from '../mock/TropPercuMock'
+import Lettrage from './Lettrage'
 import SaisieDesInstruments from './SaisieDesInstruments'
 import TropPercu from './TropPercu'
 

@@ -5,6 +5,7 @@ interface CustomTextFieldProps {
   fullWidth?: boolean
   onChange?: (event: any) => void
   value?: string
+  readOnly?: boolean
 }
 
 export default CustomTextFieldProps

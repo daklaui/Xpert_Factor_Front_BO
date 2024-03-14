@@ -2,7 +2,7 @@ import { useTheme } from '@mui/material'
 import React from 'react'
 import Select from 'react-select'
 
-const StyledSelect: React.FC<StyledSelectProps> = ({ options }) => {
+const StyledSelect: React.FC<StyledSelectProps> = ({ options, onChange }) => {
   const theme = useTheme()
 
   const customStyles = {
@@ -20,8 +20,11 @@ const StyledSelect: React.FC<StyledSelectProps> = ({ options }) => {
       color: state.isSelected ? 'white' : 'black'
     })
   }
+  const handleChange = (selectedOption: any) => {
+    onChange && onChange(selectedOption.value)
+  }
 
-  return <Select options={options} styles={customStyles} />
+  return <Select options={options} styles={customStyles} onChange={handleChange} />
 }
 
 export default StyledSelect

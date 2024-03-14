@@ -18,6 +18,7 @@ const CustomTextField: React.FC<CustomTextFieldProps> = ({
   name,
   placeholder,
   fullWidth,
+  readOnly,
   onChange,
   ...rest
 }) => {
@@ -28,6 +29,7 @@ const CustomTextField: React.FC<CustomTextFieldProps> = ({
         placeholder={placeholder || label}
         fullWidth={fullWidth}
         onChange={onChange}
+        InputProps={readOnly ? { readOnly: true } : undefined}
         {...rest}
       />
     </>

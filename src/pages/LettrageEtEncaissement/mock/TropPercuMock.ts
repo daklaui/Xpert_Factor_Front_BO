@@ -1,10 +1,10 @@
 import { DataGridRowTypePercu } from 'src/@fake-db/types'
 
-export const generateFakeData = (count: number): DataGridRowTypePercu[] => {
-  const fakeData: DataGridRowTypePercu[] = []
+export const generateFakeDataPercu = (count: number): DataGridRowTypePercu[] => {
+  const fakeDataPercu: DataGridRowTypePercu[] = []
 
   for (let i = 0; i < count; i++) {
-    fakeData.push({
+    fakeDataPercu.push({
       Contrat: i + 1,
       Nom_Adherent: `Adherent ${i}`,
       Nom_Acheteur: `Acheteur ${i}`,
@@ -14,7 +14,7 @@ export const generateFakeData = (count: number): DataGridRowTypePercu[] => {
     })
   }
 
-  console.log('Generated fake data:', fakeData) // Add this line to log the generated fake data
-  return fakeData
+  console.log('Generated fake data:', fakeDataPercu) // Add this line to log the generated fake data
+  return fakeDataPercu
 }
-export default generateFakeData
+export default generateFakeDataPercu

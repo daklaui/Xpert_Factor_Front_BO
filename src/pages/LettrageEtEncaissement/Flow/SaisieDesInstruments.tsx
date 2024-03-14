@@ -12,39 +12,15 @@ import { instrumentMockData } from '../mock/instrumentMockData'
 import { Button, Card } from '@mui/material'
 import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker'
 import CustomInput from '../Flow/PickersCustomInput'
-
-const LeftContainer = styled.div`
-  width: 30%;
-  float: left;
-`
-
-const StyledLabel = styled('label')({
-  display: 'block',
-  marginBottom: '5px',
-  fontWeight: 'bold',
-  fontSize: '13px'
-})
-
-const RightContainer = styled.div`
-  width: 68%;
-  float: right;
-`
-
-const FormContainer = styled.div`
-  padding: 20px;
-`
-
-const TableContainer = styled.div`
-  padding: 20px;
-`
-
-const StyledInputGroup = styled.div`
-  margin-bottom: 20px; /* Add some bottom margin for spacing */
-`
-const StyledInputGroupspecial = styled.div`
-  /* Add some bottom margin for spacing */
-  padding: 20px;
-`
+import {
+  LeftContainer,
+  RightContainer,
+  StyledInputGroup,
+  StyledInputGroupSpecial,
+  StyledLabel,
+  FormContainer,
+  TableContainer
+} from '../components/Styles'
 
 const SaisieDesInstruments = () => {
   const [date, setDate] = useState<DateType>(new Date())
@@ -56,6 +32,7 @@ const SaisieDesInstruments = () => {
   const [selectedData, setSelectedData] = useState<(typeof instrumentMockData)[keyof typeof instrumentMockData] | null>(
     null
   )
+  const [searchQuery, setSearchQuery] = useState<string>('')
   const instrumentOptions = [
     { value: 'Avoir', label: 'Avoir' },
     { value: 'Rétrocession', label: 'Rétrocession' },
@@ -80,12 +57,32 @@ const SaisieDesInstruments = () => {
     console.log('Selected instrument:', value)
     setSelectedInstrument(value)
     if (value) {
-      setSelectedData(instrumentMockData[value as keyof typeof instrumentMockData])
+      const instrumentData = instrumentMockData[value as keyof typeof instrumentMockData]
+      setSelectedData(instrumentData)
+
+      setMockData(prevState => ({
+        ...prevState,
+        rib: instrumentData.rib,
+        refSequentielle: instrumentData.refSequentielle
+      }))
     } else {
-      setSelectedData(null) // Clear data if no instrument selected
+      setSelectedData(null)
+
+      setMockData(prevState => ({
+        ...prevState,
+        rib: '',
+        refSequentielle: ''
+      }))
     }
   }
 
+  function handleSave(): void {
+    throw new Error('Function not implemented.')
+  }
+
+  const handleSearchInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(event.target.value)
+  }
   return (
     <div>
       <LeftContainer>
@@ -121,7 +118,7 @@ const SaisieDesInstruments = () => {
                 <StyledDatePicker
                   selected={date}
                   onChange={(date: Date) => setDate(date)}
-                  customInput={<CustomInput />}
+                  customInput={<CustomInput fullWidth={true} />}
                 />
               </DatePickerWrapper>
             </StyledInputGroup>
@@ -131,18 +128,20 @@ const SaisieDesInstruments = () => {
                 <StyledDatePicker
                   selected={date1}
                   onChange={(date1: Date) => setDate1(date1)}
-                  customInput={<CustomInput />}
+                  customInput={<CustomInput fullWidth={true} />}
                 />
               </DatePickerWrapper>
             </StyledInputGroup>
-            <Button>Valider</Button>
+            <Button variant='contained' onClick={handleSave} style={{ width: '100%' }}>
+              Valider
+            </Button>
           </FormContainer>
         </Card>
       </LeftContainer>
 
       <RightContainer>
         <Card>
-          <StyledInputGroupspecial>
+          <StyledInputGroupSpecial>
             <div
               style={{
                 marginBottom: '40px'
@@ -151,10 +150,15 @@ const SaisieDesInstruments = () => {
               <StyledLabel htmlFor='NomAdherent'>Nom Adherent</StyledLabel>
               <SelectAdherent onAdherentSelect={handleAdherentSelect} />
             </div>
-            <CustomTextField fullWidth={true} placeholder={'Recherche par nom'} /* props */ />
-          </StyledInputGroupspecial>
+            <CustomTextField
+              fullWidth={true}
+              placeholder={'Recherche par nom'}
+              value={searchQuery}
+              onChange={handleSearchInputChange}
+            />
+          </StyledInputGroupSpecial>
           <TableContainer>
-            <TableBasic selectedAdherent={selectedAdherent} />
+            <TableBasic selectedAdherent={selectedAdherent} searchQuery={searchQuery} />
           </TableContainer>
         </Card>
       </RightContainer>
